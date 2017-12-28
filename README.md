@@ -1,9 +1,9 @@
 
 # Tópicos em Orgnizção Industrial Empírica
 
-#Topics in Empirical Industrial Organization
+# Topics in Empirical Industrial Organization
 
-##OBJETIVOS:
+## OBJETIVOS:
 Prover ao aluno da pós-graduação uma introdução ao campo da Organização Industrial empírica. Mais especificamente, tem por objetivo apresentar contribuições recentes em (1) Estimação de Demanda, tanto no arcabouço neoclássico quanto no arcabouço de modelos de escolha discreta, (2) Estimação de funções de custo e produção, (3) Identificação de Conduta e (4) Modelos para Escolhas Estratégicas Discretas (modelos de entrada).
 
 ## OBJECTIVES: 
