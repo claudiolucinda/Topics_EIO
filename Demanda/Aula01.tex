@@ -1,0 +1,461 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\title{Aula 01}
+
+\subtitle{Introdução ao Curso e Modelos Neoclássicos de Demanda}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+
+\frame{\titlepage}
+\begin{frame}{Agenda}
+	\tableofcontents[pausesections]
+\end{frame}
+
+\section{Introdução ao Curso e Econometria Estrutural}
+
+\subsection{Modelagem Econométrica Estrutural}
+
+\begin{frame}[fragile]\frametitle{Abordagens à Modelagem Econométrica}
+\begin{itemize}
+  \item Podemos dividir a modelagem econométrica em duas linhas: descritiva e estrutural. 
+  \item Vamos entender a diferença entre as duas imaginando a distribuição conjunta entre as variáveis cuja relação se busca entender, $f(x,y)$.
+  \item Coisas específicas que se desejam caracterizar:
+  \begin{itemize}
+    \item A distribuição condicional de $y$ dado $x$, $f(y|x)$;
+    \item A Esperança condicional de $y$ dado $x$, $E(y|x)$;
+    \item A Correlação (ou covariância) condicional de $y$ dado $x$, $Corr(y|x)$ ou $Cov(y|x)$
+    \item Um quantil específico $\alpha$ da distribuição de $y$ dado $x$ $Q_{\alpha}(y|x)$;
+    \item O Melhor Preditor Linear de $y$ dado um valor para $x$ $BLP(y|x)$
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Econometria Estrutural e Econometria Descritiva}
+\small
+  \begin{itemize}
+      \item Nos modelos descritivos a idéia principal é caracterizar simplesmente a distribuição conjunta. 
+      \item Na abordagem econométrica estrutural buscam-se parêmetros ou primitivas econômicas da distribuição conjunta
+      \item Note-se que \textbf{a busca destas primitivas ou parâmetros da distribuição conjunta é sempre dependente destas
+premissas que limitam a distribuição conjunta.} 
+      \item Os elementos essenciais de um modelo estrutural são as hipóteses econômicas e estatísticas, as quais deveriam ser, pelo menos, razoáveis econômica e estatisticamente. 
+      \item Note-se: mesmo que você não derive explicitamente um modelo estrutural, \textbf{qualquer conclusão de ordem causal ou
+comportamental está implicitamente se baseando em um modelo estrutural}.
+    \end{itemize}    
+\end{frame}
+
+\section{Modelos Neoclássicos de Demanda}
+
+\begin{frame}[fragile]\frametitle{Abordagem Neoclássica de Demanda}
+\begin{itemize}
+  \item Modelagem de demanda baseada na escolha de uma cesta de bens.
+  \item Usualmente se estipula uma forma funcional flexível que permite que os coeficientes estimados gerem um sistema de equações que caracteriza os ``parâmetros estruturais'' (usualmente derivadas) que você busca saber.
+  \item Dois caminhos
+  \begin{itemize}
+    \item Abordagem Diferencial
+    \item Abordagem da Função Dispêndio/Função Utilidade Indireta
+  \end{itemize}
+  \item De qualquer maneira, existem algumas propriedades que o sistema estimado precisa atender para que ele seja conforme com a teoria econômica
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Propriedades Desejáveis de um Sistema de Demanda}
+\small
+\begin{itemize}
+\item Em geral, a base para este tipo de características é o conceito de um sistema de demanda ``teoricamente plausível'' -- consistente com o processo de maximização da utilidade do consumidor. 
+\item Em especial, este conceito pode ser operacionalizado verificando-se
+as seguintes condições:
+
+\begin{itemize}
+\item \emph{Adding-up} (ou exaustão da restrição orçamentária): supõe-se
+que o valor das demandas por todos os bens exaure o valor da restrição
+orçamentária. 
+\[
+\sum_{k}p_{k}h_{k}=\sum_{k}p_{k}x_{k}=w
+\]
+\item Homogeneidade: as demandas hicksianas são homogêneas de grau zero
+nos preços, e as demandas Marshallianas no gasto total e nos preços,
+ou seja, para escalar $\theta>0$, 
+\[
+h_{i}(u,\theta\mathbf{p})=h_{i}(u,\mathbf{p})=x_{i}(\theta w,\theta\mathbf{p})=x_{i}(w,\mathbf{p})
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Propriedades Desejáveis (cont.)}
+\begin{itemize}
+\item Simetria: As derivadas cruzadas das demandas Hicksianas são simétricas.
+\item Negatividade: A matriz de derivadas $\nabla_{p}h(u,\mathbf{p})$ das demandas hicksianas com relação aos preços tem que ser negativa semidefinida. Esta propriedade pode ser testada por meio da nossa querida Equação de Slutsky.
+\item Nem todos os sistemas geralmente utilizados pela literatura são consistentes
+com estas hipóteses.
+\item Exemplo: Sistema de demanda log-linear supondo $i\in N$ produtos:
+\[
+\ln q_{i}=\alpha_{i}+e_{i}\ln w+\sum_{k}e_{ik}\ln p_{k}+u_{i}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Sistema de demanda log-linear:}
+
+\begin{itemize}
+\item Esta função duplo log é muito comumente utilizada porque os coeficientes
+estimados nos dão diretamente as elasticidades. 
+\item No entanto, ela coloca problemas nos valores das elasticidades e da
+exaustão da restrição orçamentária. Para entender isso melhor, vamos
+definir o logaritmo da participação no gasto como sendo $\ln s_{i}=\ln q_{i}+\ln p_{i}-\ln w$.
+Substituindo isso na equação acima, temos que:
+\[
+\ln q_{i}=\alpha_{i}+(e_{i}-1)\ln w+(e_{ii}+1)\ln p_{i}+\sum_{k\neq i}e_{ik}\ln p_{k}
+\]
+\item Pela restrição de exaustão da restrição orçamentária, mencionada acima,
+temos que $\sum_{k}w_{k}e_{k}=1$, o que indica que \emph{ou tereemos
+todos as elasticidades renda iguais a um ou pelo menos uma delas tem
+que ser maior do que um}. 
+\end{itemize}
+\end{frame}
+
+\subsection{Abordagem Diferencial e o Modelo de Rotterdam}
+\begin{frame}\frametitle{Modelo de Rotterdam}
+
+\begin{itemize}
+\item Uma alternativa de modelagem empírica de demanda envolve aproximar diretamente a função demanda resultante do processo de maximização da utilidade do consumidor, que é o resultado do trabalho de Theil, como apresentado por \citet{Barnett2008}.
+\item Desta forma, a equação fica sendo:
+\[
+s_{l}d\log x_{l}=\theta_{l}d\log\mathbf{Q}+\sum_{j=1}^{L}v_{ij}\left(d\log p_{j}-d\log P^{f}\right)
+\]
+\item Uma versão alternativa chamada versão em preços relativos desta equação é dada por:
+\[
+s_{l}d\log x_{l}=\theta_{l}d\log\mathbf{Q}+\sum_{j=1}^{L}\pi_{ij}d\log p_{j}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo de Rotterdam (II):}
+
+Para impormos as restrições tradicionais, precisamos que os coeficientes
+atendam às seguintes restrições:
+\begin{itemize}
+\item \emph{Adding-Up}: $\sum_{j}\theta_{j}=1$ e $\sum_{l}\pi_{lj}=0$,
+para todos os $l$
+\item Homogeneidade: $\sum_{j}\pi_{lj}=0$, em uma mesma equação
+\item Simetria da matriz de Slutsky: $\pi_{ij}=\pi_{ji}$
+\item Concavidade: a matriz de Slutsky precisa ser negativa semidefinida
+com posto $L-1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo de Rotterdam (III):}
+
+As elasticidades preço compensadas e elasticidade renda são:
+\begin{eqnarray*}
+\epsilon_{ij} & = & \frac{\pi_{ij}}{s_{i}}\\
+\epsilon_{w} & = & \frac{\theta_{l}}{s_{l}}
+\end{eqnarray*}
+
+\end{frame}
+
+\subsection{Linear Expenditure System}
+\selectlanguage{brazil}%
+\begin{frame}\frametitle{LES}
+
+\begin{itemize}
+\small
+\item Começaremos pelo \emph{Linear Expenditure System}. Este modelo é de
+\citet{Klein1947}, e começa com a seguinte
+função de utilidade indireta:
+\[
+v(\mathbf{P},w)=\frac{w-\sum p_{k}b_{k}}{\Pi_{k}p_{k}^{a_{k}}}
+\]
+\item Usando a Identidade de Roy, chegamos às seguintes formas funcionais
+para as equações:
+\[
+s_{i}=\frac{p_{i}b_{i}}{w}+a_{i}\left[1-\frac{\sum_{k}p_{k}b_{k}}{w}\right]
+\]
+\item O legal deste modelo é que os parâmetros possuem interpretações comportamentais.
+Uma família cujo sistema de demanda é LES começa comprando quantidades
+``comprometidas'' de cada um dos bens $(b_{1},b_{2},\cdots,b_{n})$,
+e depois dividindo o excedente, $w-\sum_{k}p_{k}b_{k}$ entre os bens
+em proporções fixas $(a_{1},a_{2},\cdots,a_{n})$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LES - Elasticidades}
+
+\begin{itemize}
+\item As elasticidades deste sistema de equações são dadas por:
+\begin{eqnarray*}
+e_{ii} & = & \frac{p_{i}b_{i}(1-a_{i})}{p_{i}b_{i}+a_{i}\left(w-\sum_{k}p_{k}b_{k}\right)}-1\\
+e_{ij} & = & \frac{-a_{i}b_{j}p_{j}}{p_{i}b_{i}+a_{i}\left(w-\sum_{k}p_{k}b_{k}\right)}\\
+e_{w} & = & \frac{a_{i}w}{p_{i}b_{i}+a_{i}\left(w-\sum_{k}p_{k}b_{k}\right)}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\subsection{Translog}
+
+\begin{frame}\frametitle{Translog}
+
+\begin{itemize}
+\item O paper de \citet{ChristensenTLUtil75} partem da seguinte função de utilidade indireta:
+\[
+\ln(v(\mathbf{P},w))=\alpha_{0}+\sum\alpha_{i}\ln\frac{p_{i}}{w}+\frac{1}{2}\sum\sum\beta_{ij}\ln\frac{p_{i}}{w}\ln\frac{p_{j}}{w}
+\]
+\item A vantagem desta função de utilidade indireta é que ela aproxima os valores das primeiras e segundas derivadas da função ``verdadeira'' de utilidade indireta em torno da média amostral dos dados.
+\item Usando a nossa querida Identidade de Roy, eles chegam no seguinte sistema:
+\begin{eqnarray*}
+s_{i} & = & \frac{\alpha_{j}+\sum\beta_{ji}\ln\frac{p_{i}}{w}}{\alpha_{M}+\sum\beta_{Mi}\ln\frac{p_{i}}{w}}\\
+\alpha_{M} & = & \sum\alpha_{k}\\
+\beta_{Mi} & = & \sum\beta_{ki}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Translog Continuação}
+
+\begin{itemize}
+\item Normalizando $\alpha_{M}$ para ser igual a -1. Vamos calcular as elasticidades, e para isso iremos fazer a seguinte definição:
+\begin{eqnarray*}
+\mathbf{A} & = & \alpha_{j}+\sum\beta_{ji}\ln\frac{p_{j}}{w}\\
+\mathbf{B} & = & \alpha_{M}+\sum\beta_{Mi}\ln\frac{p_{j}}{w}
+\end{eqnarray*}
+\item Com isto, podemos definir a quantidade demandada como sendo:
+\[
+x_{i}=\frac{w}{p_{i}}\left[\frac{\mathbf{A}}{\mathbf{B}}\right]
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Translog -- Elasticidades}
+
+\begin{itemize}
+\item Elasticidade-Cruzada:
+\[
+e_{ij}=\left[\frac{\beta_{ji}}{\mathbf{A}}-\frac{\beta_{Mj}}{\mathbf{B}}\right]
+\]
+\item Elasticidade-Preço:
+\[
+e_{ii}=\left[\frac{\beta_{ji}}{\mathbf{A}}-\frac{\beta_{Mj}}{\mathbf{B}}\right]-1
+\]
+\item Elasticidade-Renda:
+\[
+e_{w}=\left[-\frac{\sum\beta_{ji}}{\mathbf{A}}+\frac{\sum\beta_{Mj}}{\mathbf{B}}\right]+1
+\]
+\end{itemize}
+\end{frame}
+
+\subsection{AIDS}
+
+\begin{frame}\frametitle{AIDS (Almost Ideal Demand System)}
+
+\begin{itemize}
+\item Este modelo foi apresentado por \citet{Deaton1980} se baseia na seguinte função utilidade indireta:
+\[
+v(\mathbf{P},w)=G(\mathbf{P})[\ln w-\ln g(\mathbf{P})]
+\]
+\item Sendo que a função $G(\mathbf{P})$ é homogênea de grau zero nos preços,
+e a $g(\mathbf{P})$ é homogênea de grau 1. 
+\item A classe geral deste tipo de função de utilidade indireta é denominada
+PIGLOG (``Price Independent Generalized Linearity'', PIGL em forma
+Logaritmica). 
+\item Na verdade, esta condição se relaciona com a relação entre os preços
+relativos e a curva de Engel. No caso específico da demanda AIDS,
+temos que:
+\begin{eqnarray*}
+G(\mathbf{P}) & = & \Pi_{k}p_{k}^{-\gamma_{k}}\\
+\ln g(\mathbf{P}) & = & \alpha_{0}+\sum\alpha_{k}\ln p_{K}+\frac{1}{2}\sum_{k}\sum_{j}\beta_{kj}\ln p_{k}\ln p_{j}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{AIDS -- Continuação:}
+\small
+\begin{itemize}
+\item Aplicando a nossa amiga, a Identidade de Roy, nesta função de utilidade
+indireta e cozinhando vigorosamente, temos a seguinte forma para a
+equação demanda pelo produto na forma de \emph{share de consumo}:
+\[
+s_{i}=\alpha_{i}+\sum_{i}\beta_{ki}\ln p_{k}+\gamma_{i}\ln\left(\frac{w}{g(\mathbf{P})}\right)
+\]
+\item Deaton e Muellbauer, no seu paper da \emph{AER}, mencionam que uma
+alternativa quando os preços dos diferentes produtos são muito colineares,
+é a utilização do seguinte índice de preços de \citet{stone1954measurement} no lugar
+da função $g(\mathbf{P})$:
+\[
+\mathbf{P}^{*}=\sum_{k}\bar{s}_{k}\ln p_{k}
+\]
+\item Em que $\bar{s}$ seria a média das participações de
+mercado. Outra vantagem desta aproximação (conhecida por LA-AIDS)
+é que a estimação do sistema de equações envolve apenas equações lineares,
+o que facilita a implementação computacional do modelo. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{AIDS -- Elasticidades:}
+\small
+\begin{itemize}
+\item As elasticidades preço e cruzadas do modelo são da seguinte forma:
+\begin{eqnarray*}
+e_{ii} & = & \frac{\beta_{ii}-\gamma_{i}s_{i}}{s_{i}}-1\\
+e_{ij} & = & \frac{\beta_{ij}-\gamma_{i}s_{j}}{s_{i}}\\
+e_{w} & = & 1+\frac{\gamma_{i}}{s_{i}}
+\end{eqnarray*}
+\item Caso não seja adotada a linearização do índice de preços, as elasticidades-preço
+assumem uma forma um pouco mais complexa.
+\begin{eqnarray*}
+e_{ii} & = & \frac{\beta_{ii}-\gamma_{i}s_{i}+\gamma_{i}^{2}\ln\left(\frac{w}{g(\mathbf{P})}\right)}{s_{i}}-1\\
+e_{ij} & = & \frac{\beta_{ii}-\gamma_{i}s_{i}+\gamma_{i}\gamma_{j}\ln\left(\frac{w}{g(\mathbf{P})}\right)}{s_{i}}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Restrições}
+\small
+\begin{itemize}
+\item Simetria: Precisamos que os termos $\beta$ cruzados sejam iguais, ou:
+\[
+\beta_{ij}=\beta_{ji}
+\]
+\item Adding-up: Esta premissa também permite que recuperarmos os coeficientes da última equação, mesmo ela não
+estimada pelo fato das participações no gasto necessariamente somarem 1.:
+\begin{eqnarray*}
+\sum_{i}\alpha_{i} & = & 1\\
+\sum_{i}\beta_{ij} & = & 0\\
+\sum_{i}\gamma_{i} & = & 0
+\end{eqnarray*}
+\item Homogeneidade:
+\[
+\sum_{j}\beta_{ij}=0
+\]
+ \end{itemize}   
+
+
+\end{frame}
+
+\subsection{QUAIDS}
+\begin{frame}[fragile]\frametitle{QUAIDS}
+\begin{itemize}
+  \item Este modelo foi proposto por \citet{Banks2007}, permitindo que as curvas de Engel (relacionando share do bem e log da renda) não sejam lineares.
+  \item Basicamente eles fazem isso por meio de uma extensão quadrática do modelo AIDS:
+\end{itemize}
+\begin{eqnarray*}
+ln(a(\mathbf{p})) &= \alpha_{0}+\sum_{i=1}^{n} \alpha_{i} lnp_{i}+\frac{1}{2}\sum_{i=1}^{n} \sum_{j=1}^{n} \gamma_{ij} lnp_{i} lnp_{j}\\
+b(\mathbf{p})&=\prod_{i=1}^{n}p_{i}^{\beta_{i}}\\
+s_{i}&=\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}lnp_{j}+\beta_{i}ln \left[ \frac{w}{a(\mathbf{p})}\right]+\frac{\lambda_{i}}{b(\mathbf{p})}\left[ ln \left[\frac{w}{a(\mathbf{p})}  \right] \right] ^{2}
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{QUAIDS -- Elasticidades}
+\begin{align*}    
+\mu_{i}&=\frac{\partial s_{i}}{\partial ln w}=\beta_{i}+\frac{2\lambda_{i}}{b(\mathbf{p})} \left[ln \left[ \frac{w}{a(\mathbf{p})}  \right]   \right]\\
+\mu_{ij}&=\frac{\partial s_{i}}{\partial ln p_{j}}=\gamma_{ij}-\mu_{i}\left(\alpha_{j} +\sum_{k} \gamma_{jk} lnp_{k}  \right) - \frac{\lambda_{i} \beta_{j}}{b(\mathbf{p})} \left[ ln \left( \frac{w}{a(\mathbf{p})} \right) \right]^{2}\\
+e_{w}^{u}&=\frac{\mu_{i}}{s_{i}}+1\\
+e_{ij}^{u}&=\frac{\mu_{ij}}{s{i}}+\mathbf{1}(i=j)
+\end{align*}
+\end{frame}
+
+\subsection{EASI}
+\begin{frame}[fragile]\frametitle{\textit{Exact Affine Stone Index}}
+\begin{itemize}
+  \item O objetivo deste modelo, apresentado no artigo de \citet{Lewbel2009}, é construir sistemas de demanda que:
+  \begin{itemize}
+    \item Possuem respostas flexíveis aos preços (ou seja, deixa os coeficientes estimados aproximarem as derivadas relevantes);
+    \item Têm curvas de Engel de qualquer forma (não linear que nem o AIDS ou quadrática que nem o QUAIDS)
+    \item E os erros da equação são parâmetros aleatórios da utilidade que podem ser incorporados na parte da utilidade do consumidor.
+  \end{itemize}
+  \item Notação:
+  \begin{itemize}
+    \item $x$ - Log de $w$
+    \item $\mathbf{p}$ - Vetor de Log de preços, de dimensão $J\times 1$
+    \item $\mathbf{z}$ - Vetor de Demographics, de dimensão coluna $L$
+  \end{itemize}
+   
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{EASI}
+\begin{itemize}
+  \item Versão aproximada:
+  \item Seja $\tilde{y}=x-\mathbf{p}^{\prime} \bar{\mathbf{s}}$
+  \item Temos então um sistema de equações, com $\mathbf{b}^{r}$, $\mathbf{C}$, $\mathbf{D}$, $\mathbf{B}$ e $\mathbf{A_{l}}$ sendo matrizes de coeficientes:
+\end{itemize}
+\[
+\mathbf{s}\approx \sum_{r=1}^{5} \mathbf{b}^{r} \tilde{y}^{r}+\mathbf{Cz}+\mathbf{Dz}\tilde{y} + \sum_{l=1}^{L} z_{l} \mathbf{A_{l}p}+ \mathbf{Bp}\tilde{y}+\varepsilon
+\]
+\begin{itemize}
+  \item Versão Completa
+  \item Seja $y=\frac{x-\mathbf{p}^{\prime}\mathbf{s}+\sum_{l=1}^{L}z_{l}\mathbf{p^{\prime}A_{l}p}/2}{1-\mathbf{p^{\prime}Bp}}$
+\end{itemize}
+\[
+\mathbf{s}= \sum_{r=1}^{5} \mathbf{b}^{r} y^{r}+\mathbf{Cz}+\mathbf{Dz}y + \sum_{l=1}^{L} z_{l} \mathbf{A_{l}p}+ \mathbf{Bp}y+\varepsilon
+\]
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Elasticidades}
+\begin{itemize}
+  \item Semielasticidade-preço compensadas:
+  \[
+  \nabla_{\mathbf{p}}\mathbf{s}=\sum_{l=1}^{L}z_{l}\mathbf{A_{l}} + \mathbf{B}y
+  \]
+  \item Semielasticidade-renda compensada:
+  \[
+  \nabla_{\mathbf{y}}\mathbf{s}=\sum_{r=1}^{5} \mathbf{b}^{r} y^{r-1} r + \mathbf{Dz} + \mathbf{Bp}
+  \]
+  \item As elasticidades-preço são obtidas por meio da divisão desses valores pelos shares (e no caso das elasticidades-preço próprias, subtraindo um).
+\end{itemize}
+    
+
+
+\end{frame}
+
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+\end{document}
+
+

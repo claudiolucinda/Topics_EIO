@@ -1,0 +1,438 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\title{The Environmental Effects of a Gas Prices Holiday}
+
+\subtitle{\textbf{Preliminary Version: Comments Welcome}}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{C:/logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+
+\frame{\titlepage}
+\begin{frame}{Agenda}
+	\tableofcontents[pausesections]
+\end{frame}
+
+\section{Motivation}
+
+\begin{frame}[fragile]\frametitle{\insertsection}
+    \begin{itemize}
+        \item ``Republican McCain and Democrat Clinton, who is battling Obama for their party’s nomination, both want to suspend the 18.4-cents-per-gallon federal gas tax during the peak summer driving months to ease the pain of soaring gas prices. The tax is used to fund the Highway Trust Fund that builds and maintains roads and bridges.'' (Reuters, 2008)
+        \item ``We will pay for it by imposing a windfall profits tax on the big oil companies,'' she said on Tuesday. ``They sure can afford it. This is a big difference in this race. My opponent opposes giving consumers a break from the gas tax but I believe the American people are being squeezed pretty hard.'' Hillary Clinton, according to Reuters 2008.
+        \item ``PEETROBRAS will hold prices `as long as it can', says director'' (OESP, March 13, 2011)
+    \end{itemize}
+
+
+\end{frame}
+
+\section{Objectives}
+\begin{frame}[fragile]\frametitle{\insertsection}
+    \begin{itemize}
+        \item Gas tax holidays have become more popular with US lawmakers and presidential candidates, especially in years of increasing gas prices. 
+        \item This paper uses the Brazilian experience to investigate the environmental effects of artificially repressing gasoline prices below international levels, in the period between 2008 and 2013. 
+        \item A Random Coefficient Nested Logit was used to estimate a demand model for new cars in Brazil. 
+        \item From the estimated parameters, a counterfactual scenario in which domestic gasoline prices were aligned with international ones is simulated. 
+    \end{itemize}
+
+
+\end{frame}
+
+\section{Relevant Literature}
+\begin{frame}[fragile]\frametitle{\insertsection}
+    \begin{itemize}
+        \item The most important literature it is related is on the environmental effects of policies targeted at the transport sector. 
+        \begin{itemize}
+            \item Previous relevant contributions are \citet{Huse2014}, on the Green Car Rebate in Sweden, \citet{Chandra2010} and \citet{Berestenau2011}, more focused on policies directly aimed at increasing adoption of alternative fuel vehicles. \citet{Anderson-Sallee2016} as a helpful survey on the subject.
+        \end{itemize}
+        
+        \item The second strand of the literature this paper relates to is on the so-called ``Energy Paradox'', as discussed in \citet{Allcott2014}, \citet{Sallee2015a}.
+        \begin{itemize}
+            \item The present paper adds to this literature by bringing estimates for a large emerging market in which the extensive margin is still very active. 
+            \item Besides, the behavior of a large middle-income market such as Brazil can also shed some light when much larger countries as India and China reach such income levels. 
+
+        \end{itemize}
+         
+    \end{itemize}
+
+
+\end{frame}
+
+
+\section{Institutional Background}
+
+\subsection{New Car Market}
+
+\begin{frame}[fragile]\frametitle{Brazilian New Car Market}
+
+\begin{itemize}
+    \item Despite not having a marked supply change in terms of available offering in terms of more powerful models, the demand has moved towards models with higher engine displacement.
+\end{itemize}
+
+\includegraphics[width=.5\textwidth]{Consumption_Peso.pdf}%
+\includegraphics[width=.5\textwidth]{Consumption_Power.pdf}
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Brazilian New Car Market - Demand Side}
+    
+\includegraphics[width=.5\textwidth]{Consumption.pdf}%
+\includegraphics[width=.5\textwidth]{CUBIC_CM.pdf}
+
+
+\end{frame}
+
+\subsection{Fuel Market}
+
+\begin{frame}[fragile]\frametitle{Brazilian Fuel Market}
+
+\begin{itemize}
+    \item Petrobras has ran losses on fuel sales at least since 2011
+\end{itemize}
+    
+\includegraphics[width=.5\textwidth]{PI_USGulf.pdf}%
+\includegraphics[width=.5\textwidth]{Cumm_Losses_2.pdf}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Fuel Taxes and Price Structure}
+    \begin{itemize}
+        \item There are three main taxes that are levied on the fuel market: 
+        \begin{itemize}
+            \item The first one is ICMS, a state level tax whose rates are determined independently from the Federal Government 
+            \item The second one is PIS/COFINS, a federal tax. 
+            \item The third one is CIDE, a federal specific tax.
+        \end{itemize}
+        
+    \end{itemize}
+
+    \begin{tabular}{lcc}
+    \toprule
+          & Gasoline C & Ethanol \\
+    \midrule
+    Taxes & 39.30\% & 12.00\% \\
+    Producers & 45.00\% & 67.70\% \\
+    Distributor and Retail Margins & 15.70\% & 20.30\% \\
+    \bottomrule
+    \end{tabular}%
+
+
+\end{frame}
+
+\section{Empirical Analysis}
+
+\subsection{Data}
+
+\begin{frame}[fragile]\frametitle{Data}
+
+\begin{itemize}
+    \item We have a rich dataset from the Brazilian new auto market, which includes data on sales, prices and other product characteristics at a municipality level for every passenger car sold in Brazil from January 2008 to May 2013. 
+    \item The data cover all Brazilian cities with more than 100,000 inhabitants. For data on sales, the unit of observation is a car variant, defined as a combination of brand/model/engine/fuel type/transmission/body type such as an ``Alfa Romeo 147 2000 cc gasoline sedan automatic''.
+    \item Prices are defined as list prices, including all taxes levied on purchase of a new vehicle.
+    \item Characteristics and sales data were merged according to the baseline model.
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Mileage and Scrappage Data}
+
+\begin{itemize}
+    \item The scrappage data was constructed from the information available at \citet{CETESB2015}, which provided scrappage curves from national data. 
+    \item The information on the number of kilometers ran by a given vehicle was computed from \citet{Bruni}. They fit a nonlinear regression model with the kilometers per year as a dependent variable and the vehicle age as the independent one, from all the vehicles that were subjected to the annual program of pollution checks in São Paulo city
+\end{itemize}
+    
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Car Characteristics Used}
+
+\tiny
+\begin{itemize}
+\item Transmission -- Automatic Transmission
+\item CV -- Engine Power (in cv)
+\item LITERS -- Engine Displacement (in cc)
+\item TRAC -- Four-Wheel Drive not available
+\item PILO -- Automatic Pilot not available
+\item SOUND -- Sound Equipment not available
+\item VIEL -- Electric raising of the windows not available
+\item ACLU -- Luxury finishing not available
+\item DIRA -- Assisted steering wheel not available
+\item ABS -- ABS system not available
+\item ALAM -- Factory installation of alarm system not available
+\item TRAV -- Factory installation of locking system for doors not available
+\item COPT -- Onboard computer not available
+\item EBD -- Electronic Brake Force Distribution system not available
+\item DIM -- Car Area (length between axles multiplied by width) -- in sq meters
+
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Lifetime Fuel Costs}
+
+\begin{itemize}
+    \item Fuel costs will be defined as the product of expected fuel consumption -- liter per kilometer, $e_{jk}$ -- with the expected fuel prices $g_{ks}$, for all time periods $s$. The present value of such costs will be defined as $G_{ijk}$:
+
+\end{itemize}
+    
+\begin{equation*}
+    G_{ijk}=E\left[\sum_{s=0}^{S-1} (1-r)^{-s} \beta_{m}^{i} e_{jk}g_{ks}       \right]
+\end{equation*}
+
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Nests}
+    
+\begin{enumerate}
+\item Large Cars
+\item Luxury Cars
+\item Medium Car
+\item MPV and Station Wagons
+\item Small
+\item Popular
+\item SUV
+\end{enumerate}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\insertsection}
+\begin{itemize}
+    \item There are $T$ markets, defined as a pair city/year, with $I_t$ consumers in each market $t$. Consumers are supposed to buy a car only in their city of residence.
+    \item A car will be defined as a combination of a baseline model $j$ -- encompassing a triplet brand, model and body -- with engine variant $k$. An engine variant, in turn, will be defined as a combination of engine displacement and fuel type. Every customer in market $t$ must choose between a car -- pair $jk$ -- or the outside good $0$.
+    \item These assumptions on automobile prices and fuel costs motivate our preferred specification for the conditional indirect utility for consumer $i$ of choosing car model $j$ with engine variant $k$ is as follows: 
+\end{itemize}
+\begin{equation}
+u_{ijk}=x_{jk}\beta_{i}^{x}-\alpha_{i}(p_{jk}+t^{jk})-\alpha_{i}\gamma \kappa \beta_{i}^{m} e_{jk} (g_{k}+t_{k}^{G})+\xi_{jk}+\varepsilon_{ijk}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Random Coefficient Nested Logit}
+\begin{itemize}
+    \item More specifically, we will assume the $\varepsilon_{ijk}$ terms are correlated across car models, just as in \citet{Grigolon_Verboven}, that is:
+\end{itemize}    
+
+\begin{equation}
+\varepsilon_{ijk}=\zeta_{ig}+(1-\rho)\epsilon_{ijk}
+\end{equation}
+
+\begin{itemize}
+    \item The model is closed by assuming consumer $i$ chooses the automobile $jk$ which yields the largest conditional indirect utility. 
+    \item $\beta_{i}^{m}$ following the age distribution of São Paulo car fleet and $\alpha_{i}=\nicefrac{\alpha}{y_{i}}$, with $y_{i}$ income for the $i$-th market.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Modified Contraction Mapping}
+
+\begin{itemize}
+    \item In \citet{Grigolon_Verboven}, it is shown the usual contraction mapping strategy of \citet{Berry1995} does have a fixed point. 
+    \item They propose the following modified contraction mapping:
+\end{itemize}
+
+\begin{equation}
+\delta_{jkt}^{r}=\delta_{jkt}^{r-1}+(1-\rho)(\ln(s_{jkt})-\ln(s_{jkt}(\delta_{jkt}^{r-1})))
+\end{equation}
+
+\begin{itemize}
+   \item This contraction mapping leads to severe problems with execution time as the correlation term $\rho$ approaches 1. 
+   \item Thus, we used the ideas in \citet{Reynaerts2012} for dealing with large scale problems, using a Newton-Rapshon approach to find the relevant fixed point:
+\end{itemize}    
+
+\begin{equation}
+\delta_{jkt}^{r}=\delta_{jkt}^{r-1}-\mathbf{J(\delta_{jkt}^{r-1})^{-1}}(\ln(s_{jkt})-\ln(s_{jkt}(\delta_{jkt}^{r-1})))
+\end{equation}
+
+
+\end{frame}
+
+
+\subsection{Identification Strategy}
+\begin{frame}[fragile]\frametitle{Identification Strategy}
+\begin{itemize}
+    \item In order to identify the coefficients, we have several sources of identification. 
+    \begin{itemize}
+        \item The first one is the set of so-called ``BLP instruments''.
+        \item Changes in one of the taxes on new car sales. More specifically, we interacted a dummy for 2009 with dummies corresponding to the different engine displacement levels of the tax schedule.
+        \item Additionally, the fact we have city/year prices for fuels also helps on the identification of the $\beta_{i}^{m}$ coefficient.
+    \end{itemize}
+
+\end{itemize}
+ 
+\end{frame}
+
+\subsection{Results}
+\begin{frame}[fragile]\frametitle{Demand Estimates Results}
+
+\tiny
+\resizebox{\linewidth}{!} {%
+    \begin{tabular}{lcccccccc}
+    \toprule
+          & \multicolumn{2}{c}{Logit} & \multicolumn{2}{c}{Nested Logit} & \multicolumn{4}{c}{RCNL} \\
+    
+          & Coef  & SE    & Coef  & SE    & Mean  & SE    & Std Dev & SE \\
+    \midrule
+    $\alpha \kappa \gamma \beta_{i}^{m}$ & 73886 & 10859 & -86653 & 11780 &       &       &       &  \\
+    CC    & 0.36251 & 0.36018 & -1.5731 & 0.36437 & -0.99219 & 2.0304 & 2.00E-13 & 24.064 \\
+    HP    & -0.5046 & 0.01365 & -0.2204 & 0.015865 & -0.37145 & 0.21579 & 0.1653 & 0.17868 \\
+    Domestic & 0.30194 & 0.011302 & 0.29457 & 0.011304 & 0.23492 & 0.013279 &       &  \\
+    Price & -1.4708 & 0.25705 & -2.323 & 0.25819 & -237.48 & 36.471 &       &  \\
+    $\rho$      &       &       & 0.89166 & 0.025363 & 0.93513 & 0.021147 &       &  \\
+\midrule
+    $\alpha_{i} \kappa \gamma$      &       &       &       &       & -0.23645 & 0.090377 &       &  \\
+    $\kappa \gamma \beta_{i}^{m}$      & -50237 & 11689 & 37303 & 6314.8 &       &       &       &  \\
+    $\kappa \gamma$      &       &       &       &       & 0.000996 & 0.000519 &       &  \\
+          &       &       &       &       &       &       &       &  \\
+    \midrule      
+    GMM Crit. Fun & 1562.2 &       & 326.3 &       & 325.02 &       &       &  \\
+    Number of Obs & 1.66E+05 &       & 1.66E+05 &       & 1.66E+05 &       &       &  \\
+    \bottomrule
+    \end{tabular}}
+    
+\begin{itemize}
+    \item The share weighted mean elasticity is of -6.568, with no price elasticities below unity.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Payback Period and Undervaluation Parameter}
+    
+\begin{itemize}
+    \item This figure indicates a 3 year payback time for a car, which is consistent with a low income and high interest rate country as Brazil.
+    \item The results indicate an important role for the ``energy paradox'', for the median attention parameter $\gamma$ is about 0.2, that is, only 20\% of the present value of an additional BRL in fuel economy is reflected in new car prices.
+\end{itemize}
+    
+\includegraphics[width=.5\textwidth]{RCNLPayback.png}%
+\includegraphics[width=.5\textwidth]{RCNLGamma.png}
+
+
+\end{frame}
+
+\subsection{Simulations}
+
+\begin{frame}[fragile]\frametitle{Simulations}
+    
+    \begin{itemize}
+        \item In this section, we will investigate an elimination of the artificially low gasoline price in Brazil, getting the domestic price aligned with international levels. 
+        \item Since the gasoline price is only about 31\% of the fuel pump price, all adjustments were made taking it into account. We are also supposing carmakers compete in prices in a multiproduct setting. 
+        \item The new prices are the solutions of the first order condition system for all products in all markets (year+city).
+    \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Sales Weighted Average Fuel Consumption}
+
+\begin{minipage}{.4\textwidth}
+\tiny    
+      \begin{tabular}{l|cc}
+  \toprule
+              &\multicolumn{2}{c}{\textbf{Avg. Consumption km/l}}            \\
+              &      Baseline&      Counterfactual\\
+  \midrule
+  2008        &       8.639&       8.650\\
+  2009        &       8.656&       8.662\\
+  2010        &       8.674&       8.678\\
+  2011        &       8.671&       8.697\\
+  2012        &       8.476&       8.485\\
+  \bottomrule
+  \end{tabular}
+\end{minipage}
+\begin{minipage}{.4\textwidth}
+\tiny
+\begin{tabular}{lcc}
+  \toprule
+        & Min $\Delta$ 1000t CO2 & Max $\Delta$ 1000t CO2 \\
+  \midrule
+  2008  & -17634.5 & -25561.9 \\
+  2009  & 10926.02 & 15837.73 \\
+  2010  & -43969.3 & -63735.3 \\
+  2011  & -44400.7 & -64360.7 \\
+  2012  & 5331.51 & 7728.25 \\
+  \midrule
+  Total & -89,747 & -130,092 \\
+  \bottomrule
+  \end{tabular}%
+
+\end{minipage}
+
+\begin{itemize}
+    \item The maximum if computed by using the emmission factor for gasoline, 2.214 kg of CO2 per liter of fuel.
+    \item The minimum uses the emmission factor for hydrated ethanol, 1.526 kg of CO2 per liter of fuel.
+\end{itemize}
+
+\end{frame}
+\section{Concluding Remarks}
+
+\begin{frame}[fragile]\frametitle{Concluding Remarks}
+\begin{itemize}
+    \item The demand model results point to substantial undervaluation of fuel costs, and an important role for the ``energy paradox'', for the median attention parameter $\gamma$ is about 0.2. That is, only 20\% of the present value of an additional BRL in fuel economy is reflected in new car prices.
+
+    \item Results from the demand model were used to simulate a counterfactual in which the domestic prices of gasoline were aligned to international levels. The simulation indicates the reduction in the fuel price gap and the elimination of the ``Gas Price Tax Holiday'' would imply some realignment towards lower engine displacement models. 
+    \item Additionally, an amount between 89.7 and 130 thousand CO2 tons are going to be emmitted due to the artificially low gasoline prices during this period.
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}[plain,c]
+%\frametitle{A first slide}
+
+\begin{center}
+\Huge \textbf{Thank you}
+
+claudiolucinda@usp.br
+\end{center}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+
+
+\end{frame}
+\end{document}
+
+
