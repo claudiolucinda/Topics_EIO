@@ -7,277 +7,203 @@ clear all
 set memory 128m
 set matsize 800
 set more off, permanently
-version 11
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\2014-2\Demanda\"
+version 14
+cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+
 
 adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\2014-2\Demanda\"
 
-use "Neo_data.dta", clear
+use "EASI\hixdata.dta", clear
 
-/* Guardando as Medias para o calculo das Elasticidades */
-qui mean tsval_soja
-matrix m1=e(b)
-qui mean tsval_milho
-matrix m2=e(b)
-qui mean tsval_girassol
-matrix m3=e(b)
-qui mean tsval_composto
-matrix m4=e(b)
-qui mean tsval_oliva
-matrix m6=e(b)
-qui mean l_y_P
-matrix m5=e(b)
-qui mean tsval_canola
-matrix m7=e(b)
+local J=9
+local Jm1=`J'-1
+local i=1
+foreach varn in sfoodh sfoodr srent soper sfurn scloth stranop srecr spers {
+	qui mean `varn'
+	matrix m`i'=e(b)
+	scalar sc_`varn'=m`i'[1,1]
+}
 
-scalar sc_soja=m1[1,1]
-scalar sc_milho=m2[1,1]
-scalar sc_girassol=m3[1,1]
-scalar sc_composto=m4[1,1]
-scalar sc_oliva=m6[1,1]
-scalar sc_canola=m7[1,1]
-scalar sc5=m5[1,1]
+gen l_Big_P=0
 
+local sharenames "sfoodh sfoodr srent soper sfurn scloth stranop srecr spers"
+local pricenames "pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers"
 
+forvalues i=1/`J' {
+	local tshare: word `i' of `sharenames'
+	local tprice: word `i' of `pricenames'
+	qui replace l_Big_P=sc_`tshare'*`tprice'
+
+}
+
+gen l_y_P=log_y-l_Big_P
 /* ------------------------------------------------------------*/
 /* ---- Comecando a Estimacao do Modelo AIDS ------------------*/
 /* ------------------------------------------------------------*/
+* 1) Criando as equações 
 
+*set trace on
+forvalues i=1/`Jm1' {
+	local nom: word `i' of `sharenames'
+	global t`nom' (`nom' `pricenames' l_y_P)
+}
+reg3 $tsfoodh $tsfoodr $tsrent $tsoper $tsfurn $tscloth $tstranop $tsrecr, sure
 
-/* Determinando as Equacoes - Oleo de Canola de fora !!!!*/
+* Restrições Homogeneidade
+local aa=1
+foreach var in sfoodh sfoodr srent soper sfurn scloth stranop srecr {
+	constraint define `aa' [`var']_b[pfoodh]+[`var']_b[pfoodr]+[`var']_b[prent]+[`var']_b[poper]+[`var']_b[pfurn]+[`var']_b[pcloth]+[`var']_b[ptranop]+[`var']_b[precr]+[`var']_b[ppers]=0
+	local ++aa
 
-global tsval_soja (tsval_soja l_p_soja l_p_milho l_p_girassol l_p_canola l_p_composto l_p_oliva l_y_P)
-global tsval_milho (tsval_milho l_p_soja l_p_milho l_p_girassol l_p_canola l_p_composto l_p_oliva l_y_P)
-global tsval_girassol (tsval_girassol l_p_soja l_p_milho l_p_girassol l_p_canola l_p_composto l_p_oliva l_y_P)
-global tsval_composto (tsval_composto l_p_soja l_p_milho l_p_girassol l_p_canola l_p_composto l_p_oliva l_y_P)
-global tsval_oliva (tsval_oliva l_p_soja l_p_milho l_p_girassol l_p_canola l_p_composto l_p_oliva l_y_P)
-global l_Big_Q (l_Big_Q l_Big_P l_y)
-reg3 $tsval_soja $tsval_milho $tsval_girassol $tsval_composto $tsval_oliva, sure
-/* Estabelecendo as Restricoes de Homogeneidade */
-
-scalar aa=1
-foreach x in soja milho girassol composto oliva {
-	local bbb=aa
-	constraint define `bbb' [tsval_`x']l_p_soja+[tsval_`x']l_p_girassol+[tsval_`x']l_p_canola+[tsval_`x']l_p_composto+[tsval_`x']l_p_oliva=0
-	scalar aa=aa+1
 }
 
+local Jm2=`Jm1'-1
+forvalues i=1/`Jm2' {
+	local k=`i'+1
+	forvalues j=`k'/`Jm1' {
+	local tempprice1: word `i' of `pricenames'
+	local tempprice2: word `j' of `pricenames'
+	local tempshare1: word `i' of `sharenames'
+	local tempshare2: word `j' of `sharenames'
+	constraint define `aa' [`tempshare1']_b[`tempprice2']=[`tempshare2']_b[`tempprice1']
+	local ++aa
+	}
+}
 
-/* Estabelecendo as Restricoes de Simetria */
+reg3 $tsfoodh $tsfoodr $tsrent $tsoper $tsfurn $tscloth $tstranop $tsrecr, ireg3 constr(1-`aa') su nolog
 
-constraint define 6 [tsval_soja]l_p_milho=[tsval_milho]l_p_soja
-constraint define 7 [tsval_soja]l_p_girassol=[tsval_girassol]l_p_soja
-constraint define 8 [tsval_soja]l_p_composto=[tsval_composto]l_p_soja
-constraint define 9 [tsval_soja]l_p_oliva=[tsval_oliva]l_p_soja
-constraint define 10 [tsval_milho]l_p_girassol=[tsval_girassol]l_p_milho
-constraint define 11 [tsval_milho]l_p_composto=[tsval_composto]l_p_milho
-constraint define 12 [tsval_milho]l_p_oliva=[tsval_oliva]l_p_milho
-constraint define 13 [tsval_girassol]l_p_composto=[tsval_composto]l_p_girassol
-constraint define 14 [tsval_girassol]l_p_oliva=[tsval_oliva]l_p_girassol
-constraint define 15 [tsval_composto]l_p_oliva=[tsval_oliva]l_p_composto
-
-
-reg3 $tsval_soja $tsval_milho $tsval_girassol $tsval_composto $tsval_oliva, ireg3 constr(1-15) su nolog
-reg3 $tsval_soja $tsval_milho $tsval_girassol $tsval_composto $tsval_oliva $l_Big_Q, ireg3 constr(1-15) su nolog
 
 
 
 /* ----------------------------------------------------------- */
 /* -------Calculando as Elasticidades------------------------- */
 /* ----------------------------------------------------------- */
+* Usando o NLCOM para ter os coeficientes e os erros-padrão da última equação
+* Fazendo em um loop para ficar mais abstrato
+local term0 ""
 
-
-
-
-/* Loop dos Calculos */
-global nomes "soja milho girassol composto oliva"
-global nomes2 "soja milho girassol composto oliva"
-scalar bb=1
-
-mat elast1=J(6,6,0)
-foreach x of global nomes {
-	scalar aa=1
-	foreach y of global nomes2 {
-		matrix elast1[bb,aa]=(1/sc_`x')*([tsval_`x']_b[l_p_`y']-[tsval_`x']_b[l_y_P]*sc_`y')+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_`y'
-		scalar aa=aa+1
+*local b=1
+forvalues i=1/`Jm1' {
+	local tempshare: word `i' of `sharenames'
+	local term1 " (al_`tempshare': [`tempshare']_b[_cons])"
+	local term0 `term0' `term1'
+	local term1 " (ga_`tempshare': [`tempshare']_b[l_y_P])"
+	local term0 `term0' `term1'
+	forvalues j=1/`J' {
+	local tempprice: word `j' of `pricenames'
+	local term1 " (be_`tempshare'_`tempprice': [`tempshare']_b[`tempprice'])"
+	local term0 `term0' `term1'
 	}
-	scalar bb=bb+1
+
+
+}
+* constantes da última equação
+local finalshare: word `J' of `sharenames'
+local term2 ""
+forvalues i=1/`Jm1' {
+	local tempshare: word `i' of `sharenames'
+	local term1 "-[`tempshare']_b[_cons]"
+	local term2 `term2'`term1'
+}
+local term2 "(al_`finalshare': `term2'+1)"
+di "`term2'"
+*local term0 `term0' "(al_`finalshare': `term2')"
+
+local term3 ""
+forvalues i=1/`Jm1' {
+	local tempshare: word `i' of `sharenames'
+	local term1 "-[`tempshare']_b[l_y_P]"
+	local term3 `term3'`term1'
+}
+local term3 "(ga_`finalshare': `term3')"
+di "`term3'"
+
+local term3 ""
+local sharenames "sfoodh sfoodr srent soper sfurn scloth stranop srecr spers"
+local finalshare: word 9 of `sharenames'
+forvalues i=1/8 {
+	local tempshare: word `i' of `sharenames'
+	local term1 "-[`tempshare']_b[ppers]"
+	local term3 `term3'`term1'
+}
+local term3 "(be_`finalshare'_ppers: `term3')"
+di "`term3'"
+
+
+*di "`term0'"
+nlcom `term0' (al_spers: 1-[sfoodh]_b[_cons]-[sfoodr]_b[_cons]-[srent]_b[_cons]-[soper]_b[_cons]-[sfurn]_b[_cons]-[scloth]_b[_cons]-[stranop]_b[_cons]-[srecr]_b[_cons]) ///
+(ga_spers: -[sfoodh]_b[l_y_P]-[sfoodr]_b[l_y_P]-[srent]_b[l_y_P]-[soper]_b[l_y_P]-[sfurn]_b[l_y_P]-[scloth]_b[l_y_P]-[stranop]_b[l_y_P]-[srecr]_b[l_y_P]) ///
+(be_spers_pfoodh: -[sfoodh]_b[pfoodh]-[sfoodr]_b[pfoodh]-[srent]_b[pfoodh]-[soper]_b[pfoodh]-[sfurn]_b[pfoodh]-[scloth]_b[pfoodh]-[stranop]_b[pfoodh]-[srecr]_b[pfoodh]) ///
+(be_spers_pfoodr: -[sfoodh]_b[pfoodr]-[sfoodr]_b[pfoodr]-[srent]_b[pfoodr]-[soper]_b[pfoodr]-[sfurn]_b[pfoodr]-[scloth]_b[pfoodr]-[stranop]_b[pfoodr]-[srecr]_b[pfoodr]) ///
+(be_spers_prent: -[sfoodh]_b[prent]-[sfoodr]_b[prent]-[srent]_b[prent]-[soper]_b[prent]-[sfurn]_b[prent]-[scloth]_b[prent]-[stranop]_b[prent]-[srecr]_b[prent]) ///
+(be_spers_poper: -[sfoodh]_b[poper]-[sfoodr]_b[poper]-[srent]_b[poper]-[soper]_b[poper]-[sfurn]_b[poper]-[scloth]_b[poper]-[stranop]_b[poper]-[srecr]_b[poper]) ///
+(be_spers_pfurn: -[sfoodh]_b[pfurn]-[sfoodr]_b[pfurn]-[srent]_b[pfurn]-[soper]_b[pfurn]-[sfurn]_b[pfurn]-[scloth]_b[pfurn]-[stranop]_b[pfurn]-[srecr]_b[pfurn]) ///
+(be_spers_pcloth: -[sfoodh]_b[pcloth]-[sfoodr]_b[pcloth]-[srent]_b[pcloth]-[soper]_b[pcloth]-[sfurn]_b[pcloth]-[scloth]_b[pcloth]-[stranop]_b[pcloth]-[srecr]_b[pcloth]) ///
+(be_spers_ptranop: -[sfoodh]_b[ptranop]-[sfoodr]_b[ptranop]-[srent]_b[ptranop]-[soper]_b[ptranop]-[sfurn]_b[ptranop]-[scloth]_b[ptranop]-[stranop]_b[ptranop]-[srecr]_b[ptranop]) ///
+(be_spers_precr: -[sfoodh]_b[precr]-[sfoodr]_b[precr]-[srent]_b[precr]-[soper]_b[precr]-[sfurn]_b[precr]-[scloth]_b[precr]-[stranop]_b[precr]-[srecr]_b[precr]) ///
+(be_spers_ppers: -[sfoodh]_b[ppers]-[sfoodr]_b[ppers]-[srent]_b[ppers]-[soper]_b[ppers]-[sfurn]_b[ppers]-[scloth]_b[ppers]-[stranop]_b[ppers]-[srecr]_b[ppers]), post
+
+global nprice: word count `pricenames'
+global ncols=$nprice+1
+matrix elastsLAAIDS=J($nprice,$ncols,.)
+
+local medpoint=1
+local i=1
+foreach nom of local sharenames {
+	if `medpoint'==0{
+	qui predictnl er_`i'=_b[ga_`nom']/`nom'+1
+	}
+	else if `medpoint'==1 {
+		qui egen med_`nom'=mean(`nom')
+		qui predictnl er_`i'=_b[ga_`nom']/med_`nom'+1
+		drop med_`nom'
+	}
+	qui su er_`i'
+	mat elastsLAAIDS[`i',10]=r(mean)
+	drop er_`i'
+	local ++i
 }
 
-matrix elast2=elast1-I(6)
-
-
-mat pval1=J(6,6,0)
-scalar bb=1
-foreach x of global nomes {
-	scalar aa=1
-	foreach y of global nomes2 {
-		if aa==bb {
-			qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_`y']-[tsval_`x']_b[l_y_P]*sc_`y')+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_`y'=-sc_`y'+1
-			matrix pval1[bb,aa]=r(p)
+*set trace on
+forvalues i=1/`J' {
+	local tempshare1: word `i' of `sharenames'
+*	local tempprice1: word `i' of `pricenames'
+	forvalues j=1/`J' {
+		if `i'==`j'{
+			local delt=1
 		}
 		else {
-			qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_`y']-[tsval_`x']_b[l_y_P]*sc_`y')+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_`y'=-sc_`y'
-			matrix pval1[bb,aa]=r(p)
+			local delt=0
+		} 
+		local tempshare2: word `j' of `sharenames'
+		local tempprice2: word `j' of `pricenames'
+		if `medpoint'==0 {
+		qui predictnl ep_`i'_`j'=((_b[be_`tempshare1'_`tempprice2']-_b[ga_`tempshare1']*`tempshare2')/`tempshare1')-`delt'
 		}
-		scalar aa=aa+1
+		else if `medpoint'==1 {
+			qui egen med_`tempshare1'=mean(`tempshare1')
+			if `i' == `j' {
+				qui predictnl ep_`i'_`j'=((_b[be_`tempshare1'_`tempprice2']-_b[ga_`tempshare1']*med_`tempshare1')/med_`tempshare1')-`delt'
+				drop med_`tempshare1'
+			}
+			else {
+				qui egen med_`tempshare2'=mean(`tempshare2')
+				qui predictnl ep_`i'_`j'=((_b[be_`tempshare1'_`tempprice2']-_b[ga_`tempshare1']*med_`tempshare2')/med_`tempshare1')-`delt'
+				drop med_`tempshare1' med_`tempshare2'
+			}
+			
+		}
+		qui su ep_`i'_`j'
+		mat elastsLAAIDS[`i',`j']=r(mean)
+		drop ep_`i'_`j'
 	}
-	scalar bb=bb+1
 }
 
+mat rownames elastsLAAIDS = `sharenames'
+mat colnames elastsLAAIDS = `pricenames' income
+estout matrix(elastsLAAIDS, fmt(%9.3f))
+ 
 
-mat pval2=J(6,6,0)
-scalar bb=1
-foreach x of global nomes {
-	scalar aa=1
-	foreach y of global nomes2 {
-		if aa==bb {
-			qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_`y']-[tsval_`x']_b[l_y_P]*sc_`y')+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_`y'=sc_`y'+1
-			matrix pval2[bb,aa]=r(p)
-		}
-		else {
-			qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_`y']-[tsval_`x']_b[l_y_P]*sc_`y')+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_`y'=sc_`y'
-			matrix pval2[bb,aa]=r(p)
-		}
-		scalar aa=aa+1
-	}
-	scalar bb=bb+1
-}
-
-
-/* Calculando as Elasticidades - sexta coluna */
-scalar bb=1
-foreach x of global nomes {
-	matrix elast2[bb,6]=(1/sc_`x')*([tsval_`x']_b[l_p_canola]-[tsval_`x']_b[l_y_P]*sc_canola)+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola
-	qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_canola]-[tsval_`x']_b[l_y_P]*sc_canola)+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola=-sc_canola
-	matrix pval1[bb,6]=r(p)
-	qui testnl (1/sc_`x')*([tsval_`x']_b[l_p_canola]-[tsval_`x']_b[l_y_P]*sc_canola)+(1+([tsval_`x']_b[l_y_P]/sc_`x'))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola=sc_canola
-	matrix pval2[bb,6]=r(p)
-	scalar bb=bb+1
-}
-
-/* Calculando as Elasticidades - sexta linha */
-
-scalar beta_6=(-[tsval_soja]_b[l_y_P]-[tsval_milho]_b[l_y_P]-[tsval_girassol]_b[l_y_P]-[tsval_composto]_b[l_y_P]-[tsval_oliva]_b[l_y_P])
-*foreach x of global nomes {
-*	scalar gamma_`x'=(1-[tsval_soja]_b[l_p_`x']-[tsval_milho]_b[l_p_`x']-[tsval_girassol]_b[l_p_`x']-[tsval_composto]_b[l_p_`x']-[tsval_oliva]_b[l_p_`x']
-*}
-
-scalar bb=1
-foreach x of global nomes {
-	matrix elast2[6,bb]=(1/sc_canola)*((-[tsval_soja]_b[l_p_`x']-[tsval_milho]_b[l_p_`x']-[tsval_girassol]_b[l_p_`x']-[tsval_composto]_b[l_p_`x']-[tsval_oliva]_b[l_p_`x'])-beta_6*sc_`x')+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_`x'
-	qui testnl (1/sc_canola)*((-[tsval_soja]_b[l_p_`x']-[tsval_milho]_b[l_p_`x']-[tsval_girassol]_b[l_p_`x']-[tsval_composto]_b[l_p_`x']-[tsval_oliva]_b[l_p_`x'])-beta_6*sc_`x')+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_`x'=-sc_`x'
-	matrix pval1[6,bb]=r(p)
-	qui testnl (1/sc_canola)*((-[tsval_soja]_b[l_p_`x']-[tsval_milho]_b[l_p_`x']-[tsval_girassol]_b[l_p_`x']-[tsval_composto]_b[l_p_`x']-[tsval_oliva]_b[l_p_`x'])-beta_6*sc_`x')+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_`x'=sc_`x'
-	matrix pval2[6,bb]=r(p)
-	scalar bb=bb+1
-}
-
-matrix elast2[6,6]=(1/sc_canola)*((-[tsval_soja]_b[l_p_canola]-[tsval_milho]_b[l_p_canola]-[tsval_girassol]_b[l_p_canola]-[tsval_composto]_b[l_p_canola]-[tsval_oliva]_b[l_p_canola])-beta_6*sc_canola)+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola-1
-qui testnl (1/sc_canola)*((-[tsval_soja]_b[l_p_canola]-[tsval_milho]_b[l_p_canola]-[tsval_girassol]_b[l_p_canola]-[tsval_composto]_b[l_p_canola]-[tsval_oliva]_b[l_p_canola])-beta_6*sc_canola)+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola=-sc_canola+1
-matrix pval1[6,6]=r(p)
-qui testnl (1/sc_canola)*((-[tsval_soja]_b[l_p_canola]-[tsval_milho]_b[l_p_canola]-[tsval_girassol]_b[l_p_canola]-[tsval_composto]_b[l_p_canola]-[tsval_oliva]_b[l_p_canola])-beta_6*sc_canola)+(1+(beta_6/sc_canola))*(1+[l_Big_Q]_b[l_Big_P])*sc_canola=sc_canola+1
-matrix pval2[6,6]=r(p)
-
-matrix colnames elast2 = P_Soja P_Milho P_Girassol P_Composto P_Oliva P_Canola
-matrix colnames pval1 = P_Soja P_Milho P_Girassol P_Composto P_Oliva P_Canola
-matrix rownames elast2 = Q_Soja Q_Milho Q_Girassol Q_Composto Q_Oliva P_Canola
-matrix rownames pval1 = Q_Soja Q_Milho Q_Girassol Q_Composto Q_Oliva Q_Canola
-matrix colnames pval2 = P_Soja P_Milho P_Girassol P_Composto P_Oliva Q_Canola 
-matrix rownames pval2 = Q_Soja Q_Milho Q_Girassol Q_Composto Q_Oliva Q_Canola
-
-matrix list elast2, format(%6.4g) title(Elasticidades)
-matrix list pval1, format(%6.4g) title(P-Valores - Shares Negativos)
-matrix list pval2, format(%6.4g) title(P-Valores - Shares Positivos)
-
-mat2txt, matrix(elast2) ///
-saving("elast2.txt") ///
-title("Elasticidades") format(%6.3f %6.3f %6.3f %6.3f %6.3f) replace
-
-mat2txt, matrix(pval1) ///
-saving("pval1.txt") ///
-title("P-Valores - Shares Positivos") format(%6.3f %6.3f %6.3f %6.3f %6.3f) replace
-
-mat2txt, matrix(pval2) ///
-saving("pval2.txt") ///
-title("P-Valores - Shares Negativos") format(%6.3f %6.3f %6.3f %6.3f %6.3f) replace
-
-
-
-qui reg3 $tsval_soja $tsval_milho $tsval_girassol $tsval_composto $tsval_oliva $l_Big_Q, ireg3 constr(1-15) su nolog
-estimates store f1, title ("Estimacao SURE")
-
-mark samp_setter if e(sample)
-
-/* Guardando os Resultados */
-estout * , ///
-cells(b(star fmt(%9.3f)) t(par)) unstack ///
-stats(N r2 p, fmt(%9.0f %9.3f %9.3f) ///
-labels("N-Obs" "R-sq" "p-val")) ///
-legend label collabels(, none) ///
-varlabels(_cons Constante) posthead("") ///
-prefoot("") postfoot("") ///
-varwidth(16) modelwidth(12) 
-
-estout matrix(elast2, fmt(%9.3f))
-
-
-******************************************
-* Now adapting stuff
-******************************************
-
-matrix startvals=J(1,25,.1)
-
-su tsval*
-
-cap program drop nlsurlaaidsCRL2
-/*
-set trace on
-
-gen ttsval_soja=tsval_soja
-gen ttsval_milho=tsval_milho
-gen ttsval_girassol=tsval_girassol
-gen ttsval_composto=tsval_composto
-gen ttsval_oliva=tsval_oliva
-
-
-nlsurlaaidsCRL2 ttsval_soja ttsval_milho ttsval_girassol ttsval_composto ttsval_oliva ///
-l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y_P if samp_setter==1, at(startvals)
-
-
-set trace off
-*/
-nlsur laaidsCRL2 @ tsval_soja tsval_milho tsval_girassol tsval_composto tsval_oliva ///
-l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y_P if samp_setter==1, ifgnls ///
-param(a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 g1_1 g1_2 g1_3 g1_4 g1_5 ///
-g2_2 g2_3 g2_4 g2_5 g3_3 g3_4 g3_5 g4_4 g4_5 ///
-g5_5) nolog nequations(5) ///
-hasconstants(a1 a2 a3 a4 a5)
-
-do Elast_LAaids.do
-
-cap program drop nlsurnlaidsCRL2
-/*
-matrix startvals=J(1,25,.1)
-
-su tsval*
-
-
-set trace on
-
-gen ttsval_soja=tsval_soja
-gen ttsval_milho=tsval_milho
-gen ttsval_girassol=tsval_girassol
-gen ttsval_composto=tsval_composto
-gen ttsval_oliva=tsval_oliva
-
-
-nlsurnlaidsCRL2 ttsval_soja ttsval_milho ttsval_girassol ttsval_composto ttsval_oliva ///
-l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y_P if samp_setter==1, at(startvals)
-
-
-set trace off
-*/
 nlsur nlaidsCRL2 @ tsval_soja tsval_milho tsval_girassol tsval_composto tsval_oliva ///
 l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y if samp_setter==1, ifgnls ///
 param(a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 g1_1 g1_2 g1_3 g1_4 g1_5 ///
