@@ -204,21 +204,31 @@ mat colnames elastsLAAIDS = `pricenames' income
 estout matrix(elastsLAAIDS, fmt(%9.3f))
  
 
-nlsur nlaidsCRL2 @ tsval_soja tsval_milho tsval_girassol tsval_composto tsval_oliva ///
-l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y if samp_setter==1, ifgnls ///
-param(a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 g1_1 g1_2 g1_3 g1_4 g1_5 ///
-g2_2 g2_3 g2_4 g2_5 g3_3 g3_4 g3_5 g4_4 g4_5 ///
-g5_5) nolog nequations(5) ///
-hasconstants(a1 a2 a3 a4 a5)
+nlsur nlaidsCRL @ sfoodh sfoodr srent soper sfurn scloth stranop srecr ///
+pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers log_y, ifgnls ///
+param(a1 a2 a3 a4 a5 a6 a7 a8 b1 b2 b3 b4 b5 b6 b7 b8 g1_1 g1_2 g1_3 g1_4 g1_5 g1_6 g1_7 g1_8 ///
+g2_2 g2_3 g2_4 g2_5 g2_6 g2_7 g2_8 ///
+g3_3 g3_4 g3_5 g3_6 g3_7 g3_8 ///
+g4_4 g4_5 g4_6 g4_7 g4_8 ///
+g5_5 g5_6 g5_7 g5_8 ///
+g6_6 g6_7 g6_8 ///
+g7_7 g7_8 ///
+g8_8) nolog nequations(8) ///
+hasconstants(a1 a2 a3 a4 a5 a6 a7 a8)
 
 do Elast_NLaids.do
 
 
-nlsur quaidsCRL2 @ tsval_soja tsval_milho tsval_girassol tsval_composto tsval_oliva ///
-l_p_soja l_p_milho l_p_girassol l_p_composto l_p_oliva l_p_canola l_y if samp_setter==1, ifgnls ///
-param(a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 g1_1 g1_2 g1_3 g1_4 g1_5 ///
-g2_2 g2_3 g2_4 g2_5 g3_3 g3_4 g3_5 g4_4 g4_5 ///
-g5_5 ll1 ll2 ll3 ll4 ll5) nolog nequations(5) ///
-hasconstants(a1 a2 a3 a4 a5)
+nlsur quaidsCRL @ sfoodh sfoodr srent soper sfurn scloth stranop srecr ///
+pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers log_y, ifgnls ///
+param(a1 a2 a3 a4 a5 a6 a7 a8 b1 b2 b3 b4 b5 b6 b7 b8 g1_1 g1_2 g1_3 g1_4 g1_5 g1_6 g1_7 g1_8 ///
+g2_2 g2_3 g2_4 g2_5 g2_6 g2_7 g2_8 ///
+g3_3 g3_4 g3_5 g3_6 g3_7 g3_8 ///
+g4_4 g4_5 g4_6 g4_7 g4_8 ///
+g5_5 g5_6 g5_7 g5_8 ///
+g6_6 g6_7 g6_8 ///
+g7_7 g7_8 ///
+g8_8 ll1 ll2 ll3 ll4 ll5 ll6 ll7 ll8) nolog nequations(8) ///
+hasconstants(a1 a2 a3 a4 a5 a6 a7 a8)
 
 do Elast_QUAIDS.do

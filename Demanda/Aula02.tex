@@ -347,6 +347,263 @@ temos:
 
 \end{frame}
 
+\section{Modelo Logit Aninhado}
+\begin{frame}{IIA -- Problemas:}
+
+\begin{itemize}
+\item Como vimos, um dos principais fatores que motivam a escolha do modelo
+Logit Multinomial para a a estimação de parâmetros estruturais do
+lado da demanda é a sua simplicidade computacional. 
+\item No entanto, uma das principais críticas que podem ser levantadas a
+este modelo está relacionada com a hipótese de independência de alternativas
+irrelevantes (\emph{Independence of Irrelevant Alternatives}-IIA). 
+\item Para ilustrar este problema, vamos considerar um exemplo. Suponha
+que a probabilidade de escolha em modal de transporte seja de 65\%,
+15\%, 10\% e 10\%, para carro sozinho, carro compartilhado, ônibus
+e metrô. 
+\item Supondo que o serviço de metrô fosse melhorado ao ponto que a sua
+probabilidade de escolha subisse para 19\%, as probabilidades de escolha
+iriam se alterar proporcionalmente.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo:}
+
+\begin{table}[H]
+\caption{Alterações nas Probabilidades de Escolha}
+
+\centering{}%
+\begin{tabular}{c>{\centering}p{1.5cm}>{\centering}p{1.5cm}>{\centering}p{2.1cm}>{\centering}p{1.5cm}}
+\hline 
+Alternativa & Prob. Antes & Prob. Depois & Mudança Proporcional & Mudança Alg.\tabularnewline
+\hline 
+Carro & 0,65 & 0,585 & 0,900 & -0,065\tabularnewline
+Carro Comp. & 0,15 & 0,135 & 0,900 & -0,015\tabularnewline
+Ônibus & 0,10 & 0,090 & 0,900 & -0,010\tabularnewline
+Metrô & 0,10 & 0,19 & 1,900 & +0,90\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Padrão de Substituição -- Problemas:}
+
+\begin{itemize}
+\item Como conseqüência disso, temos que a maior parte dos usuários novos
+do metrô viriam diretamente dos carros, simplesmente pelo fato que
+eles são maioria
+
+\begin{itemize}
+\item Isto é o contrário da experiência, que diz que a maior parte dos usuários
+viriam dos ônibus e dos carros compartilhados.
+\end{itemize}
+\item Esta limitação decorre do fato que os termos $\epsilon_{ij}$ são
+independentes entre si, hipótese utilizada na derivação das probabilidades
+de escolha do modelo. 
+\item Podemos relaxar esta hipótese, o que dá margem a diferentes modelos. 
+\item Iremos discutir uma alternativa que ainda preserva parte da facilidade
+computacional, o Modelo Logit Aninhado
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Logit Aninhado}
+
+\begin{itemize}
+\item A característica principal deste modelo é que agrupa as diferentes
+alternativas em grupos que são mais similares entre si do que aquelas
+que estão fora dos respectivos grupos.
+\item A derivação do modelo se baseia na premissa que algumas alternativas
+compartilham alguns componentes entre si nos seus termos representativos
+da parte aleatória da escolha do consumidor. 
+\item Vamos manter o exemplo da tabela acima com respeito às alternativas
+e supor que Metrô e Ônibus sejam mais próximos entre si --
+pertencendo, portanto, ao mesmo ninho:
+\end{itemize}
+\begin{eqnarray*}
+U_{C} & = & V_{C}+\epsilon_{C}\\
+U_{CC} & = & V_{CC}+\epsilon_{CC}\\
+U_{O} & = & V_{TC}+V_{O}+\epsilon_{TC}+\epsilon_{O}\\
+U_{M} & = & V_{TC}+V_{M}+\epsilon_{TC}+\epsilon_{M}
+\end{eqnarray*}
+
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Logit Aninhado (II):}
+
+\begin{itemize}
+\item Podemos racionalizar esta estrutura de escolha como uma escolha em
+dois estágios -- ainda que, conceitualmente, a idéia de
+escolha em dois estágios aqui se baseie em elementos muito diferentes
+dos discutidos na parte de modelos neoclássicos de demanda.
+\item Podemos derivar as probabilidades de escolha das diferentes alternativas
+em duas partes. Inicialmente, condicional à escolha de Transporte
+Coletivo, temos as seguintes probabilidades de escolha:
+\begin{eqnarray*}
+P(O|TC) & = & \frac{e^{V_{O}/\sigma}}{e^{V_{O}/\sigma}+e^{V_{M}/\sigma}}\\
+P(M|TC) & = & \frac{e^{V_{M}/\sigma}}{e^{V_{O}/\sigma}+e^{V_{M}/\sigma}}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Logit Aninhado (III):}
+
+\begin{itemize}
+\item No nível superior, temos três opções -- carro, carro compartilhado
+ou transporte coletivo. A probabilidade de escolha neste nível superior
+é dada por:
+\begin{eqnarray*}
+P(C) & = & \frac{e^{V_{C}}}{e^{V_{C}}+e^{V_{CC}}+e^{V_{TC}+\sigma I_{TC}}}\\
+P(CC) & = & \frac{e^{V_{CC}}}{e^{V_{C}}+e^{V_{CC}}+e^{V_{TC}+\sigma I_{TC}}}\\
+P(TC) & = & \frac{e^{V_{TC}+\sigma I_{TC}}}{e^{V_{C}}+e^{V_{CC}}+e^{V_{TC}+\sigma I_{TC}}}
+\end{eqnarray*}
+\item A última fórmula merece uma análise mais pormenorizada. Podemos notar
+que o numerador desta função possui um termo diferente dos logit tradicional
+composto por dois termos. 
+\item O primeiro deles é apenas a parte determinística da utilidade de se
+pegar transporte coletivo, enquanto o termo $I_{TC}$ representaria
+o valor experado do máximo de utilidade das alternativas dentro do
+ninho. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Logit Aninhado (IV):}
+
+\begin{itemize}
+\item Em especial, $I_{TC}=\log[\exp\left(\frac{V_{O}}{\sigma}\right)+\exp\left(\frac{V_{M}}{\sigma}\right)]$. 
+\item O papel do parâmetro $\sigma$ é mais importante, pois significa que
+os parâmetros dentro da função $V$ de todas as alternativas dentro
+de um mesmo ninho são padronizadas por um mesmo valor. 
+\item Uma vez que, por definição, $\sigma$ é limitado entre zero e um,
+estes coeficientes são aumentados, aumentando assim a sensibilidade
+a alterações nos atributos da alternativa dentro do ninho. 
+\item Podemos, a partir dos resultados acima, construir as probabilidades
+de escolha -- não condicionais -- das alternativas
+dentro do ninho ``transporte coletivo'':
+\begin{eqnarray*}
+P(O) & = & P(O|TC)\times P(TC)\\
+P(M) & = & P(M|TC)\times P(TC)
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Logit Aninhado -- O parâmetro $\sigma$}
+\small
+\begin{itemize}
+\item Este parâmetro é uma função da correlação subjacente entre a parte
+aleatória da utilidade para os pares de alternativas dentro de um
+mesmo ninho, caracterizando o grau de substitutibilidade entre os
+parâmetros. 
+\item Para manter a consistência com o processo de escolha colocado anteriormente,
+ele deve ser limitado entre zero e um. 
+
+\begin{itemize}
+\item Caso $\sigma=0$ , temos que existe perfeita correlação entre as alternativas
+dentro de um mesmo ninho, o que implica que a escolha deixa de ser
+estocástica e passa a ser determinística. 
+\item Caso $\sigma=1$, temos que o modelo Logit Aninhado colapsa no modelo
+Logit Multinomial tradicional.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Logit Aninhado -- Efeitos Marginais}
+
+\begin{itemize}
+\item Vamos discutir como são calculados os efeitos marginais para o caso
+do Logit Aninhado.
+\item Para isto, temos que lembrar o cálculo mencionado na seção anterior,
+em que a probabilidade de escolha da alternativa $j$ é o produto
+de dois termos: 
+
+\begin{itemize}
+\item A probabilidade de escolha do ninho $K$ em que a alternativa se encontra,
+$P_{K}$
+\item A probabilidade condicional de escolha de $j$, dado que o ninho escolhido
+foi o $K$ -- $P_{j|K}$:
+\item Omitindo o subscrito $i$, temos que:
+\[
+P_{j}=P_{j|K}P_{K}
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Efeitos Marginais}
+\begin{frame}\frametitle{Efeitos Marginais:}
+
+\begin{itemize}
+\item Podemos calcular os efeitos marginais de uma alteração em um atributo
+de uma alternativa $r$ qualquer com a seguinte fórmula:
+\[
+\frac{\partial P_{j}}{\partial x_{r}}=\frac{\partial P_{j|K}}{\partial x_{r}}P_{K}+\frac{\partial P_{K}}{\partial x_{r}}P_{j|K}
+\]
+\item As elasticidades serão diferentes para o caso em que $j=r$, $j\neq r$
+, mas as alternativas estão no mesmo ninho, ou $j\neq r$ e as alternativas
+estão em ninhos diferentes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Efeitos Marginais -- Mesma Alternativa}
+
+\begin{itemize}
+\item Supondo que não exista parte determinística na escolha de cada um
+dos ninhos, temos os seguintes efeitos marginais:
+\[
+\frac{\partial P_{j}}{\partial x_{r}}=\frac{\partial V_{r}}{\partial x_{r}}\left[P_{j}^{2}-\frac{P_{j}}{\sigma}+\frac{1-\sigma}{\sigma}P_{j}P_{j|K}\right]
+\]
+\item Caso $\sigma\rightarrow1$, temos que este efeito marginal colapsa
+para o efeito marginal que vimos para o Logit Multinomial.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Efeitos Marginais -- Alternativas no mesmo ninho}
+
+\begin{itemize}
+\item Da mesma forma, caso os produtos sejam diferentes, mas pertencentes
+ao mesmo ninho, temos:
+\[
+\frac{\partial P_{j}}{\partial x_{r}}=-\frac{\partial V_{r}}{\partial x_{r}}\left[P_{j}P_{r}+\frac{1-\sigma}{\sigma}P_{r}P_{j|K}\right]
+\]
+\item Esta também colapsa para o padrão de substituição visto anteriormente
+caso $\sigma\rightarrow1$. Além disso, ficará igual ao efeito marginal
+para alternativas localizadas em ninhos diferentes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Efeitos Marginais -- Alternativas em ninhos diferentes}
+
+\begin{itemize}
+\item Caso as alternativas pertençam a ninhos diferentes, temos a seguinte
+forma funcional para os efeitos marginais:
+\[
+\frac{\partial P_{j}}{\partial x_{r}}=-\frac{\partial V_{r}}{\partial x_{r}}P_{j}P_{r}
+\]
+\item Neste caso, quando o Logit Aninhado colapsa para o logit multinomial,
+temos que o padrão de substituição se iguala com as alternativas dentro
+de um mesmo ninho.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Logit Aninhado -- Estimação:}
+
+\begin{itemize}
+\item O procedimento de estimação por Máxima Verossimilhança segue exatamente
+o procedimento que detalhamos no Logit Multinomial.
+\item Supondo independência das escolhas dos indivíduos, a probabilidade
+de observação de uma amostra igual à que temos é:
+\[
+L(\beta)=\prod_{i\in N}\prod_{j\in J}(P_{ij})^{y_{ij}}
+\]
+\item Em geral, os algoritmos numéricos maximizam o logaritmo desta probabilidade
+conjunta, o que dá:
+\[
+\ln(L(\beta))=LL(\beta)=\sum_{i\in N}\sum_{j\in J}y_{ij}\ln P_{ij}
+\]
+\end{itemize}
+\end{frame}
+
 
 \begin{comment}
 \begin{frame}[allowframebreaks]
