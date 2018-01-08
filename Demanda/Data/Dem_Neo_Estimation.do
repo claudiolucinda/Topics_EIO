@@ -216,7 +216,8 @@ g7_7 g7_8 ///
 g8_8) nolog nequations(8) ///
 hasconstants(a1 a2 a3 a4 a5 a6 a7 a8)
 
-do Elast_NLaids.do
+run Elast_NLaids.do
+estout matrix(elastsAIDS, fmt(%9.3f))
 
 
 nlsur quaidsCRL @ sfoodh sfoodr srent soper sfurn scloth stranop srecr ///
@@ -231,4 +232,5 @@ g7_7 g7_8 ///
 g8_8 ll1 ll2 ll3 ll4 ll5 ll6 ll7 ll8) nolog nequations(8) ///
 hasconstants(a1 a2 a3 a4 a5 a6 a7 a8)
 
-do Elast_QUAIDS.do
+run Elast_QUAIDS.do
+estout matrix(elasts, fmt(%9.3f))

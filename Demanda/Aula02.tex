@@ -55,7 +55,7 @@ dos parâmetros.
 \item Inicialmente começaremos analisando o processo de estimação quando
 o analista possui dados sobre a escolha individual dos consumidores;
 depois discutiremos as situações em que apenas possuimos dados agregados.
-\item Uma bibliografia muito boa sobre esse assunto é 
+\item Uma bibliografia muito boa sobre esse assunto é o livro do Ken Train.
 \end{itemize}
 \end{frame}
 
@@ -604,15 +604,48 @@ conjunta, o que dá:
 \end{itemize}
 \end{frame}
 
+\section{Modelo Mixed Logit}
 
-\begin{comment}
+\begin{frame}[fragile]\frametitle{Mixed Logit}
+
+\begin{itemize}
+	\item As probabilidades de escolha no caso do modelo Mixed Logit são integrais definidas em termos de densidades -- estipuladas pelo econometrista -- dos parâmetros.
+	\item Basicamente ela é uma média ponderada da probabilidade logit tradicional, ponderada pela densidade em diferentes pontos da distribuição dos coeficientes.
+
+	\[
+	P_{ij}=\int \left( \frac{exp(\beta^{\prime} \mathbf{X_{ij}})}{\sum_{k} exp(\beta^{\prime} \mathbf{X_{ik}})}  \right) f(\beta) d\beta
+	\]
+	\item Do ponto de vista da estimação, é a mesma coisa -- desde que, a cada passo do otimizador, você recalcule esta integral.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Mixed Logit (II):}
+    
+    \begin{itemize}
+    	\item Uma forma de ver porque o Mixed Logit é uma forma de se lidar com o problema da IIA é entendendo os coeficientes como componentes de erro que criam correlações entre as utilidades de diferentes alternativas, como em \citet{Train2003f}.
+    	\item Imagine a seguinte especificação para a utilidade:
+    	\[
+    	U_{ij}=\alpha^{\prime} \mathbf{x_{ij}} + \mu_{i}^{\prime} \mathbf{z_{ij}} + \varepsilon_{ij}
+    	\]
+    	\item Em que $\alpha$ é um vetor de coeficientes e $\mu$ é um vetor de termos aleatórios de média zero. Neste caso a parcela aleatória da utilidade da alternativa é dada por:
+    	\[
+    	\nu_{ij} = + \mu_{i}^{\prime} \mathbf{z_{ij}} + \varepsilon_{ij}
+    	\]
+    	\item E o componente $\mu_{i}$ induz correlação entre as alternativas
+    \end{itemize}
+
+
+\end{frame}
+
+%\begin{comment}
 \begin{frame}[allowframebreaks]
 \bibliographystyle{aea}
 \bibliography{C:/Bibliog/library}
 
 \end{frame}
 
-\end{comment}
+%\end{comment}
 
 
 
