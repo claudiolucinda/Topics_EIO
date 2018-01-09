@@ -147,7 +147,7 @@ global nprice: word count `pricenames'
 global ncols=$nprice+1
 matrix elastsLAAIDS=J($nprice,$ncols,.)
 
-local medpoint=1
+local medpoint=0
 local i=1
 foreach nom of local sharenames {
 	if `medpoint'==0{

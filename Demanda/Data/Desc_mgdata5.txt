@@ -1,0 +1,7 @@
+1. Panelist
+2. Category purchase? 0 - No; 1 - Yes
+3. Week
+4-7. Brand bought if any
+8-11. Price
+12-15. Feature
+16-19. Display
