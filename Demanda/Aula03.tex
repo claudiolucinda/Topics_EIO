@@ -1,0 +1,444 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\title{Aula 03}
+
+\subtitle{Modelos de Escolha Discreta com Dados Agregados}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+
+\section{Modelos de Escolha Discreta com Dados Agregados}
+\begin{frame}{Modelos de Escolha Discreta com Dados Agregados:}
+\begin{itemize}
+\item Agora iremos discutir um pouco mais como podemos utilizar os modelos
+de escolha discreta, quando apenas temos dados agregados de mercado
+-- ou seja, não temos microdados com as escolhas dos indivíduos.
+\item Supondo que os indivíduos ajam de acordo com os modelos de escolha
+discreta colocados anteriormente, temos que a quantidade vendida em
+um determinado mercado é dada por:
+\[
+q_{j}=M\times s_{j}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Escolha Discreta com Dados Agregados: O bem externo}
+
+\begin{itemize}
+\item Além disso, tem um ponto adicional, que é a existência de um bem ``externo'',
+cujo preço não é estabelecido em resposta aos preços dos $J$ produtos. 
+\item Caso não fizéssemos isto, os consumidores seriam forçados a escolher
+apenas entre os bens existentes e a demanda dependeria somente das
+diferenças de preços. Portanto, um aumento generalizado dos preços
+não reduzirá a produção agregada. 
+\item A colocação deste produto externo torna necessário que estimemos o
+tamanho do mercado, uma vez que $s_{0}=M\times(1-\sum^{J}s_{j})$
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Derivando as Especificações -- Modelo Logit}
+
+\begin{itemize}
+\item Supondo que os consumidores funcionem como no modelo Logit Multinomial
+tradicional, temos que
+\[
+s_{j}=M\times\frac{e^{V_{j}}}{1+\sum_{k}e^{V_{k}}}
+\]
+\item Passando o Log dos dois lados:
+\[
+\ln s_{j}=\ln M+V_{j}+\ln(1+\sum_{k}e^{V_{k}})
+\]
+\item O bem externo, por sua vez, tem a sua participação de mercado dada
+por:
+\[
+s_{0}=M\times\frac{1}{1+\sum_{k}e^{V_{k}}}
+\]
+\item Passando o log também, temos que:
+\[
+\ln s_{0}=\ln M+\ln(1+\sum_{k}e^{V_{k}})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Especificações -- Modelo Logit (II):}
+
+\begin{itemize}
+\item Tirando a diferença das duas equações, temos que:
+\[
+\ln s_{j}-\ln s_{0}=V_{j}+\varepsilon_{j}
+\]
+\item Em que $\varepsilon_{j}$ seria o termo erro econométrico.
+\item Esta especificação poderia ser estimada -- mas existem
+alguns problemas que iremos discutir mais adiante:
+
+\begin{itemize}
+\item IIA
+\item Características não observadas dos consumidores
+\item Endogeneidade
+\end{itemize}
+\item Com relação ao IIA, o slide seguinte mostra uma possível solução --
+o modelo logit aninhado
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Especificações -- Modelo Nested Logit}
+
+\begin{itemize}
+\item Seguindo \citet{Berry1994}, temos que a especificação de teste
+é a seguinte:
+\[
+\ln s_{j}-\ln s_{0}=V_{j}+(1-\sigma)\ln s_{j|K}+\varepsilon_{j}
+\]
+\item Mais uma vez, o termo $\varepsilon_{j}$ representa o termo erro econométrico.
+\item CUIDADO!!! Na demonstração do Berry, o $\sigma$ dele é exatamente
+igual ao meu $1-\sigma$.
+\item Caso $\sigma\rightarrow1$, temos que esta especificação colapsa para
+o Logit Multinomial tradicional.
+\item Note que o ``aninhamento'' das alternativas é algo intrinsecamente
+determinado pelo analista; é ele quem coloca os produtos nos diferentes
+ninhos.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Identificação nestes Modelos}
+
+\begin{itemize}
+\item Quando estamos falando de dados agregados, uma questão fundamental
+é a identificação.
+\item Diferentemente do caso em que tínhamos microdados, em que poderia
+se assumir que as características dos produtos eram exógenas à escolha
+de cada um dos produtos, quando estamos falando em dados agregados,
+com certeza teremos alguma endogeneidade entre as características
+dos produtos presentes no $V_{j}$ e o termo $\varepsilon_{j}$.
+\item Para resolver isto, a melhor forma é o uso de Variáveis Instrumentais.
+\item \citet{Berry1994} sugere os seguintes instrumentos:
+
+\begin{itemize}
+\item Variáveis de custos dos produtos que não entram em $V_{j}$, tais
+como preço de insumos
+\item A soma das características dos outros produtos da mesma empresa
+\item A soma das características dos produtos das outras empresas.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\section{Modelo de Escolha Discreta com Características Não-Observáveis}
+\begin{frame}\frametitle{Escolha Discreta e Características Não Observáveis}
+
+\begin{itemize}
+\item Vamos aqui discutir uma outra forma de driblar o problema decorrente
+da IIA.
+\item Neste caso, a sensibilidade da utilidade à atributos das alternativas
+depende de características individuais.
+\item A vantagem é que prescinde de imposições do analista acerca do padrão
+de substituição entre as alternativas.
+\item No Logit Aninhado, quem tem que escrever a árvore de escolhas é o
+analista.
+\item Exemplos bons dessa abordagem são encontrados em \citet{Verboven1996} e \citet{Goldberg1998}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Escolha Discreta...(II):}
+
+\begin{itemize}
+\item Essa abordagem é apresentada no artigo clássico de \citet{Berry1995}	
+\item Uma vez que é baseada em uma microfundamentação bem robusta, permite
+que estendamos esta metodologia para um conjunto bem amplo de situações.
+Vamos então começar introduzindo o modelo microeconômico subjacente:
+\[
+U_{ij}=\sum_{k}x_{jk}\beta_{ik}+\xi_{j}+\epsilon_{ij}
+\]
+\item O termo $\xi_{j}$ captura as avaliações que os consumidores fazem
+das características não observaas da alternativa $j$. 
+\item A diferença em relação ao que vimos na aula anterior é que voltamos
+a supor que a sensibilidade do consumidor $i$ em relação ao atributo
+$k$ do produto $j$ pode ser diferente da mesma sensibilidade no
+caso de outro consumidor, ou seja $\beta_{ik}\neq\beta_{dk},\forall i,d$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Escolha Discreta...(III):}
+
+\begin{itemize}
+\item A idéia aqui é modelar a heterogeneidade dos coeficientes dos indivíduos
+da seguinte forma:
+\[
+\beta_{ik}=\bar{\beta}_{k}+\beta_{k}^{o}\mathbf{z}_{i}+\beta_{k}^{u}\mathbf{v}_{i}
+\]
+\item Ou seja, este coeficiente é composto por uma sensibilidade ``média'',
+$\bar{\beta}_{k}$, mais alguns efeitos:
+
+\begin{itemize}
+\item As características individuais observadas possui sobre ele , que denotaremos
+$\mathbf{z}_{i}$
+\item As características individuais \textbf{não observadas}, denominadas
+$\mathbf{v}_{i}$
+\end{itemize}
+\item Substituindo esta definição dos coeficientes, temos que:
+\[
+U_{ij}=\sum_{k}x_{jk}\bar{\beta}_{k}+\sum_{k}x_{jk}\beta_{k}^{o}\mathbf{z}_{i}+\sum_{k}x_{jk}\beta_{k}^{u}\mathbf{v}_{i}+\xi_{j}+\epsilon_{ij}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Escolha Discreta...(IV):}
+
+\begin{itemize}
+\item Podemos reescrever de forma similar à da aula passada, separando esta
+especificação em uma parte correspondente á utilidade ``média''
+da alternativa, e a parte aleatória:
+\begin{eqnarray*}
+U_{ij} & = & V_{j}+\sum_{k}x_{jk}\beta_{k}^{o}\mathbf{z}_{i}+\sum_{k}x_{jk}\beta_{k}^{u}\mathbf{v}_{i}+\epsilon_{ij}\\
+V_{j} & = & \sum_{k}x_{jk}\bar{\beta}_{k}+\xi_{j}
+\end{eqnarray*}
+\item Na verdade, não temos microdados, somente as participações de mercado
+e algumas características dos produtos.
+\item Como fazer neste caso? 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Escolha Discreta...(V):}
+\small
+\begin{itemize}
+\item Temos que a probabilidade de escolha de uma alternativa é, na verdade,
+a seguinte integral:
+\[
+P_{ij}=\int\int_{\varepsilon}I(\epsilon_{ik}-\epsilon_{ij}<V_{ij}-V_{ik},\forall k\neq j)f(\varepsilon)d(\varepsilon)f(\mathbf{v})d(\mathbf{v})
+\]
+\item O problema não é a integral de dentro -- supondo uma distribuição
+valores extermos para $\varepsilon$, temos uma forma analítica --
+mas sim a integral de fora.
+\item Na maior parte dos casos, não teremos dados observados sobre as características
+dos consumidores que compraram cada uma das alternativas, de forma
+que apenas trabalharemos com características não observadas dos consumidores
+-- ou seja, apenas os termos $\mathbf{v}_{i}$. A análise
+subseqüente será em três etapas.
+
+\begin{enumerate}
+\item Especificar as participações de mercado em função dos coeficientes;
+\item Recuperar os sinais dos termos $\xi_{j}$ a partir dos resultados
+da etapa anterior;
+\item Estimar os coeficientes por GMM
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\subsection{Estimando as Participações de Mercado}
+\begin{frame}\frametitle{Estimando as Participações de Mercado}
+
+\begin{itemize}
+\item A primeira parte é recuperar as participações de mercado em função
+da utilidade média, $V_{j}$, e dos coeficientes $\beta_{k}^{u}$.
+Uma vez que os termos $\mathbf{v}_{i}$ não são observados, iremos
+impor uma premissa sobre eles, que é a que eles seguem uma distribuição
+qualquer, enquanto que os termos $\epsilon_{ij}$ seguem a já tradicional
+distribuição de Valores Extremos I. Desta forma, temos que:
+\[
+s_{j}(V_{j},\beta)=\int\left(\frac{\exp[V_{j}+\sum_{k}x_{jk}\beta_{k}^{u}\mathbf{v}_{i}]}{1+\sum_{q>0}\exp[V_{q}+\sum_{k}x_{qk}\beta_{k}^{u}\mathbf{v}_{i}]}\right)f(\mathbf{v})d\mathbf{v}
+\]
+\item Para resolvermos esta integral, precisamos de uma forma funcional
+para $f(\mathbf{v})$. 
+\item Geralmente, utiliza-se dados obtidos a partir de microdados --
+por exemplo, se a renda dos consumidores não é observada, usa-se distribuição
+da renda buscada na PNAD.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calculando Integrais por Simulação}
+
+\begin{itemize}
+\item Não existe uma forma analítica de resolução desta integral, de forma
+que teremos que usar ou métodos numéricos (por exemplo, método da
+quadratura) ou métodos de simulação para a obtenção do valor desta
+integral -- e, consequentemente, o valor desta participação
+de mercado. 
+\item Vamos falar um pouco sobre os métodos de simulação.
+
+\begin{itemize}
+\item Em geral simulação consiste em sortear valores aleatórios de uma distribuição,
+calcular alguma coisa com cada um destas valores sorteados e depois
+tirar uma média destes cálculos. Em todos estes casos, o pesquisador
+quer calcular uma média da forma $\tilde{t}=\int t(\varepsilon)f(\varepsilon)d\varepsilon$.
+\end{itemize}
+\item Vamos supor que você tenha sorteado $ns$ valores desta distribuição
+$f(\mathbf{v})$. Vamos supor que $\mathbf{z}=\varnothing$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calculando Integrais por Simulação}
+
+\begin{itemize}
+\item Com estes valores, podemos calcular a participação de mercado da alternativa
+$j$ com a seguinte fórmula:
+\[
+\hat{s}^{ns}(\delta_{j},\beta)=\frac{1}{ns}\sum_{r=1}^{ns}\left[\frac{\exp[V_{j}+\sum_{k}x_{jk}\beta_{k}^{u}\mathbf{v}_{ir}]}{1+\sum_{q>0}\exp[V_{q}+\sum_{k}x_{qk}\beta_{k}^{u}\mathbf{v}_{ir}]}\right]
+\]
+\item Ou seja, pegamos os valores de $\mathbf{v}_{i}$ associados com os
+sorteios de cada característica, e calculamos a fórmula do \emph{share}
+com cada um deles. Depois disso, somamos e tiramos a média. 
+\item Evidentemente, a utilização de métodos de simulação aumenta a imprecisão
+das estimativas, que pode ser reduzida quanto maior for o valor de
+$ns$. 
+\end{itemize}
+\end{frame}
+
+\subsection{Calculando a Utilidade Média}
+\begin{frame}\frametitle{Calculando a Utilidade Média}
+
+\begin{itemize}
+\item O passo seguinte é calcular os efeitos das características dos produtos
+que não são observadas pelo analista. Para isso, precisamos obter
+estimativas do termo $V_{j}$. 
+\item Tendo este negócio, podemos obter estimativas do $\xi_{j}$, do $\bar{\beta}_{j}$
+e do $\beta_{k}^{u}$. 
+\item Em primeiro lugar, no paper BLP, os autores notam que a seguinte relação:
+\[
+V_{j}^{h}=V_{j}^{h-1}+\ln[s_{j}]-\ln[\hat{s}_{j}^{ns}]
+\]
+\item É um chamado \emph{contraction mapping}, que possui um ponto fixo.
+Ou seja, se fizermos um processo sequencial, começando com um valor
+inicial para o $V_{j}$, e em cada iteração ajustando o valor de $V_{j}$
+no valor igual à diferença entre os logs da participação de mercado
+e a participação de mercado observada, acabaremos em um ponto fixo,
+em que não há alterações adicionais em $V_{j}$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calculando a Utilidade Média (II):}
+
+\begin{itemize}
+\item Um bom valor inicial para fazer a recursão pode ser a participação
+de mercado obtida com a estimação de um modelo LOGIT multinomial. 
+\item Na verdade, na programação é utilizada a seguinte versão não-linear
+do estimador:
+\[
+\exp[V_{j}^{h}]=\exp[V_{j}^{h-1}]\times\frac{s_{j}}{\hat{s}_{j}^{ns}}
+\]
+\item Desta forma, obtemos uma estimativa para o termo $V_{j}$. A partir
+desta estimativa, podemos construir as condições de momento, lembrando
+que o termo $\xi_{j}$ pode ser entendida como a diferença entre a
+utilidade média e os valores dos coeficientes médios. 
+\end{itemize}
+\end{frame}
+
+\subsection{Construindo as Condições de Momento}
+\begin{frame}\frametitle{Construindo as Condições de Momento}
+
+\begin{itemize}
+\item Tendo este valor para $V_{j}$, podemos definir os erros da seguinte
+forma:
+\[
+\xi_{j}=V_{j}-\sum_{k}\bar{\beta}_{k}x_{jk}
+\]
+\selectlanguage{brazil}%
+\item O problema é que aqui temos que estimar os $\bar{\beta}_{\mathbf{j}}$.
+Isto é análogo a concentrar a função objetivo para ficar apenas em
+termos dos $\mathbf{\beta^{u}}$. Vamos fazer isso projetando a covariância
+entre os $\mathbf{x_{j}}$ e as variáveis instrumentais, $\mathbf{Z}$,
+na covariância entre o $V_{j}$ e os instrumentos, ou seja:
+\[
+\bar{\beta}_{j}=\mathbf{(K(Z^{T}Z)K^{T})^{-1}K(Z^{T}Z)L}
+\]
+\end{itemize}
+\selectlanguage{brazil}%
+
+\note[item]{Em que $\mathbf{K=x_{j}^{T}Z}$ e $\mathbf{L}=V_{j}^{T}\mathbf{Z}$.
+Implicitamente, esta conta significa que estamos expressando o $\bar{\beta}_{j}$
+como função dos $\beta^{u}$. }
+
+\end{frame}
+
+\begin{frame}\frametitle{Construindo as Condições de Momento (II)}
+
+\begin{itemize}
+\item Supondo que tenhamos variáveis exógenas e instrumentos para os preços,
+podemos construir as condições de momento da seguinte forma:
+\[
+m(\theta)=\Xi\mathbf{Z}
+\]
+\item Em que $\Xi$ é o empilhamento dos $\xi_{j}$. Com isto, podemos construir
+uma função objetivo da seguinte forma:
+\[
+q=\Xi^{T}\mathbf{Z\Phi^{-1}Z}^{T}\Xi
+\]
+\item Em que $\Phi$ representa uma estimativa da matriz variância-covariância
+dos momentos das equações, ou $\Phi=E(\mathbf{Z}^{T}\Xi\Xi^{T}\mathbf{Z})$. 
+\end{itemize}
+
+\note[item]{Um caminho razoavelmente adequado envolve, na primeira iteração,
+calcular $\Phi$ como sendo homocedástica $\Phi=\mathbf{Z}^{T}\mathbf{Z}$. }
+
+\note[item]{Com isto, são calculados os valores dos parâmetros e, com os valores
+dos parâmetros, calcular aí uma estimativa completa da matriz de variância
+covariância das condições de momento, $\Phi=\mathbf{Z}^{T}\Xi\Xi^{T}\mathbf{Z}$. }
+
+\end{frame}
+
+\begin{frame}\frametitle{Iterando até Convergir}
+
+\begin{itemize}
+\item Neste ponto, perdemos de vista os coeficientes $\beta_{k}^{u}$. Para
+isto, precisamos ter em mente que as etapas anteriores são repetidas
+todas ao longo de cada iteração. Na verdade, uma vez que, para os
+valores de $\beta_{k}^{u}$ temos forma analítica para os coeficientes
+$\bar{\beta_{k}}$, podemos fazer o seguinte; em cada iteração apenas
+usar métodos numéricos para obter o mínimo valor da função critério
+na iteração. Ou seja, em cada iteração temos o seguinte roteiro:
+
+\begin{enumerate}
+\item Dados os valores novos dos parâmetros $\beta_{k}^{u}$, podemos recalcular
+todo o processo e calcular a função objetivo;
+\item Pelo algoritmo numérico, temos novas sugestões para os valores $\beta_{k}^{u}$.
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+
