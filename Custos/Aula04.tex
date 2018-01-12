@@ -1,0 +1,516 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\title{Aula 04}
+
+\subtitle{Função de Produção}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+
+\section{Produção e Custos -- Introdução}
+\begin{frame}\frametitle{Produção e Custos}
+
+\begin{itemize}
+\item Agora vamos mudar o foco de nossa análise. Até o momento, estávamos
+preocupados com a modelagem do comportamento do produtor; agora, nos
+preocuparemos com o comportamento do produtor. 
+\item Nesta aula, nos preocuparemos inicialmente com a derivação das principais
+primitivas do comportamento do produtor: a função de produção e a
+função custos, para apresentar algumas formas funcionais comuns para
+a modelagem da função custos. 
+\item Peculiaridades da modelagem da decisão do produtor:
+
+\begin{itemize}
+\item Viés de Seleção da Amostra: a atrição da amostra não é completamente
+aleatória.
+\item Problemas de Endogeneidade entre a quantidade produzida e o uso dos
+insumos.
+\item Ineficiência
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Pontos Interessantes na Modelagem de Produção:}
+
+\begin{itemize}
+\item Em geral, na análise da produção e custos, estamos interessados nos
+seguintes elementos:
+
+\begin{itemize}
+\item Escala: Verificação de se a empresa ou o setor exibem retornos constantes
+de escala, crescentes ou decrescentes;
+\item Substituição: O grau de substituição dos fatores de produção em resposta
+a alterações na quantidade produzida;
+\item Separabilidade: A capacidade de separação das relações de produção
+-- ou de custos -- em componentes aninhados
+ou aditivos.
+\item Progresso Técnico: Mudança na forma pela qual os fatores de produção
+são combinados para a produção.
+\item Distribuição da renda: Como as parcelas da renda se distribuem entre
+os fatores de produção;
+\item Custo Marginal: Obtenção de estimativas de custos marginais para as
+análises subsequentes. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Formas Funcionais -- Produção e Custos}
+\begin{frame}\frametitle{Formas Funcionais}
+
+\begin{itemize}
+\item Agora, começaremos a detalhar as formas funcionais mais comumente
+utilizadas para a modelagem de produção e custos.
+\item Em certo sentido, a modelagem que colocaremos é próxima das escolhas
+feitas no contexto da modelagem de funções de utilidade indireta:
+uma vez que não é de se esperar que observemos diretamente a primitiva
+relevante, tentaremos aproximar qual seria a ``verdadeira'' a partir
+dos dados observados.
+
+\begin{itemize}
+\item Afinal de contas, NÃO EXISTE UMA FUNÇÃO DE PRODUÇÃO ESCONDIDA EM ALGUM
+ARMÁRIO EM CADA EMPRESA
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Formas Funcionais Flexíveis}
+
+\begin{itemize}
+\item Todas estas funções podem ser vistas como expansões lineares em parâmetros
+que podem aproximar uma função arbitrária. Esta expansão pode ser
+vista na seguinte forma:
+\[
+f^{*}(\mathbf{x})\approx f(\mathbf{x})=\sum_{i=1}^{N}a_{i}h^{i}(\mathbf{x})
+\]
+\item Em que os $a_{i}$ eram parâmetros, os $h^{i}$ são funções conhecidas
+e os $\mathbf{x}$ são vetores de variáveis. 
+\item Se algumas condições são satisfeitas para uma dada realização do vetor
+$\mathbf{x}^{*}$, podemos dizer que $f(\mathbf{x}^{*})$ é uma aproximação
+da função verdadeira no ponto. 
+\item Além disso, aproxima os valores da primeira e segunda derivadas da
+função também. Consideramos esta uma forma funcional flexível parsimoniosa.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Forma Funcional Flexível Parsimoniosa -- Problemas}
+
+\begin{itemize}
+\item Um cuidado adicional: quando estamos estimando uma função como esta
+com uma base de dados com um domínio extensivo -- ou seja,
+com valores que mapeiam muito do quadrante relevante da variável $\mathbf{x}$
+-- é bem provável que a função obtida não será uma aproximação
+de segunda ordem da função de produção verdadeira em qualquer ponto. 
+\item Como resultado, os efeitos de estática comparativa resultantes podem
+ser bem diferentes dos resultados da função verdadeira. 
+\item Ou seja, podemos rejeitar uma hipótese mesmo quando a função verdadeira
+não rejeitaria.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Formas Funcionais -- Exemplos:}
+
+\tiny
+\begin{tabular}{>{\centering}p{3cm}>{\centering}p{5cm}>{\centering}p{3cm}}
+\hline 
+{\tiny{}Forma Funcional} & {\tiny{}Fórmula} & {\tiny{}Restrições}\tabularnewline
+\hline 
+{\tiny{}Cobb-Douglas (Cobb e Douglas 1928)} & {\tiny{}$\ln y=a_{0}+\sum_{j=1}^{J}a_{j}\ln z_{j}$} & {\tiny{}$\sum_{j=1}^{J}a_{j}=1$ para homog. lin.}\tabularnewline
+{\tiny{}CES (Arrow et. al 1961)} & {\tiny{}$y^{\rho}=a_{0}+\sum_{j=1}^{J}a_{j}z_{j}^{\rho}$} & {\tiny{}$a_{0}=0$ para Homog.lin.}\tabularnewline
+{\tiny{}Leontief/Linear Generalizada (Diewert 1971)} & \textrm{\tiny{}$y=a_{0}+\sum_{j=1}^{J}a_{j}\sqrt{z_{j}}+\sum_{k=1}^{J}\sum_{j=1}^{J}a_{kj}\sqrt{z_{k}z_{j}}$} & {\tiny{}$a_{i}=0,i=0,\cdots J$ para Homog. Lin.}\tabularnewline
+{\tiny{}Translog (Christensen, Jorgenson e Lau (1971))} & \textrm{\tiny{}$\ln y=a_{0}+\sum_{j=1}^{J}a_{j}\ln z_{j}+\sum_{k=1}^{J}\sum_{j=1}^{J}a_{kj}\ln z_{k}\ln z_{j}$} & {\tiny{}$\sum a_{j}=1$ e $\sum a_{ij}=0$para Homog. Lin.}\tabularnewline
+{\tiny{}Cobb-Douglas Generalizada (Diewert (1971))} & {\tiny{}$\ln y=a_{0}+\sum_{k=1}^{J}\sum_{j=1}^{J}a_{jk}\ln((z_{k}+z_{j})/2)$} & {\tiny{}$\sum_{k}\sum_{j}a_{jk}=1$para H. L.}\tabularnewline
+{\tiny{}Quadrática (Lau (1974))} & \textrm{\tiny{}$y=a_{0}+\sum_{j=1}^{J}a_{j}z_{j}+\sum_{k=1}^{J}\sum_{j=1}^{J}a_{kj}z_{k}z_{j}$} & \tabularnewline
+{\tiny{}Côncava Generalizada (McFadden (1974))} & {\tiny{}$y=\sum_{k=1}^{J}\sum_{j=1}^{J}z_{j}\phi^{kj}\left(\frac{z_{k}}{z_{j}}\right)a_{kj}$} & {\tiny{}$\phi^{kj}$ é uma função côncava conhecida}\tabularnewline
+\hline 
+\end{tabular}{\scriptsize \par}
+\end{frame}
+
+\section{Estimação de Funções de Produção}
+\begin{frame}\frametitle{Estimação de Funções de Produção}
+
+\begin{itemize}
+\item A estimação das funções de produção começou com o trabnalho de Cobb
+e Douglas (1928), que buscavam testar as implicações da teoria da
+distribuição baseada na produtividade marginal dos fatores.
+\item A principal crítica deste tipo de literatura é que os dados sobre
+fatores de produção, quando estamos falando em quantidades agregadas,
+são determinados simultaneamente aos valores do produto; 
+\item desta forma, a função de produção não seria identificável. 
+\item Vamos ilustrar este ponto mais detalhadamente, considerando a seguinte
+equação:,
+\[
+q=a+\alpha z+\beta x+u
+\]
+\item Em que $q$ é o log da quantidade produzida, $z$ é o log do capital
+(ou qualquer outra quantidade de fatores ``fixos'' de produção),
+e $x$ o log de todos os insumos variáveis. 
+
+\begin{itemize}
+\item O problema, levantado já em 1944 por Marschak e Andrews, é que não
+podemos tratar $x$ e $z$ como verdadeiramente exógenos e estimar
+este negócio por OLS. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estimação de Funções de Produção (II):}
+\small
+\begin{itemize}
+\item A demanda pelo insumo variável, supondo que as empresas escolham as
+quantidades de $x$ ao observar a realização de $u$, é dada por:
+\[
+X=\left[\frac{p}{w}\beta e^{a+u}Z^{\alpha}\right]^{\frac{1}{1-\beta}}
+\]
+\item Uma vez que a escolha de $X$ depende de $u$, temos problemas de
+endogeneidade.
+\item Um segundo problema é o da seleção de amostra. Um exemplo clássico
+é o de Dunne, Roberts e Samuelson (1988) encontrou taxas de saída
+maiores do que 30\% entre intervalos de 5 e 5 anos.
+\item É de se supor que o principal determinante deste padrão de saída não
+é o componente aleatório ortogonal à escolha das variáveis.
+
+\begin{itemize}
+\item Pelo contrário! É de se supor que as decisões da empresa tenham papel
+preponderante nas decisões de saída (i.e., falência) das empresas.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Endogeneidade da Função de Produção}
+
+\scriptsize
+\begin{itemize}
+\item Dois exemplos de endogeneidade como a mencionada no slide anterior:
+
+\begin{enumerate}
+\item Vamos supor que observemos um \emph{cross section }de empresas. Algumas
+delas são mais produtivas e têm melhores gestores.E por isso, elas
+podem precisar de menos trabalho para produzir a mesma quantidade.
+Ou seja, estas empresas vão produzir mais com menos trabalho e por
+isso OLS vai subestimar $\beta_{l}$
+\item Suponha que, agora observamos um painel e, em cada período a empresa
+tem um choque de produtividade -- positivo por ela observado
+e com este valor vai contratar mais. Ou seja, no final o aumento de
+produção com o choque de produtividade vai ser devido às duas coisas
+mas OLS vai atribuir TODO o aumento de produção ao aumento de trabalho,
+sobrestimando $\beta_{l}$
+\end{enumerate}
+\item Ou seja, pode ir para qualquer direção. 
+\item Usualmente, assumimos que o problema da endogeneidade é mais presente
+no trabalho.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Atrição da Amostra em Funções de Produção}
+
+\begin{itemize}
+\item Pra ilustrar melhor este ponto, suponha que as empresas sejam monpólios
+que são dotados exogenamente de diferentes quantidades de capital.
+\item Desta forma, dependendo do valor de $u$, elas podem decidir sair
+ou não. 
+
+\begin{itemize}
+\item Ou seja, se $u$ for ``muito ruim'', pode ser melhor vender o valor
+residual da empresa.
+\end{itemize}
+\item Isto pode ser racionalizado com a seguinte regra de saída:
+\[
+\chi(u,Z,p,w,a,\beta,\alpha)=0\,se\,\Pi(u,Z,p,w,a,\beta,\alpha)<\Psi
+\]
+\item Em que $\Pi$ é a parte variável dos lucros e $\Psi$o valor residual
+da empresa.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Atrição de Amostra em Funções de Produção}
+
+\begin{itemize}
+\item O ponto aqui é que esta condição gerará uma correlação entre $u$
+e $Z$ condicional à empresa estar no mercado.
+\item Isto ocorre porque as empresas com maiores estoques de capital devem
+ter maiores lucros variáveis e, portanto, podem suportar piores choques
+$u$ sem sair do mercado.
+
+\begin{itemize}
+\item Ou seja, devemos observar apenas aquelas empresas em que o $Z$ é
+relativamente grande e/ou $u$ relativamente pequeno.
+\item Isso implica que as empresas menores devem sair da amostra
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Soluções Tradicionais para o Problema:}
+
+\begin{itemize}
+\item Existem duas formas de lidar com alguns dos problemas mencionados
+aqui:
+
+\begin{itemize}
+\item Aproveitamento de amostra de dados em painel
+\item Utilização de Variáveis Instrumentais
+\end{itemize}
+\item Vamos representar nosso modelo da seguinte forma:
+\[
+y_{it}=\beta_{0}+\beta_{k}k_{it}+\beta_{l}l_{it}+\omega_{it}+\eta_{it}
+\]
+\item Em que $\omega_{it}$ representa a parte de informação não observada
+pelo econometrista que é observada pela empresa na tomada de suas
+decisões, e $\eta_{it}$ representa a parte da informação não observada
+pelo econometrista que também não é observada pela empresa.
+
+\begin{itemize}
+\item $\omega_{it}$: capacidade gerencial
+\item $\eta_{it}$: comportamento anômalo.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Solução I -- Dados em Painel}
+
+\begin{itemize}
+\item Uma solução interessante para o problema da endogeneidade é utilizar
+a informação da estrutura em painel dos dados.
+\item Aqui estamos considerando que a parte $\omega_{it}$ é constante ao
+longo do tempo
+\item Neste caso, podemos usar os diferentes estimadores mencionados em
+Wooldridge (2002), e que alguns de vocês viram no curso de Econometria
+com Dados em Painel:
+
+\begin{itemize}
+\item Primeiras Diferenças: $(y_{it}-y_{it-1})=\beta_{k}(k_{it}-k_{it-1})+\beta_{l}(l_{it}-l_{it-1})+(\eta_{it}-\eta_{it-1})$
+\item Efeitos Fixos: $(y_{it}-\bar{y}_{i})=\beta_{k}(k_{it}-\bar{k}_{i})+\beta_{l}(l_{it}-\bar{l}_{i})+\eta_{it}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dados em Painel:}
+
+\begin{itemize}
+\item Dada a hipótese que $\eta_{it}$ são independentes das escolhas de
+insumos em qualquer instante do tempo, podemos estimar as duas equações
+por OLS.
+
+\begin{itemize}
+\item Esta hipótese é a chamada ``exogeneidade estrita''. Em alguns casos,
+podemos estimar este modelo de efeitos fixos sob a premissa de ``exogeneidade
+seqüencial'', em que $\eta_{it}$ não é correlacionado com a escolha
+de insumos nos instantes anteriores à $t$.
+\end{itemize}
+\item Esta premissa de $\omega$ constante ao longo do tempo também resolveria
+o problema da atrição da amostra, caso a regra de saída dependa somente
+de $\omega$, e não de $\eta_{it}$.
+\item No entanto, existem algumas limitações da abordagem com dados em painel.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dados em Painel -- Limitações}
+
+\begin{itemize}
+\item É uma premissa complicada assumir que os $\omega$ sejam constantes
+ao longo do tempo, especialmente quando bases de microdados mais longas
+estão disponíveis.
+\item Além disso, pode haver interesse nas mudanças em $\omega$ propriamente
+dito.
+\item Outro problema é que, quando há erros de medida nos insumos, os estimadores
+de dados em painel podem gerar estimativas piores que OLS - em especial,
+$\beta_{k}$ muito baixos
+
+\begin{itemize}
+\item Griliches e Hausman (1986) mostram que quando os insumos são mais
+correlacionados que os erros de medida, pode se reduzir a razão sinal/ruído
+nas variáveis independentes (a parcela da variabilidade mais devida
+a alterações na variável mesmo do que nos erros de medida).
+\end{itemize}
+\item Um terceiro problema é que, em geral, efeitos fixos dão estimativas
+muito baixas para os coeficientes de retornos de escala.
+
+\begin{itemize}
+\item Além disso, os dados mudam muito se pegamos o painel inteiro ou apenas
+a parte balanceada do mesmo.
+\end{itemize}
+\end{itemize}
+
+\note[item]{Se $\omega$ fosse mesmo constante, e a saída da amostra dependesse
+somente dele, deveríamos ter resolvido o problema de endogeneidade
+induzido pela atrição da amostra e, portanto, o padrão de saída seria
+muito aleatório. Neste caso, se pegássemos a parte balanceada do painel
+e o painel completo, deveríamos ter resultados muito similares.}
+
+\end{frame}
+
+\begin{frame}\frametitle{Solução II -- Variáveis Instrumentais:}
+
+\begin{itemize}
+\item As abordagens de variáveis instrumentais se baseiam na premissa que
+é possível encontrar instrumentos adequados.
+\item Alguns instrumentos ``naturais''
+
+\begin{itemize}
+\item Preços dos fatores de produção: se eles forem independentes de $\omega$,
+tudo bem
+\end{itemize}
+\item Estamos, neste caso, assumindo que não existe poder de mercado por
+parte das empresas na aquisição de insumos.
+\item No entanto, existem problemas com esta abordagem:
+
+\begin{itemize}
+\item Preços pagos por insumos não são reportados pelas empresas
+\item Nem sempre há variação econometricamente ``boa'' nestas variáveis
+\item É difícil imaginar que $\omega$ não seja afetado pelos preços dos
+insumos
+\item Não resolve a questão da saída
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Solução III -- Painéis Dinâmicos}
+\small
+\begin{itemize}
+\item Uma linha de ataque aos problemas mencionados anteriormente envolve
+a estimação de modelos de painel dinâmico. 
+\item Vamos começar supondo o seguinte modelo:
+\begin{eqnarray*}
+y_{it} & = & \gamma_{t}+\beta_{k}k_{it}+\beta_{l}l_{it}+f_{i}+\eta_{it}\\
+\eta_{it} & = & \rho\eta_{it-1}+\epsilon_{it}\\
+\epsilon_{it} & \sim & MA(0)
+\end{eqnarray*}
+\item Assume-se que a parte da produtividade tenha um componente aleatório
+e um componente persistente -- para refletir o fato que
+a produtividade apresenta forte persistência ao longo do tempo.
+\item Este modelo tem uma representação dinâmica da seguinte forma:
+\begin{eqnarray*}
+y_{it} & = & \beta_{l}l_{it}-\rho\beta_{l}l_{it-1}+\beta_{k}k_{it}-\rho\beta_{k}k_{it-1}+\rho y_{it-1}+\\
+ & + & (\gamma_{t}-\rho\gamma_{t-1})+(f_{i}(1-\rho)+\epsilon_{it})
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Painéis Dinâmicos}
+
+\begin{itemize}
+\item Podemos reescrever esta equação como:
+\[
+y_{it}=\pi_{1}l_{it}+\pi_{2}l_{it-1}+\pi_{3}k_{it}+\pi_{4}k_{it-1}+\pi_{5}y_{it-1}+\gamma_{t}^{*}+(f_{i}^{*}+\epsilon_{it})
+\]
+\item Sujeita a duas restrições:
+
+\begin{itemize}
+\item $\pi_{2}=-\pi_{1}\pi_{5}$
+\item $\pi_{4}=-\pi_{3}\pi_{5}$
+\end{itemize}
+\item Arellano e Bond (1991) supõem as seguintes premissas sobre as condições
+iniciais:
+
+\begin{itemize}
+\item $E(\mathbf{x_{i1}}\epsilon_{it})=0$, sendo que $\mathbf{x_{it}}=(y_{it},l_{it},k_{it})$
+\end{itemize}
+\item Podemos utilizar as seguintes condições de momento:
+\[
+m(\theta)=E(\mathbf{x_{it-s}}\Delta\epsilon_{it})=0
+\]
+\item Em que $s\geq2$ caso não tenhamos erros de medida.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Painéis Dinâmicos (II):}
+
+\begin{itemize}
+\item O problema é que a estimação tem propriedades ruins quando os níveis
+defasados da série, os $\mathbf{x_{it-s}}$ são pouco correlacionados
+com as primeiras diferenças subseqüentes $\Delta\epsilon_{it}$.
+\item Causas possíveis para isso:
+
+\begin{itemize}
+\item Processo marginal de determinação de $l_{it}$ e $k_{it}$ são muito
+persistentes, próximos a ter uma raiz unitária.
+\end{itemize}
+\item Neste casos, os $\mathbf{x_{it-s}}$ são instrumentos fracos
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Problemas de GMM-Diff}
+
+\begin{itemize}
+\item Esta abordagem também tem suas limitações. Em algumas aplicações,
+é comum encontrar estimativas muito baixas de $\beta_{l}$ e $\beta_{k}$
+e grandes erros-padrão.
+\item Geralmente, a validade das restrições sobre-identificadoras é rejeitada.
+Além disso, a hipótese que o processo dos $\eta$ seja exatamente
+AR(1) pode ser rejeitada, o que implica que os $\mathbf{x_{it-2}}$
+não seriam instrumentos válidos.
+\item Além disso, a transformação em primeira diferença pode levar ao mesmo
+problema no caso de erros de medida nas variáveis
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{GMM -- Sistema}
+
+\begin{itemize}
+\item Supondo adicionalmente que $E(\Delta l_{it}f_{i}^{*})=E(\Delta k_{it}f_{i}^{*})=0$,
+e que as condições iniciais incluam $E(\Delta y_{i2}f_{i}^{*})=0$,
+podemos incluir as seguintes condições de momento na estimação:
+\[
+m^{2}(\theta)=E(\Delta\mathbf{x_{it-s}}(f_{i}^{*}+\epsilon_{it}))=0
+\]
+\item Com $s=1$ caso não haja erros de medida.
+\item Este é o chamado estimador GMM em Sistema de Blundell e Bond (1998).
+\item Podemos testar a adequação das restrições adicionais por meio de um
+teste de diferença de Sargan:
+
+\begin{itemize}
+\item Calcular a diferença entre os valores da função objetivo e comparar
+com o valor crítico de uma distribuição $\chi^{2}$, com número de
+graus de liberdade igual à diferença de condições de ortogonalidade
+nos dois casos.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+\end{comment}
+
+
+
+
+\end{document}
+
+
