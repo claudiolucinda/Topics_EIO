@@ -1,0 +1,549 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{bookmark}
+
+\title{Aula 05}
+
+\subtitle{Funcoes de Producao II}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{Funcoes de Producao}
+
+\subsection{Olley e Pakes}
+
+\begin{frame}\frametitle{Olley e Pakes (1996)}
+\begin{itemize}
+\item \citet{Olley1996} começam o seu estudo afirmando que, para a obtenção
+de estimativas consistentes dos parâmetros de funções de produção
+dois problemas inter-relacionados precisam ser resolvidos: um problema
+de seleção gerado pela relação entre a variável não observada de produtividade
+e a decisão de saída do mercado, e um problema de simultaneidade gerado
+pela relação entre produtividade e demandas de fatores. 
+\item Neste caso, os autores propõem um algoritmo, cujo primeiro estágio
+se baseia na seguinte regra de acumulação para o capital:
+\begin{eqnarray*}
+k_{t+1} & = & (1-\delta)k_{t}+i_{t}\\
+a_{t+1} & = & a_{t}+1
+\end{eqnarray*}
+\item Sendo $k_{t}$ o capital, $\delta$ a depreciação, e $i_{t}$ o investimento
+em capital, e $a_{t}$ a idade da empresa. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (II)}
+
+\begin{itemize}
+\item Além disso, os autores assumem uma regra de evolução para a produtividade,
+denominada $\omega_{t}$, que seguiria um processo Markoviano de ordem
+1. 
+\item Também assume-se que a empresa maximiza o valor presente dos seus
+lucros, o que nos dá a seguinte equação de Bellman:{\small{}
+\[
+V_{t}(\omega_{t},a_{t},k_{t})=\max\{\Phi,\sup\pi_{t}(\omega_{t},a_{t},k_{t})-c(i_{t})+\beta E[V_{t+1}(\omega_{t+1},a_{t+1},k_{t+1})|J_{t}\}
+\]
+}{\small \par}
+\item Em que $\Phi$ representa o valor terminal da planta, $\pi_{t}$ representa
+os lucros da empresa como função das variáveis de estado (produtividade,
+idade e capital - supõe-se que o trabalho se ajuste instantaneamente
+às mudanças nestas variáveis), e $c(i_{t})$ representa o custo do
+ajustamento do estoque de capital -- denominado investimento. 
+\item Enquanto isso,$\beta$ é o coeficiente de desconto intertemporal da
+empresa e $J_{t}$ é o conjunto de informações disponível no instante
+$t$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (III):}
+
+\begin{itemize}
+\item O que esta relação quer dizer é que, se o valor presente dos lucros
+da empresa, descontados adequadamente, for menor do que o valor terminal
+dos ativos, ela decidirá sair do mercado e fechar a empresa. 
+\item Caso isso não seja verdade, e ela decida manter-se no mercado, ela
+acabará por estabelecer um nível de investimento consistente com a
+operação continuada da empresa. 
+\item Dadas as hipóteses sobre o comportamento do termo de produtividade,
+podemos gerar uma regra de saída de mercado e uma demanda por investimentos.
+A regra de saída é:
+\[
+\chi_{t}=\begin{cases}
+1 & se\,\omega_{t}\geq\underline{\omega}_{t}(a_{t},k_{t})\\
+0 & c.c.
+\end{cases}
+\]
+\item E podemos construir uma função investimentos da seguinte forma:
+\[
+i_{t}=i_{t}(\omega_{t},a_{t},k_{t})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (IV):}
+
+\begin{itemize}
+\item Segundo Pakes (1994, Teorema 27), temos que esta função, para quaisquer
+valores do par $(a_{t},k_{t})$ é crescente em $\omega_{t}$. Desta
+forma, definindo $h=i^{-1}$ a função inversa da anterior, podemos
+escrever:
+\[
+\omega_{t}=h_{t}(i_{t},a_{t},k_{t})
+\]
+\item Ou seja, podemos escrever a produtividade como uma função do investimento,
+da idade e do estoque de capital, o que nos permite fazer o seguinte:
+\[
+\ln(y_{it})=\beta_{0}+\beta_{a}\ln(a_{it})+\beta_{k}\ln(k_{it})+\beta_{l}\ln(l_{it})+\omega_{it}+\eta_{it}
+\]
+\item Substituindo a função produtividade em termos de $i_{t},a_{t},k_{t}$
+na função de produção acima, temos que:
+\[
+\ln(y_{it})=\beta_{l}\ln(l_{it})+\phi_{t}(i_{it},a_{it},k_{it})+\eta_{it}
+\]
+\item Uma vez que a colocação da função $\omega_{t}$ vai absorver os logs
+da idade, do investimento e do estoque de capital. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (V):}
+
+\begin{itemize}
+\item Podemos reescrever a função $\phi(\cdot)$ como:
+\[
+\phi_{t}(i_{t},a_{t},k_{t})=\beta_{0}+\beta_{a}\ln(a_{it})+\beta_{k}\ln(k_{it})+h(i_{t},a_{t},k_{t})
+\]
+\item Aqui podemos fazer \textbf{o primeiro passo da metodologia de estimação
+de Olley-Pakes}. 
+\item Em especial, esta metodologia consiste em fazer uma regressão de $\ln(y_{it})$
+contra $\ln(l_{it})$ e um polinômio de terceira ou quarta ordem em
+$(i_{t},a_{t},k_{t})$. 
+\item Ou seja, estimamos a seguinte regressão:{\tiny{}
+\begin{eqnarray*}
+\ln(y_{it}) & = & \beta_{0}+\beta_{l}\ln(l_{it})+\sum_{x=1}^{3}\gamma_{1x}(\ln(k_{it}))^{x}+\sum_{x=1}^{3}\gamma_{2x}(\ln(i_{it}))^{x}+\sum_{x=1}^{3}\gamma_{3x}(\ln(a_{it}))^{x}+\\
+ &  & +\sum_{x=1}^{3}\gamma_{4x}(\ln(k_{it})\times\ln(a_{it}))^{x}+\sum_{x=1}^{3}\gamma_{5x}(\ln(k_{it})\times\ln(i_{it}))^{x}+\sum_{x=1}^{3}\gamma_{6x}(\ln(i_{it})\times\ln(a_{it}))^{x}
+\end{eqnarray*}
+}{\tiny \par}
+\item Com isto aqui, conseguimos estimar consistentemente o coeficiente
+$\beta_{l}$, que é o de ajustamento imediato.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (VI):}
+
+\begin{itemize}
+\item No entanto, precisamos ainda dos coeficientes dos outros elementos.
+Para estimarmos os coeficientes de $\beta_{a}$ e $\beta_{k}$, precisamos
+das estimativas de $\beta_{l}$, bem como de $\hat{\phi}$ e das probabilidades
+de sobrevivência da empresa (ou seja, estar no mercado, dado que esteve
+no período anterior). 
+\item Definindo esta variável por $\chi_{t+1}$, podemos escrever um probit
+da seguinte forma:{\tiny{}
+\begin{eqnarray*}
+Prob(\chi_{t+1}=1) & = & \sum_{x=1}^{3}\gamma_{1x}(\ln(k_{it}))^{x}+\sum_{x=1}^{3}\gamma_{2x}(\ln(i_{it}))^{x}+\sum_{x=1}^{3}\gamma_{3x}(\ln(a_{it}))^{x}+\\
+ &  & +\sum_{x=1}^{3}\gamma_{4x}(\ln(k_{it})\times\ln(a_{it}))^{x}+\sum_{x=1}^{3}\gamma_{5x}(\ln(k_{it})\times\ln(i_{it}))^{x}+\sum_{x=1}^{3}\gamma_{6x}(\ln(i_{it})\times\ln(a_{it}))^{x}
+\end{eqnarray*}
+}{\tiny \par}
+\item A partir daí, são calculados os valores previstos da probabilidade
+de sobrevivência. Caso tenhamos uma base de dados balanceada, este
+estágio não seria necessário. Com este modelo, são estimadas as probabilidades
+de ocorrência daquele evento, o que denominaremos $\hat{P}_{t}$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Olley e Pakes (VII):}
+
+\begin{itemize}
+\item Finalmente, podemos estimar os coeficientes do capital e da idade. 
+\item Em especial, isto é conseguido por meio de estimação não-linear do
+seguinte modelo:
+\tiny
+\begin{eqnarray*}
+\ln(y_{it})-\hat{\beta}_{l}\ln(l_{it}) & = & c+\beta_{a}\ln(a_{it})+\beta_{k}\ln(k_{it})+\sum_{j=0}^{3-m}\sum_{m=0}^{3}\beta_{mj}\hat{h}_{t-1}^{m}\hat{P}_{t-1}^{j}+e_{it}\\
+\hat{h}_{t-1} & = & \hat{\phi}_{t-1}+\beta_{a}\ln(a_{it-1})+\beta_{k}\ln(k_{it-1})
+\end{eqnarray*}
+\normalsize
+\item Finalmente, os autores calculam a produtividade da seguinte forma:
+\[
+p_{t}=\exp[\ln(y_{it})-\beta_{l}\ln(l_{it})-\beta_{k}\ln(k_{it})-\beta_{a}\ln(a_{it})]
+\]
+\end{itemize}
+\end{frame}
+
+\subsection{Levinsohn e Petrin}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (2000)}
+\begin{itemize}
+\item \citet{Levinsohn2000} levantam um ponto importante sobre os resultados
+de Olley e Pakes (1996): nem sempre o investimento responde integralmente
+aos choques de produtividade das empresas. 
+\item Uma vez que o investimento é uma variável de controle sobre uma variável
+de estado (o estoque de capital), em geral ela é custosa de ajustar. 
+\item Estes custos de ajustamento podem ser de tal ordem que tornam a inversão
+proposta por Olley e Pakes (1996) para a obtenção da produtividade
+como função dos investimentos e do capital e da idade inviável. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (2000)}
+
+\begin{itemize}
+\item Em primeiro lugar, a produtividade pode possuir um componente previsível
+e um componente não previsível. Se parte do componente previsível,
+o ajustamento nas variáveis de estado (o capital) se dará específicamente
+sobre ela. Neste caso, o investimento somente responderia à parte
+não esperada do choque de produtividade. Além disso, como o trabalho
+é suposto que se ajuste instantaneamente, provavelmente ele se ajusta
+aos dois componentes, criando assim simultaneidade.
+\item Outro cenário em que isso pode ocorrer é quando a produtividade possui
+um componente i.i.d. Neste caso, as expectativas sobre o futuro não
+são ajustadas, ainda que afetam os valores dos fatores variáveis.
+Além disso, como os choques de produtividades são i.i.d., os investimentos
+não se alteram em resposta a estes componentes da produtividade.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (II)}
+
+\begin{itemize}
+\item Para resolver este problema, Levinsohn e Petrin utilizam o valor de
+alguns insumos intermediários como \emph{proxies} para resolver este
+problema. Em especial, considerando a seguinte função de produção:
+\[
+y_{it}=\beta_{0}+\beta_{k}k_{it}+\beta_{l}l_{it}^{s}+\beta l_{it}^{u}+\beta_{m}m_{it}+\beta_{f}f_{it}+\beta_{e}e_{it}+\omega_{it}+\eta_{it}
+\]
+\item Em que as variáveis são logs de:
+
+\begin{itemize}
+\item $y_{it}$ - Valor da Produção
+\item $k_{it}$ - Valor do estoque de capital da planta da empresa
+\item $l_{it}^{s}$ - Valor da mão-de-obra qualificada
+\item $l_{it}^{u}$ - Valor da mão-de obra não qualificada
+\item $m_{it}$ - Valor das matérias-primas
+\item $f_{it}$ - Valor dos combustíveis
+\item $e_{it}$ - Valor da eletricidade consumida
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (III)}
+
+\begin{itemize}
+\item Agora, Levinsohn e Petrin fazem a hipótese que a demanda de insumos
+intermediários -- no caso, energia elétrica --
+é uma função da produtividade e do estoque de capital (as duas variáveis
+de estado do nosso problema dinâmico):
+\[
+e_{t}=e(\omega_{t},k_{t})
+\]
+\item Como eles mostram, a função $e$ , para qualquer valor de $k_{t}$,
+é crescente em $\omega_{t}$, o que indica que podemos inverter a
+função $e$:
+\[
+\omega_{t}=e^{-1}(e_{t},k_{t})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (IV)}
+
+\begin{itemize}
+\item Fazendo esta inversão, a função de produção fica assim:
+\end{itemize}
+\[
+y_{it}=\beta_{k}k_{it}+\beta_{l}l_{it}^{s}+\beta l_{it}^{u}+\beta_{m}m_{it}+\beta_{f}f_{it}+\phi(e_{it},k_{it})+\eta_{it}
+\]
+
+\begin{itemize}
+\item Em que:
+\[
+\phi_{it}(e_{it},k_{it})=\beta_{0}+\beta_{k}k_{it}+\omega_{t}(e_{t},k_{t})
+\]
+\item Ao invés de usar aproximações polinomiais para limpar os efeitos deste
+negócio, Levinsohn e Petrin utilizarão um método não-paramétrico diferente
+para a estimação (\emph{locally weighted least squares}). 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (V)}
+
+\begin{itemize}
+\item O que eles fazem é calcular o valor esperado de cada uma das variáveis,
+em função dos termos $e_{it}$ e $k_{it}$, e aí fazer a diferença:{\scriptsize{}
+\begin{eqnarray*}
+y_{it}-E(y_{it}|e_{it},k_{it}) & = & \beta_{s}(l_{it}^{s}-E(l_{it}^{s}|e_{it},k_{it}))+\beta_{u}(l_{it}^{u}-E(l_{it}^{u}|e_{it},k_{it}))+\\
+ & + & \beta_{m}(m_{it}-E(m_{it}|e_{it},k_{it}))+\beta_{f}(f_{it}-E(f_{it}|e_{it},k_{it}))+\eta_{it}
+\end{eqnarray*}
+}{\scriptsize \par}
+\item Para obtermos o coeficiente $\beta_{e}$, os autores oferecem dois
+caminhos.
+
+\begin{itemize}
+\item Supondo o que os autores chamam de separabilidade, não precisamos
+estimar os coeficientes para o insumo intermediário cujo consumo serve
+de instrumento. 
+\item Este coeficiente seria exatamente igual à elasticidade do produto
+com relação a ele. No caso de uma função Cobb-Douglas, isto implica
+que o coeficiente deste insumo é igual á participação do mesmo na
+receita:
+\[
+\beta_{e}=s_{e}
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (VI)}
+
+\begin{itemize}
+\item Neste caso, o processo se facilita muito. Precisamos apenas obter
+um coeficiente para a variável capital. Isto será obtido por GMM. 
+\item Dados os coeficientes estimados antes, podemos reescrever, para um
+valor qualquer do parâmetro $\beta_{k}$:
+\[
+y_{it}-\beta_{l}l_{it}^{s}-\beta l_{it}^{u}-\beta_{m}m_{it}-\beta_{f}f_{it}-s_{e}e_{it}-\beta_{k}^{*}k_{it}
+\]
+\item Sabemos que este negócio é igual aos choques de produtividade mais
+os componentes aleatórios $\omega_{it}+\eta_{it}$. 
+\item Pela suposição de que a produtividade segue um processo de Markov,
+temos que $\omega_{it}=E(\omega_{it}|\omega_{it-1})+\xi_{it}$. Desta
+forma, temos que:
+\[
+y_{it}-\beta_{l}l_{it}^{s}-\beta l_{it}^{u}-\beta_{m}m_{it}-\beta_{f}f_{it}-s_{e}e_{it}-\beta_{k}^{*}k_{it}-E(\omega_{it}|\omega_{it-1})=\xi_{it}+\eta_{it}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (VII)}
+
+\begin{itemize}
+\item Tudo estaria tranquilo, se soubéssemos o valor de $E(\omega_{it}|\omega_{it-1})$;
+no entanto, ainda não o sabemos, de forma que temos que estimar esta
+parada. Considerando que o termo $\eta_{it}$ é composto pela parte
+aleatória da função de produção, podemos afirmar que:
+\[
+E(\omega_{it}+\eta_{it}|\omega_{it-1})=E(\omega_{it}|\omega_{it-1})
+\]
+\item Assim, podemos usar como estimativa de $\omega_{it}+\eta_{it}$ o
+seguinte:
+\[
+y_{it}-\beta_{l}l_{it}^{s}-\beta l_{it}^{u}-\beta_{m}m_{it}-\beta_{f}f_{it}-s_{e}e_{it}-\beta_{k}^{*}k_{it}
+\]
+\item Agora, para a estimativa de $\omega_{it-1}$, podemos fazer o seguinte:
+\[
+\hat{\omega}_{it-1}=\hat{\phi}_{it-1}-s_{e}e_{it-1}-\beta_{k}^{*}k_{it-1}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Levinsohn e Petrin (VIII)}
+
+\begin{itemize}
+\item Com estes valores, podemos utilizar mínimos quadrados ponderados locais
+para calcular $E(\omega_{it}|\omega_{it-1})$, que denominaremos $\hat{\Omega}$.
+\item Usando esta estimativa, podemos calcular os valores de $\xi_{it}+\eta_{it}$,
+para os valores candidatos de $\beta_{k}$. Finalmente, podemos calcular
+a função critério:
+\[
+q=\left(\sum_{i}\sum_{t=t_{0}+1}^{T}(\xi_{it}+\eta_{it})k_{it}\right)^{2}
+\]
+\item Com isso, estimamos o coeficiente do capital.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Wooldridge}
+
+\begin{itemize}
+\item Neste paper, \citet{Wooldridge2009} se volta para a questão de como implementar
+os estimadores OP e LP em um contexto de GMM.
+\item Ele mostra que é possível estimar os parâmetros na forma de um sistema
+de equações não lineares.
+\item Esse negócio é implementável no GMM do Stata.
+\end{itemize}
+\end{frame}
+
+\section{Ackerberg-Caves-Frazer}
+\begin{frame}\frametitle{ACF}
+
+\begin{itemize}
+\item \citet{Ackerberg2005c} criticam OP e LP e propõem uma alternativa.
+\item A principal crítica está relacionada com o que exatamente se consegue
+com a utilização de medidas de insumos intermediários como proxies
+para a produtividade.
+\item O principal ponto pode ser visto quando a gente olha para a forma
+funcional do primeiro estágio de OP e LP:
+\[
+y_{it}=\beta_{L}l_{it}+\phi_{t}(m_{it},k_{it})+\varepsilon_{it}
+\]
+\item Como a gente consegue variação em $l_{it}$ independente de $\phi_{t}$?
+Porque se a gente acertasse direitinho $\phi_{t}$, provavelmente
+esse negócio deveria andar muito junto.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{ACF (II)}
+
+\begin{itemize}
+\item Eles mostram que a gente só consegue esta variação independente --
+e a identificação de $\beta_{L}$ se a gente assumir algumas hipóteses
+sobre o timing da decisão sobre a quantidade de insumos intermediários
+(e trabalho também).
+\item Por exemplo, caso $m_{it}$ seja escolhido conjuntamente com $l_{it}$
+não temos variação independente.
+\item Por outro lado, se $m_{it}$ for escolhido em um instante do tempo
+diferente de $l_{it}$ mas $\omega_{it}$ mexe nesse meio tempo, vc
+tem variação independente, mas não consegue recuperar o $\omega_{it}$correto
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{ACF (III)}
+
+\begin{itemize}
+\item ACF sugerem dois casos em que isso pode funcionar:
+\end{itemize}
+\begin{enumerate}
+\item Erro de medida em $l_{it}$ com $m_{it}$ sendo escolhido simultaneamente
+\item $l_{it}$ é escolhido depois de $m_{it}$ e $\omega$ não varia neste
+meio tempo
+\item O caso que eles usam é assumir que as formas escolhem $l_{it}$ no
+instante $t-b$ , com $(0<b<1)$, o que implica que a empresa escolhe
+a quantidade de trabalho depois do estoque de capital $k_{it}$ ter
+sido determinado em $t-1$, por $k_{it-1}+i_{it-1}$, mas antes de
+a quantidade de insumos $m_{it}$ forem escolhidos. 
+
+\begin{enumerate}
+\item Com esta ordem nas decisões de escolha, o $l_{it}$ pode ser uma variável
+de estado e determinando a quantidade de insumos intermediários.
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Timing}
+
+\begin{tikzpicture}
+\draw (0,0) -- (9,0);
+
+\foreach \x in {0,5,9}
+   \draw (\x cm,3pt) -- (\x cm,-3pt);
+
+\draw (0,0) node[below=3pt] {\footnotesize{$t-1$}} node[above=18pt] {\small{$k_{it}=k_{it-1}+i_{it-1}$}};
+\draw (0,0) node[above=3pt] {\small{$\mathbb{I}_{t-1}=\omega_{t-1}$}};
+\draw (5,0) node[below=3pt] {\footnotesize{$t-b$}} node[above=3pt] {\small{$E(\omega_{t-b}|\mathbb{I}_{t-1})=E(\omega_{t-b}|\omega_{t-1})$}} node[above=18pt] {$l_{it}$};
+\draw (9,0) node[below=3pt] {\footnotesize{$t$}} node[above=3pt] {\tiny{$E(\omega_{t}|\mathbb{I}_{t-b})=E(\omega_{t}|\omega_{t-b})$}} node[above=18pt] {\tiny{$m_{it}=h_{t}(\omega_{it},k_{it},l_{it}$)}};
+
+\end{tikzpicture}
+
+\end{frame}
+
+\begin{frame}\frametitle{ACF (IV)}
+
+\begin{itemize}
+\item Eles sugerem o seguinte algoritmo:
+\item Primeiro, considerando a seguinte função de produção:
+\[
+y_{it}=\alpha+\beta_{L}l_{it}+\beta_{K}k_{it}+\omega_{it}+\varepsilon_{it}
+\]
+\item Sendo que:
+
+\begin{itemize}
+\item $i_{it}$ e $k_{it}$ determinados em $t-1$
+\item $l_{it}$ em $t-b,0<b<1$
+\item $m_{it}$ determinado em $t$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{ACF (V):}
+
+\begin{itemize}
+\item Além disso, os choques de produtividade seguem a seguinte regra:
+\begin{eqnarray*}
+P(\omega_{it}|I_{it-b}) & = & P(\omega_{it}|\omega_{it-b})\\
+P(\omega_{it-b}|I_{it-1}) & = & P(\omega_{it-b}|\omega_{it-1})
+\end{eqnarray*}
+\item Com todas estas premissas, podemos escrever a escolha de $m_{it}$
+como sendo uma função $f(l_{it},\omega_{it},k_{it})$, podendo ser
+invertida. Ou seja, a função de produção fica:
+\[
+y_{it}=\alpha+\beta_{L}l_{it}+\beta_{K}k_{it}+f^{-1}(l_{it},m_{it},k_{it})+\varepsilon_{it}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Procedimento ACF}
+
+\begin{itemize}
+\item Estágio 1 - Regredir $y_{it}$ em uma função não-paramétrica de $l_{it}$,
+$m_{it}$ e $k_{it}$
+\item Estágio 2 - Estimar $\beta_{L}$ e $\beta_{K}$ usando os seguintes
+momentos:
+\[
+E(\xi(\beta_{K},\beta_{L})|k_{it},l_{it-1})=0
+\]
+\item Sendo que $\xi_{it}=\omega_{it}-E(\omega_{it}|\omega_{it-1})$ --
+por exemplo:
+
+\begin{itemize}
+\item $\xi(\beta_{k},\beta_{l})$ com uma regressão não paramétrica de $\hat{\phi}_{it}-\beta_{K}k_{it}-\beta_{L}l_{it}$
+em $\hat{\phi}_{it-1}-\beta_{K}k_{it-1}-\beta_{L}l_{it-1}$ 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Visão geral}
+
+\begin{enumerate}
+\item OP/LP/ACF permite um processo geral, não apenas um AR(1) para a produtividade.
+\item DPD pode ter efeitos fixos de empresa enquanto OP não (as condições
+de momento não seriam válidas).
+\item DPD não requer a condição de monotonicidade.
+\item DPD pode ter suas premissas testadas diretamente
+\end{enumerate}
+\end{frame}
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+
