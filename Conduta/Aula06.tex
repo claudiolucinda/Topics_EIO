@@ -1,0 +1,412 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{bookmark}
+\usepackage[normalem]{ulem}
+
+\title{Aula 06}
+
+\subtitle{Conduta}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{O Parâmetro de Conduta}
+\begin{frame}\frametitle{Receita Marginal=Custo Marginal, revisitados}
+\begin{itemize}
+\item Seria possível determinar, a partir dos dados observados, se os casos
+polares de competição e monopólio são discerníveis?
+\begin{itemize}
+\item Basicamente, o autor pressupõe que as quantidades e preços observados
+são o resultado do equilíbrio entre uma curva de demanda e uma \uline{relação}
+de oferta. 
+\item A forma mais geral desta relação de oferta é $RMg_{p}=CMg$, em que
+$RMg_{p}$ representa a receita marginal percebida pela empresa. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Receita Marginal Percebida}
+
+\begin{itemize}
+\item A Receita Marginal associada, por sua vez, é dada por:
+\[
+RMg_{j}=\frac{\partial(P\times q_{j})}{\partial q_{j}}=P+q_{j}\frac{\partial P}{\partial Q}\frac{\partial Q}{\partial q_{j}}
+\]
+\item O termo $\frac{\partial Q}{\partial q_{j}}$ é o que dá a ``percebida''
+para a Receita Marginal percebida.
+\item Esta fórmula abrange todos os casos tradicionais de Microeconomia.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Receita Marginal Percebida (II)}
+
+\begin{itemize}
+\item Vamos desempacotar um pouco mais esta parte ``percebida'' da Receita
+Marginal:
+\[
+\frac{\partial Q}{\partial q_{j}}=\sum_{k=1}^{J}\frac{\partial q_{k}}{\partial q_{j}}=\left(1+\sum_{k\neq j}\frac{\partial q_{k}}{\partial q_{j}}\right)=\lambda
+\]
+\item O que implica na seguinte expressão para a Receita Marginal Percebida
+- se assumirmos uma demanda linear:
+\end{itemize}
+\[
+RMg_{j}=P+q_{j}\frac{\lambda}{\alpha_{1}}
+\]
+
+\begin{itemize}
+\item As estimativas para o parâmetro $\lambda$ podem ser obtidas a partir
+da estimação de demanda - para obtermos uma estimativa para o $\alpha_{1}$-
+e uma relação de oferta, que nada mais é do que igualarmos isso à
+receita marginal percebida ao custo marginal.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{O Papel dos Custos}
+\begin{itemize}
+\item Aqui precisamos trazer o outro lado -- da tecnologia -- para derivarmos a nossa relação de oferta. Existem várias
+opções aqui:
+\begin{itemize}
+\item Custos Marginais determinados externamente -- Por exemplo, \citet{Genesove1998a}  fazem isso para o mercado de açúcar, e \citet{Wolfram1999a} para o mercado de eletricidade da Califórnia.
+\item Imposição de uma forma funcional linear nos parâmetros e dependendo dos custos de fatores, mas \uline{não} dependendo da quantidade produzida 
+\item Imposição de uma forma funcional linear nos parâmetros e dependendo dos custos de fatores \uline{e} da quantidade produzida da empresa. O Caso de \citet{Bresnahan1982a} e \citet{Lau1982a}.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{O Papel dos Custos (II):}
+
+\begin{itemize}
+\item Iremos falar aqui do segundo dos casos, em que:
+\end{itemize}
+\[
+CMg_{j}=\phi_{0}+\phi_{1}W_{j}+\xi_{j}
+\]
+\begin{itemize}
+\item Igualando o Custo Marginal com a Receita Marginal Percebida,
+temos:
+\begin{eqnarray*}
+RMg_{j} & = & CMg_{j}\\
+P+q_{j}\frac{\lambda}{\alpha_{1}} & = & \phi_{0}+\phi_{1}W_{j}+\xi_{j}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Estimável}
+
+\begin{itemize}
+\item Com tudo isso, chegamos às seguintes equações estimáveis:
+\end{itemize}
+\begin{eqnarray*}
+P & = & \frac{-\alpha_{0}}{\alpha_{1}}-\frac{\alpha_{2}}{\alpha_{1}}Y+\frac{Q}{\alpha_{1}}-\epsilon\\
+P & = & -q_{j}\frac{\lambda}{\alpha_{1}}+\phi_{0}+\phi_{1}W_{j}+\xi_{j}
+\end{eqnarray*}
+
+\begin{itemize}
+\item Basicamente, qual é o problema econométrico aqui? 
+\item Na equação de baixo, temos uma razão entre dois coeficientes, $\lambda$
+e $\alpha_{1}$. Todavia, conseguimos estimar o $\alpha_{1}$ a partir
+da equação de demanda (basicamente a gente usa $W_{j}$ como instrumento
+para $Q$ na equação de demanda), e aí consegue desamarrar o $\lambda$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Valores de $\lambda$}
+\small
+\begin{itemize}
+\item E como este $\lambda$ pode ser usado para identificarmos
+o sobrepreço de cartel? Em primeiro lugar, como checagem de consistência
+da metodologia, deveríamos checar se o $\lambda$ resultante está
+de acordo com alguma estrutura de mercado:
+\begin{itemize}
+\item Para Oligopólio competindo à la Cournot: $\lambda=1$
+\item Para Competição Perfeita: $\lambda=0$
+\item Para Cartel/Solução de Monopólio: $\lambda=\nicefrac{1}{s_{j}}$
+\end{itemize}
+\item Independentemente do que se considera sobre a modelagem do
+parâmetro de conduta, podemos obter qual seria o preço contrafactual.
+\begin{itemize}
+\item Basicamente, substituiríamos no valor de $\lambda$ o valor
+correspondente à estrutura de mercado que consideraríamos que melhor
+representasse o comportamento das empresas no cartel e utilizamos
+os valores das variáveis e outros coeficientes para estimar uma trejetória
+contrafactual para a empresa. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mas....(Sempre tem um mas, não é?)}
+
+\begin{itemize}
+\item No entanto, não podemos perder de vista que isso é o resultado das
+seguintes premissas:
+
+\begin{itemize}
+\item Produto Homogêneo
+\item Demanda Linear
+\item Custo Marginal independente da quantidade produzida
+\item Termos quantidades das empresas específicas
+\end{itemize}
+\item Cada uma destas premissas pode -- ou não --
+ser adequuada para o contexto em que se faz necessário o cálculo da
+margem do cartel. Mas temos que saber o que fazer quando estas premissas
+\uline{não} são adequadas para o contexto e, mesmo assim, desejamos
+manter a abordagem estrutural para estimar a margem de sobrepreço
+do cartel. 
+\end{itemize}
+\end{frame}
+
+
+\section{Extensões}
+
+\subsection{Demanda Não Linear}
+\begin{frame}\frametitle{Demanda Não Linear}
+\small
+\begin{itemize}
+\item Neste caso, o que precisamos fazer é adaptar a função
+Receita Marginal Percebida para o contexto em questão. Vamos, por
+simplicidade, supor uma demanda duplo log:
+\[
+\ln P=\alpha_{0}+\alpha_{1}\ln Q+\alpha_{2}\ln Y+\epsilon
+\]
+\item Se continuarmos supondo uma curva de custo marginal
+horizontal em relação à quantidade produzida, poderíamos representar
+isso da seguinte forma:
+\[
+P\left(1+s_{j}\alpha_{1}\lambda\right)=\phi_{0}+\phi_{1}W_{j}+\xi_{j}
+\]
+\item O jeito mais simples de estimar este $\lambda$ é
+por meio de GMM. O resíduo do GMM é dado por:
+\[
+\xi_{j}=P\left(1+s_{j}\alpha_{1}\lambda\right)-\phi_{0}+-\phi W_{j}
+\]
+\item Como a gente novamente pode estimar o $\alpha_{1}$
+consistentemente por GMM da demanda com o $W_{j}$ sendo instrumento
+para $\ln Q$, a gente poderia estimar essa relação de oferta usando
+$\ln Y,P,s_{j},W_{j}$ como instrumentos.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Dados Agregados}
+\begin{frame}\frametitle{Dados Agregados}
+
+\begin{itemize}
+\item E se não tivermos dados por empresa, apenas de mercado?
+\item Dá pra fazer a mesma análise, apenas a interpretação dos valores correspondentes
+às estruturas de mercado muda um pouco
+\item Vamos multiplicar a Receita Marginal percebida pela empresa $j$,
+bem como o Custo Marginal, pelas participações de mercado e somar
+para todas as empresas. Note que ainda não estamos levando esta equação
+aos dados:
+\[
+\sum_{j}s_{j}RMg_{j}=P\sum_{j}s_{j}+\frac{\partial P}{\partial Q}\sum_{j}q_{j}s_{j}\frac{\partial Q}{\partial q_{j}}=\sum_{j}s_{j}CMg_{j}=\bar{CMg}
+\]
+\item Reorganizando:
+\[
+P+\frac{\partial P}{\partial Q}Q\sum_{j}s_{j}\frac{\partial Q}{\partial q_{j}}\frac{q_{j}}{Q}=\bar{CMg}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dados Agregados (II):}
+\small
+\begin{itemize}
+\item Não iremos conseguir desempacotar mais a somatória,
+então a representaremos por $\lambda^{A}$. Utilizando as mesmas funções
+de antes:
+\[
+P+Q\frac{\lambda^{A}}{\alpha_{1}}=\phi_{0}+\phi_{1}W_{j}+\xi_{j}
+\]
+\item O caminho ali descrito para identificarmos os parâmetros
+continua inalterado. No entanto, a interpretação dos valores de $\lambda^{A}$
+é diferente. Lembrando que:
+\[
+\lambda^{A}=\sum_{j}s_{j}^{2}\frac{\partial Q}{\partial q_{j}}
+\]
+\item Temos que, se as empresas funcionam em um mercado
+competindo à la Cournot, e $\nicefrac{\partial Q}{\partial q_{j}}=1$,
+temos que este $\lambda^{A}$ precisaria ser igual ao Índice Herfindahl-Hirschman
+(a soma dos quadrados das participações de mercado, com os shares
+expressos em forma decimal). Se estivermos em concorrência perfeita,
+temos que $\lambda^{A}=0$ e, no caso de uma solução de cartel, teríamos
+que $\lambda^{A}=1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Custos Dependendo da Quantidade da Empresa}
+
+\begin{itemize}
+\item Essa foi a contribuição de \citet{Bresnahan1982a} e \citet{Lau1982a},
+que mostram que uma condição suficiente para a identificação de $\lambda$
+neste caso é que a variável endógena na equação de demanda não seja
+aditivamente separável em relação aos outros deslocadores de demanda.
+\item Em outras palavras, pelo menos um deslocador de demanda
+tem que interagir com a variável preço.
+\item Caso não tenhamos isso, a relação de oferta fica sendo:
+\begin{eqnarray*}
+CMg_{j} & = & RMg_{j}\\
+\beta_{0}+\beta_{1}q_{j}+\beta_{2}W & = & P+\lambda\frac{q_{j}}{\alpha_{1}}\\
+P & = & \beta_{0}+q_{j}\left(\beta_{1}-\frac{\lambda}{\alpha_{1}}\right)+\beta_{2}W
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Custos Dependendo da Quantidade da Empresa (II):}
+
+\begin{itemize}
+\item No slide anterior, a gente teria três (na verdade dois, porque $\alpha_{1}$
+você estima da equação de demanda) coeficientes para identificar,
+e apenas uma variável - o $q_{j}$. Neste sentido, não dá pra identificar
+as coisas.
+\item Agora, se tivermos um deslocador de demanda interagindo com a variável
+endógena na equação de demanda, temos:
+\end{itemize}
+\[
+P=\beta_{0}+q_{j}\left(\beta_{1}-\frac{\lambda}{\alpha_{1}+\alpha_{3}Y}\right)+\beta_{2}W
+\]
+
+\begin{itemize}
+\item Neste caso, conseguimos identificar adequadamente os coeficientes
+envolvidos, pois o pacote de três coeficientes, $\alpha_{1}$, $\alpha_{3}$
+e $\lambda$ pode ser obtido por duas variáveis diferentes --
+$q_{j}$ e $Y$. 
+\end{itemize}
+\end{frame}
+
+
+\subsection{Produtos Diferenciados}
+\begin{frame}\frametitle{Produtos Diferenciados}
+
+\begin{itemize}
+\small
+\item Uma outra crítica foi levantada por \citet{Nevo1998a} à abordagem de Breshanan
+(1982) e Lau (1982), especialmente relevante quando consideramos mercados
+em que os produtos são fortemente diferenciados. 
+
+\begin{itemize}
+\item Iremos entender aqui produtos diferenciados como sendo aqueles em
+que a elasticidade cruzada é bem definida -- ou seja, se
+um produtor reduz unilateralmente o preço do seu bem ele não rouba
+toda a demanda das outras empresas.
+\end{itemize}
+\item Neste caso, a demanda pelo produto de uma empresa $j$ é uma função
+não apenas do preço de mercado do próprio produto mas também dos preços
+dos produtos que são seus substitutos imperfeitos.
+\item O problema é que, para identificar os $\lambda$'s e os $\alpha$'s
+teríamos que ter a dimensão de variáveis exógenas nas equações de
+demanda igual ao número de produtos. Quando temos dois produtos, encontrar
+dois instrumentos é fácil. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Produtos Diferenciados (II):}
+
+\begin{itemize}
+\item As Condições de Primeira Ordem de uma empresa competindo em preços
+são:
+\end{itemize}
+\[
+q_{i}^{j}(\mathbf{p})+\sum_{i\in I_{j}}(p_{i}-CMg_{i})\times\frac{\partial q_{i}^{j}}{\partial p_{i}}=0
+\]
+
+\begin{itemize}
+\item Para deixar a relação de oferta mais clara, iremos representar este
+sistema de condições de primeira ordem em forma matricial, definindo
+duas matrizes. 
+\item A primeira delas será a que coleta todos os efeitos marginais e tem
+elemento típico$S_{jr}=-\frac{\partial q_{r}}{\partial p_{j}},j,r=1,\cdots,J$,
+que é o negativo do vetor de sensibilidades das demandas aos preços
+e a segunda é o que seria uma matriz seletora de propriedade
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Produtos Diferenciados (III):}
+
+\begin{itemize}
+\item Matriz Seletora de Propriedade
+\[
+\Theta_{jr}=\begin{cases}
+1, & \exists f:\{r,j\}\in I_{j}\\
+0 & c.c.
+\end{cases}
+\]
+\item Adicionalmente, podemos definir $\Omega_{jr}=\Theta_{jr}S_{jr}$,
+o que permite representar em notação vetorial o sistema de condições
+de primeira ordem da seguinte forma:
+\[
+\mathbf{q(p)}-\Omega(\mathbf{p}-\mathbf{CMg})=\mathbf{0}
+\]
+\item Reorganizando:
+\[
+\mathbf{p=CMg+\Omega^{-1}q(p)}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Produtos Diferenciados (IV):}
+
+\begin{itemize}
+\item Nevo (1998)afirma que a modelagem de parâmetros de conduta como a
+que vimos equivaleria a substituir a matriz $\Theta$ por uma matriz
+de parâmetros a serem estimados. 
+
+\begin{itemize}
+\item O problema que o autor levanta é que, no caso de produtos diferenciados,
+é extremamente difícil identificar os parâmetros constantes nesta
+matriz $\Theta$, além da identificação dos efeitos cruzados.
+\end{itemize}
+\item Para resolver este problema, os autores sugerem que, para a identificação
+da conduta do setor, sejam estimados diferentes modelos e depois fazendo
+um teste estatístico formal. 
+\item Eles envolvem as chamadas ``hipóteses não-aninhadas''. 
+\end{itemize}
+\end{frame}
+
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+
