@@ -1,0 +1,361 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{bookmark}
+\usepackage[normalem]{ulem}
+
+\title{Aula 06}
+
+\subtitle{Conduta -- Outras Abordagens}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{Funcoes de Producao}
+\begin{frame}[fragile]\frametitle{Funções de Produção e Conduta}
+    \begin{itemize}
+        \item O ponto de partida é a tradicional função de produção homogênea
+        \begin{equation*}
+            Y=F(K,L)
+        \end{equation*}
+        \item Passando o Logaritmo dos dois Lados:
+        \begin{align*}
+            \log{Y}&=\log{F(K,L)}  \\
+            d\log{Y}&=\left [\frac{\partial F}{\partial K}\frac{Y}{K}d\log{K} + \frac{\partial F}{\partial L}\frac{Y}{L} d\log{L} \right]
+        \end{align*}
+        \item O crescimento do progresso técnico é a diferença entre essas duas coisas
+        \begin{equation}
+            d\log{Z}=d\log{Y}-\left [\frac{\partial F}{\partial K}\frac{K}{Y}d\log{K} + \frac{\partial F}{\partial L}\frac{L}{Y} d\log{L} \right]
+        \end{equation}
+    \end{itemize}
+    
+
+\end{frame}
+\begin{frame}[fragile]\frametitle{Resíduo de Solow -- Continuação}
+    \begin{itemize}
+        \item Os termos $\nicefrac{\partial F}{\partial K} \times \nicefrac{K}{Y}$ e $\nicefrac{\partial F}{\partial L} \times \nicefrac{L}{Y}$ são as elasticidades da produção com respeito aos fatores de produção
+        \item Caso tenhamos
+        \begin{itemize}
+            \item Retornos Constantes de Escala
+            \item Competição Perfeita nos mercados de fatores e de produtos
+        \end{itemize}
+        \item Esses negócios são iguais às participações dos fatores de produção no valor da produção
+        \item Isso pode fazer sentido na Macroeconomia, mas será que faz na microeconomia?
+    \end{itemize}
+
+
+\end{frame}
+
+\subsection{Caso 1: Retornos de Escala}
+\begin{frame}[fragile]\frametitle{Revisitando o lado dos Custos}
+    \begin{itemize}
+        \item Vamos lembrar que os Custos podem ser definidos como:
+        \begin{equation*}
+            C=wL+rK
+        \end{equation*}
+        \item E vamos construir uma medida de economias de escala como a razão entre custo médio e custo marginal:
+        \begin{align*}
+            \gamma&=\frac{\nicefrac{C}{Y}}{\nicefrac{\partial C}{\partial Y}} \\
+            C&=\gamma \times \frac{\partial C}{\partial Y} \times Y
+        \end{align*}
+    \end{itemize}
+
+
+\end{frame}
+\begin{frame}[fragile]\frametitle{Custos -- Parte II}
+    \begin{itemize}
+        \item Agora vamos lembrar de outra coisa: se temos competição no mercado de fatores, o uso do fator vai ser até o ponto em que a remuneração do mesmo seja igual ao Valor do Produto Marginal do mesmo
+        \begin{align*}
+            \frac{\partial F}{\partial K}\times P&=r \\
+            \frac{\partial F}{\partial L}\times P&=w
+        \end{align*}
+        \item Mas temos competição perfeita, então $P=\nicefrac{\partial C}{\partial Y}$, o que implica:
+        \begin{align*}
+            \frac{\partial F}{\partial K}\times \frac{\partial C}{\partial Y}&=r \\
+            \frac{\partial F}{\partial L}\times \frac{\partial C}{\partial Y}&=w
+        \end{align*}
+    \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Custos -- Parte III}
+    \begin{itemize}
+        \item Reorganizando, podemos escrever:
+        \begin{align*}
+            \frac{\partial F}{\partial K}\frac{K}{Y}&=\gamma \frac{Y}{C} \frac{K}{Y} r= \gamma  \frac{rK}{C}\\
+            \frac{\partial F}{\partial L}\frac{L}{Y}&=\gamma \frac{Y}{C} \frac{L}{Y} w=\gamma \frac{wL}{C} \\
+        \end{align*}
+        \item Ou seja, neste caso, o resíduo de Solow é dado por
+        \begin{equation}
+            d\log{Z}=d\log{Y}-\gamma \left [s_K d\log{K} + s_L d\log{L} \right]
+        \end{equation}
+        \item Em que $s_K$ e $s_L$ são as participações dos fatores de produção nos custos (e nas receitas)
+    \end{itemize}
+
+
+\end{frame}
+
+\subsection{Caso 2: Competição Imperfeita}
+\begin{frame}[fragile]\frametitle{Competição Imperfeita}
+    \begin{itemize}
+        \item E quando temos Competição Imperfeita?
+        \item Neste caso, temos que $P \neq CMg$, mas podemos escrever $P=\mu \times CMg$, em que $\mu$ é a razão Preço/Custo Marginal.
+        \item Reorganizando:
+        \begin{align*}
+            C&=\frac{\gamma}{\mu}\times P \times Y \\
+            \frac{wL}{C}&=\frac{\mu}{\gamma}\frac{wL}{PY} \\
+            \frac{rK}{C}&=\frac{\mu}{\gamma}\frac{rK}{PY}
+        \end{align*}
+    \end{itemize}
+
+
+\end{frame}
+\begin{frame}[fragile]\frametitle{Competição Imperfeita -- II}
+    \begin{itemize}
+        \item Neste caso, a equação dos resíduos de Solow fica sendo:
+        \begin{equation}
+            d\log{Z}=d\log{Y}-\mu \left [s_K d\log{K} + s_L d\log{L} \right]
+        \end{equation}
+        \item Em que $s_K$ e $s_L$ são as participações dos fatores de produção NAS RECEITAS (que são diferentes dos custos)
+        \item Ou seja:
+            \begin{itemize}
+                \item Só com Retornos Constantes de Escala E Competição Perfeita temos que as elasticidades dos fatores com relação à produção são iguais aos shares de fatores
+                \item Quando UMA destas coisas não acontece, temos que as participações das remunerações dos fatores na receita verdadeiras não somam 1, mas sim $\nicefrac{\gamma}{\mu}$ 
+            \end{itemize}
+    \end{itemize}
+
+
+\end{frame}
+\section{A Abordagem de Hall}
+\begin{frame}[fragile]\frametitle{Implicações Empíricas deste Monte de Coisa}
+\scriptsize
+    \begin{itemize}
+        \item A partir dessa volta pelo Resíduo de Solow, podemos tirar a seguinte definição \citet{Hall1991a}:
+    \begin{definition}    
+        O Crescimento da Produtividade não deve ser correlacionado com nenhuma variável que (a) afete a produção e que (b) não seja argumento da função de produção
+    \end{definition}
+        \item Essa é a base para a primeira parte do teste de \citet{Hall1988} -- Calcular o Resíduo de Solow da forma tradicional e checar se ele é correlacionado com alguma coisa que a gente sabe que afeta o produto.
+        \item Se afetar, temos evidência de Retornos Não Constantes de Escala e/ou Competição Imperfeita:
+        \item Outra Implicação importante depois: $\mu=\frac{PY}{C}=\frac{\nicefrac{\partial ln(F)}{\partial ln(L)}}{\nicefrac{wL}{PY}}$
+    \end{itemize}
+
+\end{frame}
+
+\subsection{Os Testes de Hall}
+\begin{frame}[fragile]\frametitle{Abordagem de Hall}
+    \begin{itemize}
+        \item Duas Etapas:
+        \begin{itemize}
+            \item Na primeira, é testado o conjunto (Retornos Constantes de Escala E Competição perfeita)
+            \begin{itemize}
+                \item Neste caso, o Resíduo de Solow calculado da forma tradicional é regredido contra uma variável que espera-se que não afete a produtividade mas sim o PIB. 
+                \item Pelo slide anterior, esta variável não deveria afetar a produtividade.
+            \end{itemize}
+            \item Na segunda, é estimada uma regressão do tipo $ln(\nicefrac{Y}{K})=\mu [s_L ln(\nicefrac{L}{K})]$ e estima-se o $\mu$
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\subsection{A Abordagem de De Loecker}
+\begin{frame}[fragile]\frametitle{De Loecker}
+    \begin{itemize}
+        \item Em 2006, apareceu um paper que buscou revisitar essa abordagem, \citet{Loecker2009a}
+        \item A essência da abordagem reside em que podemos calcular a razão preço-custo marginal como a razão entre duas coisas:
+        \begin{itemize}
+            \item A participação de cada insumo na receita
+            \item A elasticidade produto de cada fator de produção
+        \end{itemize}
+        \item Isso tem a vantagem que você não precisa de informações detalhadas sobre volume produzido dos diferentes produtos, preços de cada um deles...
+    \end{itemize}
+
+
+\end{frame}
+
+\section{Estatística Panzar-Rosse}
+\begin{frame}[fragile]\frametitle{Estatística Panzar-Rosse}
+\begin{itemize}
+	\item No final dos anos 70, Panzar e Rosse (\citet{Panzar1987}) propuseram uma forma de se determinar o comportamento das empresas sem precisar de informações de preços e quantidades. 
+	\item A ``Estatística Panzar-Rosse'' nada mais é do que a soma das elasticidades da receita total com relação aos preços dos fatores de produção:
+	\begin{align*}
+	\ln{R}&=\alpha_{0}+\sum_{i} \beta_{i}\ln{w_{i}}+\varepsilon\\
+	h&=\sum_{i} \beta_{i}
+	\end{align*}
+	\item Diferentes estruturas de competição podem ser associadas a diferentes valores de $h$
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Estatística Panzar-Rosse}
+\footnotesize
+\begin{itemize}
+	\item Monopólio: $h<0$. Intuitivamente, em resposta a uma elevação nos custos em $h$\%, as receitas totais se reduzem.
+	\item Competição Monopolística: $h\leq 1$.
+	\item Competição Perfeita: $h=1$
+	\item Oligopólio: Como mostrado em \citet{Shaffer1982}, podemos mostrar que, para elasticidade-preço da demanda constante e custo linear na quantidade produzida, temos que:
+	\begin{eqnarray*}
+	h & = & 1-\frac{1}{m}\\
+	m & = & \frac{p-CMg}{p}=\frac{1}{\varepsilon}
+	\end{eqnarray*}
+
+	\item No contexto de modelos específicos de oligopólio, coisas adicionais podem ser feitas. 
+	\item Supondo, custo marginal constante na quantidade produzida, no caso de conjecturas equivalentes (ou seja, as empresas seguem um comportamento oligopolizado), temos que $h\leq0$. 
+\end{itemize}
+    
+
+
+\end{frame}
+
+\section{Demanda Residual}
+\begin{frame}\frametitle{Demanda Residual}
+\small
+\begin{itemize}
+\item A idéia desta abordagem é propôr procedimentos econométricos para
+a estimação de um sistema de demanda que será enfrentado pelas partes
+que serão objeto de fusão, baseada somente em dados pré-fusão. 
+\item O elemento chave para isto é a agregação dos efeitos de todas as outras
+firmas em um único parâmetro. 
+\item Formalmente, começaremos com um sistema de demanda de produtos diferenciados
+com $n$ empresas. 
+\item Após manipulação do sistema, eliminamos os preços de todas as empresas,
+exceto as duas diretamente envolvidas em uma fusão. 
+\item Isto reduz a dimensionalidade do sistema, para um tamanho que o torna
+gerenciável. 
+\item Passemos então à descrição da metodologia propriamente dita, apresentada originalmente por \citet{Baker1985a} e \citet{Baker1988a}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Demanda Residual (II):}
+
+\begin{itemize}
+\item Vamos supor que duas empresas estejam contemplando a fusão. Podemos
+representar a função demanda inversa de cada uma das empresas da seguinte
+forma:
+\begin{eqnarray*}
+P_{1} & = & h_{1}(q_{1},q_{2},\tilde{q},Y,\eta_{1})\\
+P_{2} & = & h_{2}(q_{1},q_{2},\tilde{q},Y,\eta_{2})
+\end{eqnarray*}
+
+\item Em que $\tilde{q}$ representa a produção das $n-2$ empresas não
+diretamente envolvidas, $Y$ um vetor de deslocadores de demanda,
+$\eta_{1}$ e $\eta_{2}$ são vetores de parâmetros da função demanda
+das duas empresas.
+\item Podemos, adicionalmente, representar a função demanda inversa das
+$n-2$ empresas remanescentes do mercado da seguinte forma:
+\[
+\tilde{P}=\tilde{h}(q_{1},q_{2},\tilde{q},Y,\tilde{\eta})
+\]
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Demanda Residual (III):}
+
+\begin{itemize}
+\item Agora, vamos especificar o comportamento das $n-2$ empresas remanescentes. 
+\item Independentemente da hipótese comportamental, podemos assumir que
+elas agirão de forma a igualar a receita marginal \uline{percebida}
+(ou seja, envolvendo as conjecturas das empresas sobre o comportamento
+das outras) igual ao seu custo marginal. 
+\item Ou seja, para estas $n-2$ empresas a receita marginal é da seguinte
+forma:
+\[
+\tilde{MR}=\tilde{P}+\tilde{g}(q_{1},q_{2},\tilde{q},Y,\tilde{\eta})\tilde{q}
+\]
+
+\item Sendo que a função $\tilde{g}$ é uma representação da inclinação
+da demanda $\tilde{h}$ percebida pelas $n-2$ empresas. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Demanda Residual (IV):}
+
+\begin{itemize}
+\item Da mesma forma, podemos escrever a função custo marginal da seguinte
+forma:
+\[
+\tilde{CMg}=\tilde{j}(\tilde{q},W,\tilde{\beta)}
+\]
+
+\item Ou seja, a relação de preços é dada pela seguinte igualdade:
+\[
+\tilde{MR}=\tilde{P}+\tilde{g}(q_{1},q_{2},\tilde{q},Y,\tilde{\eta})\tilde{q}=\tilde{CMg}=\tilde{j}(\tilde{q},W,\tilde{\beta)}
+\]
+
+\item Resolvendo o sistema composto pela equação de demanda e a igualdade
+entre receita marginal e custo marginal, podemos expressar a quantidade
+produzida pelas $n-2$ firmas da seguinte forma:
+\[
+\tilde{q}=\tilde{e}(q_{1},q_{2},Y,W,\tilde{\eta},\tilde{\beta})
+\]
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Demanda Residual (V):}
+
+\begin{itemize}
+\item Com esta equação, podemos escrever uma forma reduzida do sistema para
+as duas equações que estão se unindo, da seguinte forma;
+\begin{eqnarray*}
+P_{1} & = & h_{1}(q_{1},q_{2},\tilde{e}(q_{1},q_{2},Y,W,\tilde{\eta},\tilde{\beta}),Y,\eta_{1})\\
+P_{2} & = & h_{2}(q_{1},q_{2},\tilde{e}(q_{1},q_{2},Y,W,\tilde{\eta},\tilde{\beta}),Y,\eta_{2})\\
+P_{1} & = & r_{1}(q_{1},q_{2},Y,W,\eta_{1},\tilde{\eta},\tilde{\beta})\\
+P_{2} & = & r_{2}(q_{1},q_{2},Y,W,\eta_{2},\tilde{\eta},\tilde{\beta})
+\end{eqnarray*}
+
+\item A análise empírica se baseia na estimação do sistema composto pelas
+duas equações do sistema. 
+\end{itemize}
+\end{frame}
+
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+
