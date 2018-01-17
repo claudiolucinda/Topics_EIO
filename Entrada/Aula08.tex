@@ -1,0 +1,665 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+%\usepackage{bookmark}
+%\usepackage[normalem]{ulem}
+
+\title{Aula 08}
+
+\subtitle{Entrada}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+\section{Introducao}
+\begin{frame}\frametitle{Introdução}
+\small
+\begin{itemize}
+\item Nesta aula, iremos mudar o foco de nossa análise, para investigarmos
+a questão da entrada e saída das empresas em um determinado mercado. 
+\item Em especial, esta discussão se filia à questão de como entender a
+estrutura de mercado e a relação entre esta e a competição dentre
+deste mesmo mercado. 
+
+\begin{itemize}
+\item Como o número e organização das empresas neste mercado, o tamanho
+das mesmas, dos competidores em potencial e a forma das linhas de
+produtos das empresas afetam a competição e os lucros das mesmas. 
+\end{itemize}
+\item A discussão sobre este tema variou bastante ao longo do tempo. 
+\item Nos anos 50 a 70, as análises econométricas eram voltadas para como
+as variáveis tais como lucro das empresas, gastos com P\&D, e preços
+variavam em mercados concentrados ou pouco concentrados. 
+\item A maior parte destes trabalhos assumiam que a estrutura de mercado
+era exógena à decisão sobre estas variáveis. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Introdução (II):}
+\small
+\begin{itemize}
+\item Nos anos 80, os modelos teóricos de OI eram focados em entender como
+o comportamento estratégico poderia influenciar a estrutura de mercado. 
+\item Tais modelos consideravam a estrutura de mercado como o resultado
+de um jogo em duas etapas, sendo que a primeira envolvia a decisão
+de entrada ou saída, enquanto que a segunda etapa modelava a competição
+entre as empresas que decidiram pela entrada. 
+\item Do ponto de vista empírico, a maior disponibilidade de dados dos censos
+industriais permitiu documentar ricos padrões de entrada e saída das
+empresas, bem como mudanças na estrutura do mercado. 
+\item Nesta aula, iremos descrever como a análise empírica mais moderna
+sobre este tema se baseia, utilizando modelos de teoria dos jogos
+para construir modelos econométricos de entrada, saída e concentração
+de mercado. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Introdução (III):}
+\small
+\begin{itemize}
+\item Em especial, iremos discutir as previsões que estes modelos fazem
+sobre os efeitos sobre a estrutura de mercado das seguintes variáveis:
+
+\begin{itemize}
+\item Tamanho e irrecuperabilidade dos custos fixos não recuperáveis;
+\item Sensibilidade dos lucros das empresas à entrada e saída de competidores;
+\item O grau de substitutibilidade dos produtos
+\item Expectativas dos potenciais entrantes sobre a competição após a entrada
+propriamente dita;
+\item A existência e a eficiência dos entrantes em potencial
+\item A endogeneidade dos custos fixos e dos custos irrecuperáveis.
+\end{itemize}
+\item Vamos começar a nossa análise com uma estrutura bem simples de estudo,
+na seção seguinte, originalmente apresentada no paper de \citet{Bresnahan1991} e resumido em \citet{Berry2007a}
+\end{itemize}
+\end{frame}
+
+\section{Modelos de Escolhas Estratégicas Discretas}
+\begin{frame}\frametitle{Modelos de Escolhas Estratégicas Discretas}
+\small
+\begin{itemize}
+\item Vamos começar a ilustrar como é esta metodologia com um problema bem
+simples. 
+\item Vamos supor que existam dados sobre as decisões de entrada das firmas
+-- supostas homogêneas -- e queremos estimar
+os custos fixos de produção das mesmas. 
+\item Além disso, vamos supor que se observa um grande número de mercados
+regionais distintos e que existem dados sobre a demanda de mercado
+e os custos dos insumos das empresas. 
+\item Se estes mercados fossem competitivos -- o que implicaria
+que as decisões de entrada dos diferentes agentes são independentes
+-- poderíamos modelar esta entrada das empresas como um
+modelo de escolha discreta. 
+\item No entanto, quando estamos falando de mercados oligopolizados, as
+expectativas das empresas acerca do comportamento dos seus competidores
+também afetam as decisões de entrada, e vice-versa. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelos de Escolhas Estratégicas Discretas (II)}
+\small
+\begin{itemize}
+\item Para que possamos saber até que ponto os maiores custos fixos afetam
+a concentração de mercado ou se o comportamento dos competidores afeta
+os lucros, precisamos de modelos estatísticos para decisões interdependentes.
+\item Para isto, vamos começar com um modelo bem simples, para investigar
+como os custos fixos afetam a decisão de entrada de duas empresas.
+\item Vamos definir $a_{i}=1$ como sendo o evento de entrada no mercado
+da empresa $i$, e $a_{i}=0$ o evento de não entrada da empresa $i$. 
+\item Podemos representar a decisão estratégica das empresas com a ajuda
+da seguinte matriz de \emph{payoffs}:
+\end{itemize}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+ &  & \multicolumn{2}{c|}{Empresa 1}\tabularnewline
+\hline 
+\hline 
+ &  & $a_{1}=0$ & $a_{1}=1$\tabularnewline
+\hline 
+Empresa 2 & $a_{2}=0$ & $\Pi_{00}^{1}$,$\Pi_{00}^{2}$ & $\Pi_{10}^{1}$,$\Pi_{10}^{2}$\tabularnewline
+\hline 
+ & $a_{2}=1$ & $\Pi_{01}^{1}$,$\Pi_{01}^{2}$ & $\Pi_{11}^{1}$,$\Pi_{11}^{2}$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{center}
+
+\end{frame}
+
+\begin{frame}\frametitle{Escolhas Discretas}
+\small
+\begin{itemize}
+\item Supondo que os dados observados venham de um jogo sem repetição e
+simultâneo, e que possamos restringir a nossa atenção aos equilíbrios
+de Nash em estratégias puras, as estratégias de equilíbrio dos agentes
+podem ser representadas pelas seguintes condições:
+\begin{eqnarray*}
+a_{1}^{*} & = & \left\{ \begin{array}{cc}
+1 & se\,\pi_{1}^{*}\geq0\\
+0 & se\,\pi_{1}^{*}<0
+\end{array}\right.
+\end{eqnarray*}
+\[
+a_{2}^{*}=\left\{ \begin{array}{cc}
+1 & se\,\pi_{2}^{*}\geq0\\
+0 & se\,\pi_{2}^{*}<0
+\end{array}\right.
+\]
+\item Sendo que $\pi^{*}$ representa os lucros adicionais para a empresa
+decorrentes da decisão de entrar. 
+\item Em especial, $\pi_{1}^{*}=(1-a_{2})(\Pi_{10}^{1}-\Pi_{00}^{1})+a_{2}(\Pi_{11}^{1}-\Pi_{01}^{1})$
+e $\pi_{2}^{*}=(1-a_{1})(\Pi_{01}^{2}-\Pi_{00}^{2})+a_{1}(\Pi_{11}^{2}-\Pi_{10}^{2})$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estratégias Discretas:}
+\scriptsize
+\begin{itemize}
+\item Uma vez que as empresas somente incorrem em custos fixos
+se elas decidirem pela entrada, estas diferenças de lucros apresentam
+os custos fixos como termos separados. 
+\item Para a estimação econométrica, precisamos especificar
+a distribuição da parte variável dos lucros (o ganho de lucros além
+do custo fixo que as empresas auferem no caso da entrada propriamente
+dita).
+\item Seguindo \citet{Bresnahan1991}, podemos escrever
+estes lucros incrementais da entrada da seguinte forma:
+\begin{eqnarray*}
+\pi_{1}^{*} & = & X_{1}\beta_{0}^{1}+a_{2}\Delta_{1}^{1}-\varepsilon^{1}\\
+\pi_{2}^{*} & = & X_{2}\beta_{0}^{2}+a_{1}\Delta_{1}^{2}-\varepsilon^{2}
+\end{eqnarray*}
+
+\item Podemos entender estas equações da seguinte forma. Normalizando
+os lucros na eventualidade da não entrada em zero, temos que $\pi_{1}^{*}=\Pi_{10}^{1}+a_{2}(\Pi_{11}^{1}-\Pi_{10}^{1})$. 
+\item O primeiro dos termos representa os lucros que a empresa
+1 desfrutaria caso fosse monopolista neste mercado, que podemos assumir
+que é uma função de elementos observáveis, alguns parâmetros e componentes
+aleatórios, dando $\Pi_{10}^{1}=X_{1}\beta_{0}^{1}-\varepsilon^{1}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estratégias Discretas }
+
+\begin{itemize}
+\item Além disso, o termo entre parênteses representa a diferença nos lucros
+da empresa 1 decorrente da entrada da empresa 2. 
+\item Este elemento podemos deixar como sendo um parâmetro a ser estimado
+e denotado por $\Delta_{1}^{1}$. 
+\item Estas considerações fazem com que possamos especificar um modelo econométrico
+e estimar os parâmetros relevantes. 
+\item No entanto, ainda temos dois problemas, um de natureza teórica e outro
+de natureza econométrica. O problema de natureza econométrica é que,
+dado que consideramos $\Delta_{1}^{1}$ como um parâmetro a ser estimado,
+se não pusermos nenhuma restrição sobre o suporte da distribuição
+do termo $\varepsilon$, não conseguiremos identificar adequadamente
+os parâmetros $\beta$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estratégias Discretas}
+\footnotesize
+\begin{itemize}
+\item O problema de natureza teórica é que nem sempre os valores são tais
+que garantem a existência e a unicidade do equilíbrio (ou seja, pode
+haver um equilíbrio múltiplo, em que apenas uma das empresas entra).
+\item A solução para estes problemas passou pelo fato de se considerar os
+resultados não únicos como observacionalmente equivalentes. Esta foi
+a abordagem de \citet{Bresnahan1990}. 
+\item Esta restrição implica que o modelo econométrico deixa de ser um modelo
+especificamente voltado para a decisão de entrada, mas sim um modelo
+para a previsão do número de entrantes em um determinado mercado. 
+\item No caso de um duopólio, a função de verossimilhança contém as seguintes
+assertivas sobre as probabilidades de ocorrência:
+\begin{eqnarray*}
+\Pr(a_{1}=0,a_{2}=0) & = & \Pr(X\beta_{0}^{1}<\varepsilon^{1},X\beta_{0}^{2}<\varepsilon^{2})\\
+\Pr(a_{1}=1,a_{2}=1) & = & \Pr(X\beta_{0}^{1}+\Delta_{1}^{1}>\varepsilon^{1},X\beta_{0}^{1}+\Delta_{1}^{2}>\varepsilon^{2})\\
+\Pr(a_{1}=1\vee a_{2}=1) & = & 1-\Pr(a_{1}=0,a_{2}=0)-\Pr(a_{1}=1,a_{2}=1)
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estratégias Discretas}
+\small
+\begin{itemize}
+\item A distribuição dos termos $\Delta_{1}^{i}$ determinaria, então, a
+forma funcional específica para estas probabilidades. 
+\item Evidentemente, esta distribuição deve respeitar as restrições sobre
+os \emph{payoffs} dos jogadores e permitir a identificação dos parâmetros
+chave. 
+\item Uma forma utilizada por Bresnahan e Reiss (1990 e 1991) foi modelar
+este negócio permitindo heterogeneidades não observáveis entre os
+jogadores. 
+\item Por exemplo, estes autores usam $\Delta_{1}^{i}=g(Z\gamma^{i})+\eta^{i}$,
+em que $g(\cdot)$ é uma função definida no ramo negativo dos números
+reais e $\eta^{i}$ é uma variável aleatória com um limite superior
+de zero. 
+\item Primeiro colocaremos um modelo mais geral, para depois abordar especificamente
+a forma pela qual estes artigos chegaram aos seus resultados, de forma
+a nos familiarizar com as suas premissas.
+\end{itemize}
+\end{frame}
+
+\subsection{Um Modelo Geral de firmas homgêneas}
+\begin{frame}\frametitle{Um Modelo Geral de firmas homogêneas}
+\footnotesize
+\begin{itemize}
+\item Como vimos anteriormente, para evitarmos o problema da identificação
+dos modelos econométricos, bem como a questão de como modelar os equilíbrios
+múltiplos, a solução é considerar os resultados múltiplos como um
+único elemento e, depois, modelar a questão sobre o número de empresas
+que entram.
+\item Iremos, em especial, discutir o que poderemos aprender sobre as primitivas
+do modelo quando observamos um vetor de quantidades $N_{1},N_{2},\cdots,N_{T}$,
+que entraram em $T$ mercados diferentes. 
+\item Para isto, precisamos relacionar o $N_{T}$ observado com os lucros
+não observados no mercado $T$. 
+\item Dados $N_{i}$ entrantes no mercado $T$ , temos que os lucros de
+cada uma delas é dado por:
+\[
+\pi_{i}(N_{i})=V(N_{i},x_{i},\theta)-F_{i}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Geral (II)}
+
+\begin{itemize}
+\item Em que $V(\cdot)$ representa os lucros variáveis totais e $F$ o
+custo fixo. Vamos assumir que os custos fixos, que também não são
+observados pelo econometrista são distribuídos de acordo com $\Phi(F_{i}|x_{i},\omega)$.
+Com esta função lucro, podemos ligar as decisões de entrada ao número
+observado de empresas. Para as $N^{*}$ empresas que entraram, temos:
+\[
+V(N^{*},x,\theta)-F>0
+\]
+\item Enquanto que para qualquer entrante potencial, temos que:
+\[
+V(N^{*}+1,x,\theta)-F<0
+\]
+\item Combinando estas duas desigualdades, temos um limite para os custos
+fixos:
+\[
+V(N^{*},x,\theta)\geq F>V(N^{*}+1,x,\theta)
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Geral (III):}
+
+\begin{itemize}
+\item Estes limites permitem que possamos estimar os parâmetros da função
+lucro variável e os custos fixos a partir da observação do vetor $x$
+e do número de empresas:
+\begin{eqnarray*}
+\Pr(V(N^{*},x) & \geq & F|x)-\Pr(V(N^{*}+1,x)>F|x)=\\
+ & = & \Phi(V(N^{*},x,\theta)|x)-\Phi(V(N^{*}+1,x,\theta)|x)
+\end{eqnarray*}
+\item Supondo amostras independente eidenticamente distribuídas, temos que
+a amostra possui uma função de verossimilhança ``ordenada'' da seguinte
+forma:
+\[
+LL(\theta|\{x,N^{*}\})=\sum_{t}(\ln(V(N_{t}^{*},x_{t}))-\ln(V(N_{t}^{*}+1,x_{t})))
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Modelo Geral }
+
+\begin{itemize}
+\item A pergunta, para a qual veremos algumas respostas mais adiante, é
+como especificar esta função de lucros variáveis. 
+\item Uma delas seria montar a função $V(\cdot)$ de tal forma que ela torne
+a estimação simples e, ao mesmo tempo, atenda a restrição que a função
+seja não crescente em $N$. 
+\item A segunda abordagem é baseada em especificar a função $V(\cdot)$diretamente
+a partir de premissas de mercado e hipóteses sobre o jogo após a entrada. 
+\item Vamos ver dois exemplos deste tipo de abordagem nos papers a seguir.
+\end{itemize}
+\end{frame}
+
+\subsection{Bresnahan e Reiss (1990)}
+\begin{frame}\frametitle{Bresnahan e Reiss (1990)}
+
+\begin{itemize}
+\item \citet{Bresnahan1990}, fazem a suposição de que os resultados
+que equivalem a equilíbrios múltiplos são observacionalmente equivalentes. 
+\item Neste caso, eles se focam no número de empresas -- que,
+neste caso, podem ser zero, uma ou duas empresas. A função de lucro
+de cada empresa é dada por:
+\[
+\Pi_{i}^{N}=V_{i}^{N}\times S(Y)-F_{i}^{N}
+\]
+\item Sendo que a empresa $i$ pode ser monopolista $N=M$, ou duopolista
+$N=D$. 
+\item A função $V_{i}$ representa os ``lucros variáveis por consumidor'',
+ou seja, a margem entre preço e custo marginal, multiplicada pela
+função demanda individual. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bresnahan e Reiss (1990) (II)}
+
+\begin{itemize}
+\item O termo $S(Y)$ seria uma medida do tamanho do mercado, enquanto que
+$F_{i}^{N}$ é uma medida dos custos fixos. 
+\item A modelagem é refinada ao assumirmos uma parte não observável para
+os lucros variáveis por consumidor, bem como para os custos fixos,
+o que deixa a função lucro da seguinte forma:
+\begin{eqnarray*}
+\Pi_{i}^{N} & = & [\bar{V}_{i}^{N}+\eta_{i}^{N}]\times S(Y)-\bar{F_{i}^{N}}+\varepsilon_{i}^{N}\\
+ & = & \bar{V}_{i}^{N}\times S(Y)-\bar{F}_{i}^{N}+\xi_{i}^{N}\\
+ & = & \bar{\Pi}_{i}^{N}+\xi_{i}^{N}
+\end{eqnarray*}
+\item Acredito que as similaridades entre a forma colocada anteriormente
+e a que desenvolvemos agora estejam bastante claras. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bresnahan e Reiss (1990) (III)}
+\scriptsize
+\begin{itemize}
+\item Caso não tenhamos elementos não observáveis sobre os lucros variáveis
+por consumidor, o termo $\xi_{i}^{N}$ fica igual ao termo $\varepsilon_{i}^{N}$,
+de forma que podemos estimar este negócio por um modelo PROBIT ordenado. 
+\item A diferença entre o modelo PROBIT multinomial (ou seja, a extensão
+do modelo PROBIT para o caso de mais de dois resultados) para o modelo
+PROBIT multinomial reside no fato que a ordem dos valores que a variável
+representativa dos lucros possui relevância para a análise. 
+\item Caso tenhamos elementos não observáveis sobre os lucros variáveis,
+chegamos ao modelo PROBIT ordenado, só que o termo $\xi_{i}^{N}$
+é inerentemente heterocedástico, pois o termo $\varepsilon_{i}^{N}$
+ali presente está multiplicado pela função $S(Y)$. Neste caso, as
+funções de probabilidade ficariam sendo:
+\begin{eqnarray*}
+P_{0} & = & 1-\Phi(\bar{\Pi}^{M}/\sigma_{\xi})\\
+P_{2} & = & \Phi(\bar{\Pi}^{D}/\sigma_{\xi})\\
+P_{1} & = & 1-P_{0}-P_{2}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bresnahan e Reiss (1990)}
+\scriptsize
+\begin{itemize}
+\item Em que uma restrição deveria ser imposta para que $\bar{\Pi}^{M}\geq\bar{\Pi}^{D}$.
+Com relação às precisas formas funcionais utilizadas, elas foram:
+\[
+S(Y)=TOWNPOP+\lambda_{1}OPOP10+\lambda_{2}NGRW70+\lambda_{3}PGRW70+\lambda_{4}OCTY
+\]
+\item Em que $TOWNPOP$ representa a população da cidade, $OPOP10$ representa
+o montante de demanda das pessoas em volta da cidade, $NGRW70$ e
+$PGRW70$ são as taxas de crescimento negativas e positivas no tamanho
+da população entre 1970 e 1980. $OCTY$ é a fração dos residentes
+da cidade que comutam para fora da cidade. 
+\item Com relação à função lucros variáveis por consumidor, temos a seguinte
+função:
+\[
+V^{N}=\theta^{M}+\theta^{D}D+Z\theta_{Z}+W\theta_{W}
+\]
+\item Em que os $\theta$ são parâmetros a serem estimados, $D$ é uma \emph{dummy}
+com valor de um caso exista mais de uma empresa no mercado, e $W$
+e $Z$ são variáveis que explicariam variações na demanda e nos custos
+em cada uma das regiões. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bresnahan e Reiss (1990)}
+\scriptsize
+\begin{itemize}
+\item Os autores colocam variáveis tais como renda média dos consumidores,
+a mediana da idade e dos anos de estudo, bem como o salário médio
+no varejo. Com relação aos custos fixos, os autores colocam a seguinte
+especificação:
+\[
+F^{N}=\gamma^{N}+\gamma^{D}D+\gamma_{W}RETWAGE+\gamma_{L}LANDVAL
+\]
+\item Em que $RETAWGE$ é o salário médio do varejo na região e $LANDVAL$
+é o valor médio do acre. 
+\item As variáveis relevantes para o estudo são os valores de $S^{D}$e
+$S^{M}$, o mínimo tamanho de mercado que é viável a sustentação de
+duas e uma empresa, respectivamente. 
+\item Além disso, outro elemento importante é $\frac{V^{D}}{V^{M}}$ mensura
+a fração pela qual os lucros variáveis por consumidor caem com a entrada
+da segunda firma. 
+
+\begin{itemize}
+\item Por exemplo, se os duopolistas vendessem produtos iguais, esta razão
+deveria ser igual a 0,5. 
+\item Além disso, outra coisa interessante envolve a razão $\frac{F^{D}}{F^{M}}$. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Breshanan e Reiss (1991)}
+\begin{frame}\frametitle{Bresnahan e Reiss (1991)}
+
+\begin{itemize}
+\item O segundo dos artigos em que temos a aplicação e o desenvolvimento
+desta metodologia também é \citet{Bresnahan1991a}. 
+\item Este artigo é uma extensão da metodologia anterior para o caso de
+um oligopólio. 
+\item Ele faz a mesma premissa de equivalência entre os diferentes equilíbrios
+múltiplos em estratégias puras em um jogo de entrada,assumindo a seguinte
+função para os lucros de uma entrante em potencial:
+\[
+\Pi_{N}=S(\mathbf{Y},\lambda)\times V_{N}(\mathbf{Z},\mathbf{W},\alpha,\beta)-F(\mathbf{W},\gamma)+\varepsilon
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bresnahan e Reiss (1991)}
+
+\begin{itemize}
+\item A verossimilhança deste negócio é dada por:
+\begin{eqnarray*}
+P(N & = & 0)=P(\Pi_{1}<0)=1-\Phi(\bar{\Pi}_{1})\\
+P(N=n) & = & P(\bar{\Pi}_{n}>0\wedge\bar{\Pi}_{n+1}<0)=\Phi(\bar{\Pi}_{n})-\Phi(\bar{\Pi}_{n+1})\\
+P(N\geq n^{max}) & = & \Phi(\bar{\Pi}_{n^{max}})
+\end{eqnarray*}
+\item A forma da função de lucros variáveis por consumidor é dada por 
+\[
+V_{N}=\alpha_{1}+\mathbf{X}\beta+\sum_{n=2}^{N}\alpha_{n}
+\]
+\item Neste paper, eles calculam os ``limites de entrada'', ou seja, o
+menor tamanho de mercado necessário para sustentar exatamente $N$
+empresas, que é dado por $S_{N}^{*}=\frac{\bar{F}}{V_{N}}$, bem como
+o limite de entrada por empresa, que seria $\frac{S_{N}^{*}}{N}$
+\end{itemize}
+\end{frame}
+
+
+
+\section{Modelos de Informação Completa}
+
+\begin{frame}[fragile]\frametitle{\insertsection}
+    \begin{itemize}
+        \item Após os papers de Bresnahan e Reiss, a literatura avançou em quatro caminhos diferentes para lidar com o problema apontado por B\& R:
+        \begin{itemize}
+            \item Agregar o problema para eliminar a questão da multiplicidade de equilíbrios (\citet{Bresnahan1991a})
+            \item Colocar restrições sobre a ordem dos \textit{players} que garanta a unicidade (\citet{Berry1992})
+            \item Especificar uma regra de seleção de equilíbrio na área onde não dá unicidade
+            \item Usar coisas mais invocadas, tipo \textit{Bounds Approach} ou \textit{Moment Inequalities}
+        \end{itemize}
+        \item Hoje vamos falar mais do segundo ponto.
+    \end{itemize}
+
+
+\end{frame}
+
+\subsection{Berry, 1992 -- \textit{Econometrica}}
+\begin{frame}[fragile]\frametitle{Berry 1992}
+\begin{itemize}
+    \item O Objetivo do paper de \citet{Berry1992} é avaliar os efeitos da escala de operação sobre a propabilidade de entrada em rotas que saem deste aeroporto.
+    \item Hipótese subjacente: existe um jogo em dois estágios em cada mercado $i$. 
+    \begin{itemize}
+        \item No primeiro estágio, cada uma das $K_{i}$ decide entrar ou não no mercado
+        \item Cada configuração é um vetor $s$ com dimensão $K_{i}$, composto por uns e zeros.
+    \end{itemize}
+    \item A função lucro de cada empresa é dada por:
+    \[
+    \pi_{ik}(N)=X_{i}\beta - \delta \ln{N} + Z_{ik} \alpha +\rho u_{io} + \sigma u_{ik}
+    \]
+    \item $u_{io}$ é um choque de mercado e $u_{ik}$ é um choque das firmas -- observado pelas empresas, mas não pelo econometrista. Adicionalmente, $\sigma=\sqrt{1-\rho^2}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Probabilidade de Observarmos $N$ empresas}
+    
+    \begin{itemize}
+        \item O Cálculo destas probabilidades é complicado por duas razões:
+        \begin{enumerate}
+            \item É multidimensional
+            \item E tem uma região de integração meio maluca
+        \end{enumerate}
+        \item A região de integração é meio maluca porque ela depende dos não observáveis de TODAS as empresas e dos parãmetros do modelo
+        \[
+        Pr(a_{i1}=1|\theta)=\int_{\epsilon_{i1}}\int_{\epsilon_{i2}}\cdots \int_{\epsilon_{iK}} \mathbf{1}(a_{i1}=1|\theta,\tilde{\epsilon})d(\tilde{\epsilon})
+        \]
+    \end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Soluções de Berry para o problema dos Equilíbrios -- Alternativas}
+
+\begin{itemize}
+    \item Solução 1: $\delta=0$, $\rho=0$. Neste caso, não há interação estratégica e você cai em um probit tradicional para cada empresa.
+    \item Solução 2: $\rho=0$. Neste caso, há a interação estratégica, e os componentes não observáveis de cada empresa não são correlacionados. Dá pra fazer igual Bresnahan e Reiss, só que tem que se focar em mercados com poucas empresas (a integral de probabilidade fica enorme, pq vc tem que calcular as probabilidades caso a caso).
+    \item Solução 3: $\rho=1$ e heterogeneidade entre as firmas apenas observada. Aí dá um Probit Ordenado, mas implica que você tenha as características da pior empresa como regressores.
+    \item 
+\end{itemize}
+    
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Solução de Berry -- A Ordem importa}
+    
+    \begin{itemize}
+        \item A solução que ele considera como a mais interessante é colocar restrições sobre a ordem das empresas.
+        \item Ou seja, quando os parâmetros do modelo apontarem para a região onde o modelo é ambíguo, o ``first mover'' (ou a firma mais eficiente) entra e faz com que a outra não entre.
+        \item Essa é uma forma de seleção de equilíbrio bastante arbitrária. Outra forma de seleção poderia ser por meio dos dados, onde vc colocaria as duas possibilidades indicadas por probabilidades $\pi$, que seria estimada.
+    \end{itemize}
+
+
+\end{frame}
+
+\subsection{O Algoritmo}
+
+\begin{frame}[fragile]\frametitle{O Algoritmo}
+    
+    \begin{enumerate}
+        \item Antes de rodar o código:
+        \begin{enumerate}
+            \item Escolher um valor inicial para os parâmetros $\theta=\{\beta, \delta, \alpha\}$
+            \item Sortear um vetor de $u_{io}$ e outro vetor de $\{u_{ik}\}_{k=1}^{K}$
+        \end{enumerate}
+        \item Enquanto roda o otimizador, para um vetor de parâmetros $\hat{\theta}$, calcular:
+        \begin{enumerate}
+            \item Calcular o vetor $\hat{\epsilon_{ik}}=\hat{\rho} u_{io}+ \sqrt{1-\hat{\rho}^2} u_{ik}$, para um draw
+            \item Ordenar os elementos do vetor $\hat{\epsilon_{ik}}$ de acordo com a ordem que vc impôs. Seja do menor para o maior, seja pela incumbente...
+            \item Calcule os $\pi_{ik}(N)=X_{i}\hat{\beta} - \hat{\delta} \ln{N} + Z_{ik} \hat{\alpha} +\hat{\rho} u_{io} + \hat{\sigma} u_{ik}$ e os ordene. 
+            \item Some as firmas de $n=1,\cdots,N$ até o ponto em que:
+            \[
+            v(N|\hat{\theta})+\hat{\epsilon_{iN}}\geq 0, v(N+1|\hat{\theta})+\hat{\epsilon_{iN+1}}< 0
+            \]
+            \item Esse vai ser o $N^{*}(\hat{\theta},\hat{\epsilon})$.
+        \end{enumerate}
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{O Algoritmo II}
+    
+    \begin{itemize}
+        \item A condição de momento é a diferença entre o número predito - a média do de antes entre todos os draws - e o observado:
+        \[
+        \xi=\frac{1}{d} \sum_{d} N^{*} (\hat{\theta},\hat{\epsilon})
+        \]
+        \item Empilhamos essas diferenças em todos os mercados e temos as condições de momento, e podemos calcular a função critério:
+        \[
+        Q(\theta)=(\xi \mathbf{Z})(\mathbf{Z}^T \mathbf{Z})^{-1} (\xi \mathbf{Z})^{T}
+        \]
+    \end{itemize}
+
+
+\end{frame}
+
+\section{Exercício Empírico II -- Jogos Discretos e abordagens recentes}
+
+\begin{frame}[fragile]\frametitle{O Paper}
+    
+    \begin{itemize}
+        \item O paper em anexo reúne exercícios empíricos sobre um mesmo banco de dados para vermos como as coisas mudam.
+        \item Estes dados são de um paper da Econometrica (Jia (2008)) e envolve um jogo de entrada entre a WalMart e a Kmart.
+        \item 2065 mercados locais relativamente isolados.
+        \item Função lucro para uma firma $i$ no mercado $m$:
+        \[
+        \pi_{im}=\alpha_{i}^{\prime} X_{m} + \beta_{i}^{\prime} Z_{im} + \delta_{i} y_{-im} + \varepsilon_{im}
+        \]
+        \item Os $\varepsilon$ não são observados pelo econometrista, mas são observados pelas empresas. Ou seja, pra elas isso é um jogo de informação completa.
+        \item Sendo um jogo simultâneo, o Equilíbrio de Nash resultante leva às seguintes desigualdades
+    \end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Desigualdades de Momento}
+
+\begin{align*}
+    y_{Km}&=\mathbf{1}(\alpha_{K}^{\prime} X_{m} + \beta_{K}^{\prime} Z_{Km} + \delta_{K} y_{Wm} + \varepsilon_{Km} \geq 0) \\
+    y_{Wm}&=\mathbf{1}(\alpha_{W}^{\prime} X_{m} + \beta_{W}^{\prime} Z_{Wm} + \delta_{W} y_{Km} + \varepsilon_{Wm} \geq 0) \\
+\end{align*}
+
+
+
+\end{frame}
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+
