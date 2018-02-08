@@ -1,0 +1,186 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+%\usepackage{bookmark}
+%\usepackage[normalem]{ulem}
+
+\title{Aula 09}
+
+\subtitle{Entrada -- Modelos de Informação Incompleta}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA-RP/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{Introducao}
+
+\begin{frame}[fragile]\frametitle{Introdução}
+    \begin{itemize}
+    	\item Vamos agora falar dos modelos estáticos de informação incompleta.
+    	\item Neste caso, as funções payoff são de conhecimento privado dos players -- porque contém informações específicas aos players.
+    	\item Os jogadores fazem então crenças sobre os aspectos não observados do \textit{payoff} das empresas.
+    	\item Esta informação incompleta pode ser modelado da forma mais simples por conta do $\varepsilon$, a parte dos lucros que também não é observada pelo pesquisador. 
+    	\item Mais especificamente, vamos supor que cada jogador observa o seu $\varepsilon_{i}$, mas só sabe a distribuição dos valores dos seus competidores, ou seja $F(\varepsilon_{j\neq i})$
+    \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Introdução (II):}
+\begin{itemize}
+	\item O econometrista, neste caso, só conhece a distribuição $F(\varepsilon_{j})$, que é quase a mesma coisa que o que as empresas sabem.
+	\item Cada empresa então forma crenças sobre o comportamento das oponentes, o que leva ao seguinte sistema de desigualdades (para $K=2$):
+\begin{align*}
+	a_{1}&=\mathbf{1}\left[X\beta +\delta p_{2} + \varepsilon_{1} \geq 0 \right]\\
+	a_{2}&=\mathbf{1}\left[X\beta +\delta p_{1} + \varepsilon_{2} \geq 0 \right]
+\end{align*}
+	\item Sendo que $p_{i}=E_{i}(y_{-i})$ representam as crenças da empresa $i$ sobre as ações dos seus oponentes.
+	\item Isso gera um negócio chamado \textit{Conditional Choice Probability} que vai ser usada para representar a estratégia de cada empresa.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Equilíbrio de Nash Bayesiano}
+    \begin{itemize}
+    	\item Podemos usar essas CCP para caracterizar melhor o Equilíbrio de Nash Bayesiano:
+		\begin{align*}
+		p_{1} &= \Psi_{1}(X\beta + \delta p_{2}) \\
+		p_{2} &= \Psi_{2}(X\beta + \delta p_{1})
+		\end{align*}
+		\item Sendo que a forma exata da função $\Psi(\cdot)$ vai depender da distribuição $F$. 
+		\item Essas $\Psi$ são as funções melhor resposta.
+		\item Supondo que elas sejam contínuas, a gente pode garantir que este sistema de equações não lineares tem uma solução pelo Teorema do Ponto Fixo de Brouwer.
+		\item Além disso, podemos ter um jeito direto de resolver para os equilíbrios para um valor candidato dos parâmetros.
+		\begin{itemize}
+			\item O método das aproximações sucessivas (aka iteração de ponto fixo)
+		\end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Fixed Point Iteration}
+
+\begin{frame}[fragile]\frametitle{Iteração de Ponto Fixo}
+\begin{itemize}
+	\item Lógica:
+	\begin{itemize}
+		\item Para cada valor candidato mandado pelo otimizador, você vai resolver o sistema de equações para cada mercado.
+		\item Com as probabilidades das empresas entrarem, você diz que a contribuição à verossimilhança daquele mercado é a probabilidade correspondente.
+		\item Quando a gente tem os $\varepsilon$ vindo de uma distribuição de valores extremos, a função $\Psi$ tem inclusive a nossa conhecida cara Logit.
+	\end{itemize}
+\end{itemize}
+   
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Iteração de Ponto Fixo -- Problemas Computacionais}
+    \begin{itemize}
+    	\item O grande problema aqui é a chamada ``praga da dimensionalidade'':
+    	\item Em termos técnicos, o número mínimo de avaliações das funções relevantes e operações aritméticas necessárias para se computar uma $\epsilon$-aproximação a um ponto fixo de um sistema de $d$ cresce exponencialmente com $d$.
+    	\item Em jogos estáticos com poucas empresas isso não pega tanto, mas em jogos dinâmicos e/ou com muitas empresas pode pegar.
+    \end{itemize}
+
+
+\end{frame}
+
+\section{Hotz-Miller Inversion}
+
+\begin{frame}[fragile]\frametitle{Hotz--Miller Inversion}
+\begin{itemize}
+	\item A grande contribuição deste artigo -- originalmente desenvolvido para jogos dinâmicos -- é que na verdade as coisas do sistema de equações do Equilíbrio de Nash Bayesiano valem para qualquer estimativa \textbf{consistente} de $p_{1}$ e $p_{2}$ do lado direito da igualdade.
+	\item E você pode estimar estas probabilidades dos dados!
+	\item Ou seja, você vai usar o maximizador pra achar os $\hat{\beta}$ condicional a termos 
+		\begin{align*}
+		p_{1} &= \Psi_{1}(X\beta + \delta \hat{p_{2}}) \\
+		p_{2} &= \Psi_{2}(X\beta + \delta \hat{p_{1}})
+		\end{align*}
+	\item Ou seja, você calcularia uma estimativa consistente de $\hat{p_{1}}$ e $\hat{p_{2}}$ (pode ser a frequencia relativa) e manda otimizar.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Hotz-Miller Inversion -- Vantagens e Desvantagens}
+\begin{itemize}
+	\item Vantagens:
+	\begin{itemize}
+		\item Ele é relativamente robusto à multiplicidade. Caso o mesmo equilíbrio seja sempre jogado nos dados, isso resolve o problema da coerência, pois o PBE condiciona ao equilíbrio que sempre é efetivamente jogado.
+		\item Óbvio, isso pressupõe que sempre se joga o mesmo equilíbrio.
+	\end{itemize}
+	\item Desvantagens:
+	\begin{itemize}
+		\item É menos eficiente (limited information method)
+		\item As estimativas das CCP tem que ser estimadas de forma consistente.
+		\item Você tem que estimar isso não parametricamente. Só que isso vai implicar que as estimativas das CCP vão ser muito ruidosas, o que vai carregar pro segundo estágio.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Aguirregabiria e Mira (2002, 2007)}
+
+\begin{frame}[fragile]\frametitle{Aguirregabiria e Mira (2002, 2007)}
+\begin{itemize}
+	\item Aguirregabiria e Mira (2002, 2007) propõem interagir o sistema de equações do BPNE em cada passada do otimizador.
+	\item Na verdade você inverteu a ordem dos passos do primeiro método.
+	\item Forçando que as condições do BPNE sejam satisfeitas, você torna isso um método de informação completa.
+	\item Desde que convirja.
+	\item O que pega é que ele depende da iteração de melhores respostas, e pode não achar equilíbrios de Nash que não são estáveis em melhor resposta.
+	\item E isso significa que o algoritmo pode não convergir (Pesendorfer e Schmidt-Dengler 2010)
+\end{itemize}
+\end{frame}
+
+\section{Heterogeneidade não Observável}
+\begin{frame}[fragile]\frametitle{\insertsection}
+\begin{itemize}
+	\item Todos esses métodos podem acomodar a chamada heterogeneidade não observada pelo econometrista (mas observada pelas empresas).
+	\item Basicamente, isso seria adaptar efeitos aleatórios ou random coefficients no arcabouço anterior.
+	\item Aumenta a dificuldade computacional disso. Por exemplo, conseguir convergência com métodos como os de Aguirregabiria e Mira (2002 e 2007) é bem mais difícil.
+	
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{C:/Bibliog/library}
+
+\end{frame}
+
+\end{comment}
+
+
+
+
+\end{document}
+
+

@@ -8,6 +8,8 @@ clear
 
 cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - PÃ³s\Mini Curso USP\Topics_EIO\Custos\Data\"
 
+adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - PÃ³s\Mini Curso USP\Topics_EIO\Custos\Data\"
+
 use sample.dta, clear
 cap program drop ACF_proc
 gen newid=plantid
@@ -54,7 +56,6 @@ sort newid year
 * Estimando por Painéis Dinâmicos - GMM-Diff
 * 2 lags
 xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year, gmm(lnva lnk lnw lnb, laglim(2 .)) iv(i.year) noleveleq robust
-adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - PÃ³s\2014-2\Custos\"
 md_ar1, nx(3) beta(e(b)) cov(e(V))
 
 xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year if balanced, gmm(lnva lnk lnw lnb, laglim(2 .)) iv(i.year) noleveleq robust
@@ -68,6 +69,11 @@ md_ar1, nx(3) beta(e(b)) cov(e(V))
 * GMM-Sys
 xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year, gmm(lnva lnk lnw lnb, laglim(2 .)) iv(i.year, e(level)) robust h(1)
 md_ar1, nx(3) beta(e(b)) cov(e(V))
+
+* GMM-Sys
+xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year if balanced, gmm(lnva lnk lnw lnb, laglim(2 .)) iv(i.year, e(level)) robust h(1)
+md_ar1, nx(3) beta(e(b)) cov(e(V))
+
 
 xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year, gmm(lnva lnk lnw lnb, laglim(3 .)) iv(i.year, e(level)) robust h(1)
 md_ar1, nx(3) beta(e(b)) cov(e(V))

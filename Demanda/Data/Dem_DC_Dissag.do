@@ -82,7 +82,7 @@ forvalues i=1/4 {
 * Usando o (1) como categoria base
 * Usando o (0) engasga o otimizador numérico
 
-*mlogit depvar price_esc feature_esc display_esc, base(0)
+*mlogit depvar price_esc feature_esc display_esc, base(0) gradient
 
 mlogit depvar price_esc feature_esc display_esc if depvar!=0, base(1)
 
@@ -97,7 +97,7 @@ drop panelist semana
 reshape long marca_ price_ display_ feature_, i(nro) j(brand)
 
 * Com a constante - Não convergência
-*asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) difficult
+asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) difficult base(1)
 
 * Sem a constante
 asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) nocons
@@ -123,6 +123,7 @@ mat li r(elast)
 
 preserve
 mixlbeta price_, saving(Coefs.dta) replace
+use "Coefs.dta", clear
 kdensity price_
 restore
 
