@@ -23,6 +23,7 @@
 # ================================================================
 
 
+setwd("G:\\Meu Drive\\Aulas\\GV\\Curso de OI - Pós\\Mini Curso USP\\Topics_EIO\\Entrada\\Data\\")
 # Read Data in
 jiadat <-read.csv("jiadata2R.csv",header=T)
 
@@ -157,7 +158,7 @@ Berry.Obj <- function(theta)
 # duo,Wm,Km, nofirm .. Wxmat 	
 # set parameters
 
-	theta.W = c(theta[1],theta[3:5],theta[6:7]);;
+	theta.W = c(theta[1],theta[3:5],theta[6:7]);
 	theta.K = c(theta[2],theta[3:5],theta[8]);
 	delta   = exp(theta[9]); # We exponentiate to ensure competitive effects are negative
 	
@@ -319,12 +320,12 @@ Kmart = jiadat$Kmart
 
 # First Step - Nonparametric Binary Model
 # Warning: Will take a looooong time
-# library(np)
-# np.W = npreg(WalMart~population+SPC+urban+dBenton+southern)
-# np.K = npreg(Kmart~population+SPC+urban+MidWest)
-# CCPs from NP estiamtes
-# pred.W = as.matrix(fitted(np.W));
-# pred.K = as.matrix(fitted(np.K));
+ library(np)
+np.W = npreg(jiadat$WalMart~jiadat$population+jiadat$SPC+jiadat$urban+jiadat$dBenton+jiadat$southern)
+np.K = npreg(jiadat$Kmart~jiadat$population+jiadat$SPC+jiadat$urban+jiadat$MidWest)
+#CCPs from NP estiamtes
+pred.W = as.matrix(fitted(np.W));
+pred.K = as.matrix(fitted(np.K));
 
 # First Step - SemiParametric Binary Models
 # Faster than the Nonparametric approach 

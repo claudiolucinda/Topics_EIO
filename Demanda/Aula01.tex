@@ -27,9 +27,9 @@
 \author{Claudio R. Lucinda}
 
 
-\institute{FEA-RP/USP}
+\institute{FEA/USP}
 
-\date{}
+\date{2019}
 \logo{\includegraphics[scale=.1]{logousp.png}}
 \beamertemplatenavigationsymbolsempty
 \begin{document}
@@ -72,23 +72,60 @@ comportamental está implicitamente se baseando em um modelo estrutural}.
     \end{itemize}    
 \end{frame}
 
-\section{Modelos Neoclássicos de Demanda}
-
-\begin{frame}[fragile]\frametitle{Abordagem Neoclássica de Demanda}
+\begin{frame}[fragile]\frametitle{Modelagem Estrutural, ``Experimentos Naturais'' e ``Forma Reduzida''}
 \begin{itemize}
-  \item Modelagem de demanda baseada na escolha de uma cesta de bens.
-  \item Usualmente se estipula uma forma funcional flexível que permite que os coeficientes estimados gerem um sistema de equações que caracteriza os ``parâmetros estruturais'' (usualmente derivadas) que você busca saber.
-  \item Dois caminhos
-  \begin{itemize}
-    \item Abordagem Diferencial
-    \item Abordagem da Função Dispêndio/Função Utilidade Indireta
-  \end{itemize}
-  \item De qualquer maneira, existem algumas propriedades que o sistema estimado precisa atender para que ele seja conforme com a teoria econômica
+	\item Experimentos Naturais são excelentes para identificar o efeito de interesse localmente, mas:
+	\begin{itemize}
+		\item Nem sempre existe um experimento para identificar o efeito que você quer.
+		\item A validade de um experimento natural é bem restrita para fora do local onde o efeito é identificado.
+		\item E não esqueçam: o ``ideal'' do ``experimento ideal'' sempre é com base em um modelo teórico.
+	\end{itemize}
+	\item ``Forma Reduzida'' às vezes pode ser bastante útil para responder perguntas relevantes, especialmente quando:
+	\begin{itemize}
+		\item Quando a teoria aponta para efeitos determinados para um determinado coeficiente ou conjunto de coeficientes.
+		\item Se você tem a equação da forma reduzida exatamente identificada você até consegue voltar com os parâmetros estruturais
+	\end{itemize}
 \end{itemize}
     
 
 
 \end{frame}
+
+\section{Modelos Neoclássicos de Demanda}
+
+\begin{frame}[fragile]\frametitle{Demanda Neoclássica}
+\begin{itemize}
+	\item Em meados dos anos 70, o ponto de vista dominante para estimação de demanda era baseado na teoria neoclássica de demanda usando \textit{Cross-Section} de domicílios.
+	\begin{itemize}
+		\item Uma resenha interessante sobre o estado da arte da época é \citet{Deaton1986a}
+	\end{itemize}
+	\item Isso essencialmente significava partir de uma especificação para a função dispêndio ou para a função utilidade indireta e, a partir daí, utilizar o Lema de Shepard ou a Identidade de Roy para obter um sistema de equações estimáveis.
+	\item Desafios:
+	\begin{itemize}
+		\item Escolha da Forma Funcional
+		\item Agregação
+		\item Separabilidade
+		\item Aspectos Econométricos
+	\end{itemize}
+\end{itemize}
+   
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Escolha da Forma Funcional}
+\begin{itemize}
+	\item Formas funcionais deveriam poder ser levadas aos dados e os coeficientes estimados aproximassem a função ``verdadeira'' -- não observável.
+	\item \textit{Formas Funcionais Flexíveis}, como em \citet{BarnettEL83} e \citet{ChristensenTLUtil75} -- formas funcionais que, em um determinado ponto, aproximam:
+	\begin{itemize}[<+->]
+		\item O valor da função ``verdadeira''.
+		\item O valor das derivadas primeira e, em alguns casos, a segunda.
+	\end{itemize}
+	\item Modelos mais antigos, como o LES de \citet{Klein1947}, não atendiam a esta propriedade e impunham restrições que não eram vindas dos dados.
+\end{itemize}
+    
+
+
+\end{frame}
+
 
 \begin{frame}\frametitle{Propriedades Desejáveis de um Sistema de Demanda}
 \small
@@ -374,6 +411,7 @@ ln(a(\mathbf{p})) &= \alpha_{0}+\sum_{i=1}^{n} \alpha_{i} lnp_{i}+\frac{1}{2}\su
 b(\mathbf{p})&=\prod_{i=1}^{n}p_{i}^{\beta_{i}}\\
 s_{i}&=\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}lnp_{j}+\beta_{i}ln \left[ \frac{w}{a(\mathbf{p})}\right]+\frac{\lambda_{i}}{b(\mathbf{p})}\left[ ln \left[\frac{w}{a(\mathbf{p})}  \right] \right] ^{2}
 \end{eqnarray*}
+\hyperlink{Graf_ev}{\beamerbutton{Evidência Gráfica}}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{QUAIDS -- Elasticidades}
@@ -445,11 +483,56 @@ e_{ij}^{u}&=\frac{\mu_{ij}}{s{i}}+\mathbf{1}(i=j)
 
 \end{frame}
 
+\begin{frame}[fragile]\frametitle{Aspectos Econométricos}
+\label{Econometrics}
+\begin{itemize}
+	\item Análise com Microdados:
+	\begin{itemize}
+		\item Solução de canto e consumo zero. Inicialmente enfrentado por \citet{Heien1990} e posteriormente por \citet{Shonkwiler1999} 
+		\item Imputação de preços. Ainda que as listas de produtos de pesquisas de orçamento sejam bastante detalhadas, ainda assim parte das diferenças de qualidade se perdem. \citet{Cox1986} sugerem um método de imputação.
+		\item Aspectos demográficos e Escalas de Equivalência. \hyperlink{Equiv_Sc}{\beamerbutton{Detalhes}}
+
+	\end{itemize}
+	\item Análise com Dados Agregados:
+	\begin{itemize}
+		\item Estacionariedade. \citet{Ng1995} e \citet{Lewbel1996} enfrentam o problema, ainda que reconhecem que os resultados não são conclusivos (muitas séries de preços com dimensão temporal não muito grande, como diz \citet{Lewbel1997}).
+		\item Identificação/Endogeneidade
+	\end{itemize}
+\end{itemize}
+    
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Aspectos Econométricos -- Escalas de Equivalência}
+
+\label{Equiv_Sc}
+
+\begin{itemize}[<+->]
+	\item Um nome confuso e que pode significar quatro coisas diferentes na literatura, como apontam \citet{Lewbel1997} e os livros de \citet{pollak_wales92} e \citet{DeatonBook80}.
+	\item Aqui utilizaremos uma definição mais genérica como o conjunto de procedimentos pelos quais se modelam os efeitos que as características das unidades de observação possuem sobre o padrão do consumo da ``unidade de observação representativa''.
+	\begin{itemize}[<+->]
+		\item Consistência com os axiomas da agregação: \citet{Pollak1981} para uma referência mais antiga e \citet{Ray1983a} para uma referência mais recente.
+		\item Definição formal de escalas de equivalência: o valor que o dispêndio de um domicílio de referência precisaria ser multiplicado para alcançar o dispêndio de um outro domicílio com características diferentes \citep{Lewbel1997}.
+	\end{itemize}
+\end{itemize}
+    
+\hyperlink{Econometrics}{\beamerbutton{Retorno}}
+
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Evidência Gráfica}
+\label{Graf_ev}
+	\includegraphics[scale=.5]{Banks.png}
+	\hyperlink{QUAIDS}{\beamerbutton{Retorno}}
+    
+\end{frame}
 
 %\begin{comment}
 \begin{frame}[allowframebreaks]
 \bibliographystyle{aea}
-\bibliography{C:/Bibliog/library}
+\bibliography{Apres_tit}
 
 \end{frame}
 
