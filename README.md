@@ -7,7 +7,7 @@
 Prover ao aluno da pós-graduação uma introdução ao campo da Organização Industrial empírica. Mais especificamente, tem por objetivo apresentar contribuições recentes em (1) Estimação de Demanda, tanto no arcabouço neoclássico quanto no arcabouço de modelos de escolha discreta, (2) Estimação de funções de custo e produção, (3) Identificação de Conduta e (4) Modelos para Escolhas Estratégicas Discretas (modelos de entrada).
 
 ## OBJECTIVES: 
-Give graduate students an introduction to the field of Empirical Industrial Organization. More specifically, it aims to present recent developments in (1) Demand Estimation, both in the neoclassical approach and the discrete choice framework, (2) Estimation of costs and production functions, (3) Identification of Conduct and (4) Models for Discrete Strategic Choices (entry)
+Give graduate students an introduction to the field of Empirical Industrial Organization. More specifically, it aims to present recent developments in (1) Demand Estimation, both in the neoclassical approach and the discrete choice framework, (2) Estimation of costs and production functions, (3) Identification of Conduct and (4) Models for Discrete Strategic Choices (entry) - Static (with complete/incomplete information) and Dynamic.
 
 ## JUSTIFICATIVA:
 
@@ -31,8 +31,8 @@ Beyond its relevance for the Industrial Organization field, the topics above are
 	1.	Modelos não-aninhados
 	1.	Função de Produção e Conduta
 	1.	Outras abordagens
-1.	Modelos de Entrada
+1.	Modelos de Interações Estratégicas Dinâmicas
 	1.	Introdução
 	1.	Como lidar com equilíbrios múltiplos
 	1.	Estimação
-
+1.	Leilões
