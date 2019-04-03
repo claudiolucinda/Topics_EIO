@@ -1,0 +1,271 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\title{Aula 03-b}
+
+\subtitle{Identificação de Modelos de Demanda}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+
+\section{Identificação de Modelos de Demanda}
+\begin{frame}{\insertsection}
+\begin{itemize}
+    \item Vamos agora falar sobre a identificação dos modelos de demanda.
+    \item Alguns destes resultados são úteis para modelos de demanda neoclássicos e outros são úteis para modelos de escolha discreta.
+    \item Este aspecto é especialmente importante para organização industrial, uma vez que estamos especialmente preocupados com estimarmos parâmetros estruturais.
+    \item E, em cima destes parâmetros estruturais, vamos construir os nossos contrafactuais
+    \item Vou dividir estas abordagens em três categorias:
+    \begin{itemize}
+        \item Abordagens ``tradicionais''
+        \item Abordagem de Hausman
+        \item Abordagem BLP
+    \end{itemize}
+    \item Um texto legal sobre o assunto é o de \citet{Bresnahan1997a}
+\end{itemize}
+
+    
+\end{frame}
+
+\subsection{Abordagens Tradicionais}
+
+\begin{frame}{Abordagens Tradicionais}
+\begin{itemize}
+    \item \textbf{Deslocadores de Custo}: Preços de fatores, coisas do gênero. São bons, mas:
+    \begin{itemize}
+        \item Nem sempre são fáceis de se conseguir, e mais difícil ainda de conseguir em quantidade suficiente para um monte de coeficientes estimáveis.
+        \item Se você tiver menos deslocadores de custos que coeficientes estimáveis, tem jeito de resolver (interações com dummies de produtos, etc e tal...). Não é ideal.
+    \end{itemize}
+    \item \textbf{Dados Individuais de Consumidores}: Você pode assumir que os preços são exógenos às escolhas dos consumidores e a variação das características dos consumidores permitem a identificação da curva de demanda. Precisa de dados.
+\end{itemize}
+    
+\end{frame}
+
+\subsection{Abordagem de Hausman}
+
+\begin{frame}{Abordagem de Hausman}
+\begin{itemize}
+    \item A abordagem de Hausman é baseada em um argumento de componentes de variância.
+    \item Vamos entender isso assumindo a seguinte forma reduzida para o preço do produto $i$, no instante $t$ na região $r$:
+\end{itemize}
+\[
+p_{itm}=\mathbf{W}\gamma+\epsilon_{itm}
+\]
+\begin{itemize}
+    \item Vamos assumir que este termo erro $\epsilon$ tenha uma estrutura de componentes da seguinte forma:
+\end{itemize}
+
+\[
+\epsilon_{itm}=f_{i\in K}+g_{t}+h_{m}+\varepsilon_{itm}
+\]
+
+\begin{itemize}
+    \item Em que $f_{i\in K},g_{t}$ e $h_{m}$ são componentes comuns de empresa, instante de tempo e mercado
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Abordagem de Hausman II}
+\begin{itemize}
+    \item Neste caso, podemos dizer que:
+    \[
+    Cov(p_{itm},p_{it(-m)}) \neq 0
+    \]
+    \item Porque o componente $f_{i \in K}$ e $g_{t}$ são  comuns aos dois produtos.
+    \item \textbf{Instrumentos de Hausman}: Para o preço do produto $i$ no mercado/instante do tempo  $m$, usar o preço do produto $i$ em um mercado/instante do tempo DIFERENTE.
+    \item Isso presumivelmente garantiria a condição de força dos instrumentos.
+    \item Esta abordagem foi aplicada com em \citet{HLZ94}, daí o nome de ``Instrumentos de Hausman''
+\end{itemize}
+
+    
+\end{frame}
+
+\begin{frame}{Abordagem de Hausman III}
+\begin{itemize}
+    \item O problema aqui não é a restrição de força dos instrumentos.
+    \item O problema aqui é sobre a restrição de exclusão dos instrumentos. 
+    \item Será que não existe um componente comum para o termo erro da equação demanda desse jeito aqui?
+    \[
+    q_{itm}=f(\mathbf{p}_{tm})+\varepsilon_{itm}
+    \]
+    \item Se existir componente comum na demanda similar à estrutura de componentes comuns impostas na forma reduzida mais acima, o instrumento não passa na condição de exclusão (instrumento não correlacionado com o termo erro).
+    \item Este é um ponto que foi levantado por \citet{Bresnahan1997a}, e que precisa ser checada em qualquer aplicação.
+\end{itemize}
+    
+\end{frame}
+
+\subsection{Modelos de Escolha Discreta}
+
+\begin{frame}{Modelos de Escolha Discreta}
+\begin{itemize}
+    \item Com modelos de escolha discreta e com dados agregados, a coisa fica um pouco mais complicada.
+    \item Inicialmente vamos revisitar a estratégia adotada no paper de \citet{Berry1995}, para depois falarmos do que veio depois.
+    \item No paper original de \citet{Berry1995}, a identificação vinha de três lugares:
+    \begin{itemize}
+        \item Os ``Instrumentos BLP'': Somas de características de outros produtos da mesma marca e Somas de características dos produtos de outras marcas.
+        \item Condições de Momento Adicionais do lado da oferta.
+        \item Um deslocador de custo.
+        
+    \end{itemize}
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{BLP -- O lado da Oferta}
+\begin{itemize}
+    \item Para entendermos isso, vamos supor que tenhamos empresas multiproduto competindo à la Bertrand com produtos diferenciados.
+    \[
+    \pi_{f}=\sum_{i \in \mathcal{J}_{f}}(p_{i}-c_{i})q_{i}(\mathbf{p})
+    \]
+    \item Temos as seguintes condições de primeira ordem:
+    \[
+    s_{j}(\mathbf{p},\mathbf{x},\beta,\xi)+\sum_{i \in \mathcal{J}_{f}}(p_{i}-c_{i})\frac{\partial s_{j}(\mathbf{p}, \mathbf{x},\beta,\xi)}{\partial p_{i}}=0
+    \]
+\end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{BLP -- O lado da Oferta}
+\begin{itemize}
+    \item Podemos representar esse sistema de condições de primeira ordem como sendo:
+    \[
+    \mathbf{s}(\mathbf{p},\mathbf{x},\beta,\xi)+\Delta (\mathbf{p}-\mathbf{c})=\mathbf{0}
+    \]
+    \item Reorganizando, temos a seguinte expressão para o custo marginal:
+    \[
+    \mathbf{c}=\mathbf{p}-\Delta^{-1}\mathbf{s}
+    \]
+    \item Podemos construir um conjunto de condições de momento do lado da oferta do seguinte tipo:
+    \[
+    \mathbf{p}-\Delta^{-1}\mathbf{s}-\gamma \mathbf{w}=\xi_{supply}
+    \]
+    \item Estas condições de momento adicionais implicam restrições entre equações dos coeficientes e ajudam (bastante!) na identificação dos coeficientes do lado da oferta.
+\end{itemize}
+    
+\end{frame}
+\begin{frame}{``Instrumentos BLP'' e ``Instrumentos BST''}
+\begin{itemize}
+    \item A premissa básica por trás dos Instrumentos BLP é a ideia que as características não observadas pelo econometrista tem média zero em relação às características observadas.
+    \[
+    E(\xi|\mathbf{x})=0
+    \]
+    \item Intuição: características que não os preços são determinadas previamente à competição de Bertrand do slide anterior.
+    \item Com isso, temos que os instrumentos para os preços são somas das características (não o preço) dos outros produtos da mesma empresa, ou os produtos de outras empresas no mesmo mercado.
+    \item \citet{Bresnahan1997}: Extensão dos ``Instrumentos BLP'' por ninhos.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Problemas com Instrumentos BLP}
+\begin{itemize}
+    \item Podemos ter pouca variação nos dados para identificar as coisas
+    \item Os instrumentos BLP podem ser fracos
+    \item \citet{Berry2014}: mesmo que não tivéssemos preço, teríamos endogeneidade por conta dos RC.
+    \item Ou seja, para isso funcionar, precisamos de \textbf{Instrumentos Fortes}.
+    \item A literatura trabalha com a definição de instrumentos ótimos (paper clássico é o de \citet{Chamberlain1987})
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Instrumentos ótimos}
+\begin{itemize}
+    \item Problemas comuns em estatística e econometria lidam com modelos de momentos condicionais, que satisfaçam relações de regressão da forma $E[Y|X]=\mu (X,\beta_{0})$, $E[Y|X]=\mu (X,\beta_{0})$ em que  $E[\varepsilon |X]=0$.
+    \item Esta premissa de média zero $E[\varepsilon |X]=0$ implica que podemos estimar estes modelos usando um conjunto infinito dimensional de restrições não condicionais de momento, pois ela implica que o seguinte também vale:
+    \[
+    E(h(X)(Y-X\beta_{0}))=0
+    \]
+    \item Existem infinitas funções que satisfazem estas restrições condicionais de momento.
+    \item Só que vamos buscar funções $h(X)$ que sejam ótimas no sentido de permitir identificação dos parâmetros.
+
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Gandhi e Houde}
+\begin{itemize}
+    \item Em um paper bastante influente, \citet{Gandhi2015} mostram que podemos construir instrumentos ótimos que são parecidos com os de BLP
+    \item \textit{Funções Base}
+\end{itemize}
+\begin{align}
+    \sum_{j^{\prime} \neq j} \mathbf{x}_{jt}\\
+    \sum_{j^{\prime} \neq j} (\mathbf{d}_{j^{\prime} t j})^{2}\\
+    \sum_{j^{\prime} \neq j} \mathbf{1}(|\mathbf{d}_{j^{\prime} t j}|<\kappa)(\mathbf{d}_{j^{\prime} t j})
+\end{align}
+    
+\end{frame}
+
+\begin{frame}{Reynaert e Verboven}
+\begin{itemize}
+    \item Uma proposta interessante, ainda na mesma linha de ação de instrumentos ótimos de \citet{Chamberlain1987}, é a de \citet{Reynaert2014a}.
+    \item Eles propõem instrumentos ótimos baseados nas seguintes condições de momento:
+    
+\end{itemize}
+    \begin{align*}
+        E\left[\frac{\partial \xi}{\partial \beta} | \mathbf{z} \right] \\
+        E\left[\frac{\partial \xi_{supply}}{\partial \beta} | \mathbf{z} \right]
+    \end{align*}
+\begin{itemize}
+    \item Note-se que estas são funções bem complicadas dos RC.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Micromomentos}
+\begin{itemize}
+    \item Um outro caminho é a adição dos chamados ``Micromomentos''
+    \item Alguma outra função dos dados e dos RC que possa ser mapeada nos dados.
+    \item Exemplos são \citet{Berry2004}, e \citet{Petrin2002}.
+    \item No primeiro dos papers, os autores conseguem microdados sobre quais seriam as segundas opções de carro para os entrevistados.
+    \item Com as probabilidades estimadas, é possível calcular qual seria a proporção de consumidores que escolheriam o carro $Y$ como segunda opção.
+\end{itemize}
+    
+\end{frame}
+
+
+
+%\begin{comment}
+\begin{frame}[allowframebreaks]
+\bibliographystyle{aea}
+\bibliography{references}
+
+\end{frame}
+
+
+%\end{comment}
+
+
+
+
+\end{document}
