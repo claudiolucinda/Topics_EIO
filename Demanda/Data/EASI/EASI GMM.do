@@ -19,7 +19,7 @@ set more off
 macro drop _all
 program drop _all
 version 11
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\EASI\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\EASI\"
 use ".\hixdata.dta", clear
 
 * set number of equations and prices and demographic characteristics

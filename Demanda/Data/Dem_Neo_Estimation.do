@@ -8,10 +8,10 @@ set memory 128m
 set matsize 800
 set more off, permanently
 version 14
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
 
 
-adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\2014-2\Demanda\"
+adopath + "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
 
 use "EASI\hixdata.dta", clear
 
@@ -32,7 +32,7 @@ local pricenames "pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers"
 forvalues i=1/`J' {
 	local tshare: word `i' of `sharenames'
 	local tprice: word `i' of `pricenames'
-	qui replace l_Big_P=sc_`tshare'*`tprice'
+	qui replace l_Big_P=l_Big_P+sc_`tshare'*`tprice'
 
 }
 

@@ -10,8 +10,8 @@ set memory 128m
 set matsize 800
 set more off
 
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
-adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+adopath + "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\"
 *cap log close
 *log using  "Output_Micro_DC.log", replace
 
@@ -97,7 +97,7 @@ drop panelist semana
 reshape long marca_ price_ display_ feature_, i(nro) j(brand)
 
 * Com a constante - Não convergência
-asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) difficult base(1)
+*asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) difficult base(1)
 
 * Sem a constante
 asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) nocons
