@@ -6,9 +6,9 @@ clear
 
 *cd "C:\Users\ClaudioLucinda\Documents\Aulas\GV\Curso de OI - Pós\Custos\ACF-Lucinda\"
 
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Custos\Data\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Custos\Data\"
 
-adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Custos\Data\"
+adopath + "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Custos\Data\"
 
 use sample.dta, clear
 cap program drop ACF_proc

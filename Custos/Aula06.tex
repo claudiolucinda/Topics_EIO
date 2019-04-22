@@ -1,0 +1,699 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgf}
+\usepackage{tikz}
+%\usetikzlibrary{snakes}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{float}
+\usetheme{Frankfurt}
+\usepackage{epstopdf}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{bookmark}
+
+\title{Aula 06}
+
+\subtitle{Funcoes de Producao e Custos}
+
+\author{Claudio R. Lucinda}
+
+
+\institute{FEA/USP}
+
+\date{}
+\logo{\includegraphics[scale=.1]{logousp.png}}
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}\frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{Fronteiras de Producao Estocasticas}
+\begin{frame}{Fronteiras de Produção Estocásticas}
+
+\begin{itemize}
+\item Em termos de uma função de produção definida em termos de uma cross-section,
+uma fronteira paramétrica pode ser definida como:
+\[
+Y_{i}=f(X_{i},\beta)\times TE_{i}
+\]
+\item Em que $i$ representa os produtores, $Y_{i}$ a quantidade produzida,
+$X_{i}$ a quantidade dos insumos, $\beta$ os coeficientes associados
+e $TE_{i}$ a medida de eficiência técnica orientada a produto, e
+definida como:
+\[
+TE_{i}=\frac{Y_{i}}{f(X_{i},\beta)}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fronteiras Estocásticas de Produção (II)}
+
+\begin{itemize}
+\item Na abordagem de Farrell (1957), ele adotou a forma $TE_{i}=\exp(-u_{i})$.
+Note que, neste momento, não fizemos nenhuma imposição de elemento
+aleatório, fazendo com que esta fronteira de produção seja determinística. 
+\item Com a imposição de uma forma funcional à la Cobb-Douglas, a forma
+funcional fica sendo:
+\[
+\ln Y_{i}=\beta_{0}+\sum_{r}\beta_{r}\ln X_{ri}-u_{i}
+\]
+\item Aigner, Lovell e Schmidt (1977) fizeram a análise econométrica canônica
+deste tipo de modelo, incorporando o termo $u_{i}$ em um termo erro
+composto, $e_{i}=v_{i}-u_{i}$, em que $v_{i}$é uma parte aleatória
+independente e identicamente distribuída. Neste caso, o modelo completo
+fica sendo:
+\[
+\ln Y_{i}=\beta_{0}+\sum_{r}\beta_{r}\ln X_{ri}+v_{i}-u_{i}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fronteiras Estocásticas de Produção (III)}
+
+\begin{itemize}
+\item Supondo que o o termo de ineficiência seja com uma distribuição normal
+pela metade, podemos escrever a função verossimilhança, com a suposição
+que os dois termos erros são distribuidos independentemente. 
+\item A partir da estimativa, podemos decompor o valor esperado da ineficiência
+do termo erro composto, da seguinte forma:
+\[
+E(u_{i}|e_{i})=\frac{\sigma\lambda}{(1+\lambda^{2})}\left[\frac{\phi(\frac{e_{i}\lambda}{\sigma})}{\Phi(-\frac{e_{i}\lambda}{\sigma})}-\frac{e_{i}\lambda}{\sigma}\right]
+\]
+\item Em que $\phi$ é a pdf normal, a $\Phi$ a cdf normal, $\lambda=\frac{\sigma_{u}}{\sigma_{v}}$,
+e $\sigma=(\sigma_{u}^{2}+\sigma_{v}^{2})^{1/2}$. 
+\item Neste caso, $TE_{i}=1-E(u_{i}|e_{i})$. Outras alternativas foram
+propostas, mas agora nós mudaremos o nosso foco para incorporarmos
+dados em painel. 
+\end{itemize}
+\end{frame}
+
+\subsection{Dados em Painel}
+\begin{frame}{FEP -- Dados em Painel}
+
+\begin{itemize}
+\item Com a dispoibilidade de dados em painel, algumas vantagens surgem.
+
+\begin{itemize}
+\item Em primeiro lugar, não necessariamente o termo erro precisa ser exógeno
+em relação às quantidades dos insumos, como no caso de cross-sections. 
+\item Além disso, ao adicionar informações ao longo do tempo de uma mesma
+empresa, isso permite que tenhamos estimativas consistentes da ineficiência. 
+\item Finalmente, a terceira vantagem está no fato que, em alguns casos
+não é necessária a imposição de hipóteses distribucionais sobre o
+termo erro; simplesmente as técnicas de efeitos fixos e aleatórios
+nos permitem obter estimativas dos parâmetros da função de produção. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{FEP -- Dados em Painel (II)}
+
+\begin{itemize}
+\item Para entender este ponto melhor, considere a função de produção como
+vimos anteriormente:
+\[
+\ln Y_{it}=\beta_{0}+\sum_{r}\beta_{r}\ln X_{rit}+v_{it}-u_{it}
+\]
+\item Sendo que $u_{it}>0$. Usando a transformação within, e se supusermos
+que o termo $u_{it}$ seja sistemático e não varie ao longo do tempo,
+podemos estimar os coeficientes da função de produção:
+\[
+(\ln Y_{it}-\bar{\ln Y_{it}})=\sum_{r}\beta_{r}(\ln X_{rit}-\bar{\ln X_{rit}})+v_{i}
+\]
+\item Podemos definir os termos de ineficiência individual por meio das
+seguintes definições:
+\begin{eqnarray*}
+\hat{\beta}_{0} & = & \max(\hat{\beta}_{0i})\\
+u_{i} & = & \hat{\beta_{0}}-\hat{\beta_{0i}}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{FEP -- Dados em Painel (III)}
+
+\begin{itemize}
+\item Em que os $\hat{\beta_{0i}}$ são obtidas como:
+\[
+\hat{\beta_{0i}}=(\ln Y_{it}-\bar{\ln Y_{it}})-\sum_{r}\beta_{r}(\ln X_{rit}-\bar{\ln X_{rit}})
+\]
+\item Evidentemente, este tipo de análise impede que utilizemos dados que
+são constantes ao longo do período amostral. 
+\item Uma solução para este problema é tratar a parte de ineficiência como
+sendo um efeito aleatório, podemos estimar o modelo da seguinte forma:
+\[
+\ln Y_{it}=(\beta_{0}-E(u_{i}))+\sum_{r}\beta_{r}\ln X_{rit}+v_{it}+(u_{it}-E(u_{it}))
+\]
+\item Em que tanto $v_{it}$ e $u_{it}^{*}=u_{it}-E(u_{it})$ possuem média
+zero. Este modelo pode ser estimado por Mínimos Quadrados Generalizados. 
+\end{itemize}
+
+\note[item]{Note-se que, para a estimação da eficiência técnica, não precisamos
+impor nenhuma hipótese distribucional sobre o termo erro. }
+
+\note[item]{No entanto, a estimação por efeitos aleatórios precisa, para a estimação
+consistente da eficiência técnica, que a dimensão tempo e cross-section
+da amostra tenda ao infinito. }
+
+\note[item]{Além disso, esta estimação poe efeitos aleatórios pressupõe que a
+ineficiência seja exógena à escolha das quantidades de insumos. }
+
+\note[item]{Ainda sobre este problema da consistência, a imposição de constância
+na eficiência técnica ao mesmo tempo que exija que a amostra tenda
+ao infinito é um pouco inconsistente, demandando o desenvolvimento
+de modelos em que a eficiência seja alterada ao longo do tempo.}
+\end{frame}
+
+\begin{frame}{Dados em Painel}
+
+\begin{itemize}
+\item No contexto da estimação de ineficiênca técnica, algumas vantagens
+surgem da utilização de dados em painel.
+
+\begin{itemize}
+\item Em primeiro lugar, não necessariamente o termo erro precisa ser exógeno
+em relação às quantidades dos insumos, como no caso de cross-sections. 
+\item Além disso, ao adicionar informações ao longo do tempo de uma mesma
+empresa, isso permite que tenhamos estimativas consistentes da ineficiência. 
+\item Finalmente, em alguns casos não é necessária a imposição de hipóteses
+distribucionais sobre o termo erro; simplesmente as técnicas de efeitos
+fixos e aleatórios nos permitem obter estimativas dos parâmetros da
+função de produção.
+\end{itemize}
+\item Note que as questões mencionadas anteriormente sobre endogeneidade
+continuam valendo; apenas assume-se que ela não existam.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dados em Painel}
+
+\begin{itemize}
+\item Para entender este ponto melhor, considere a função de produção como
+vimos anteriormente:
+\[
+\ln Y_{it}=\beta_{0}+\sum_{r}\beta_{r}\ln X_{rit}+v_{it}-u_{it}
+\]
+\item Sendo que $u_{it}>0$. 
+\item Usando a transformação within, e se supusermos que o termo $u_{it}$
+seja sistemático e constante ao longo do tempo, podemos estimar os
+coeficientes da função de produção:
+\[
+(\ln Y_{it}-\bar{\ln Y_{it}})=\sum_{r}\beta_{r}(\ln X_{rit}-\bar{\ln X_{rit}})+v_{i}
+\]
+\item Podemos definir os termos de ineficiência individual por meio das
+seguintes definições:
+\begin{eqnarray*}
+\hat{\beta}_{0} & = & \max(\hat{\beta}_{0i})\\
+u_{i} & = & \hat{\beta_{0}}-\hat{\beta_{0i}}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dados em Painel (III)}
+
+\begin{itemize}
+\item Em que os $\hat{\beta_{0i}}$ são obtidos como:
+\[
+\hat{\beta_{0i}}=(\ln Y_{it}-\bar{\ln Y_{it}})-\sum_{r}\beta_{r}(\ln X_{rit}-\bar{\ln X_{rit}})
+\]
+\item Evidentemente, este tipo de análise impede que utilizemos dados que
+são constantes ao longo do período amostral. 
+\item Uma solução para este problema é tratar a parte de ineficiência como
+sendo um efeito aleatório, podemos estimar o modelo da seguinte forma:
+\[
+\ln Y_{it}=(\beta_{0}-E(u_{i}))+\sum_{r}\beta_{r}\ln X_{rit}+v_{it}+(u_{it}-E(u_{it}))
+\]
+\item Em que tanto $v_{it}$ e $u_{it}^{*}=u_{it}-E(u_{it})$ possuem média
+zero. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dados em Painel -- Problemas de Estimação}
+
+\begin{itemize}
+\item Este modelo pode ser estimado por Mínimos Quadrados Generalizados,
+como o modelo de Efeitos Aleatórios.
+\item Note-se que, para a estimação da eficiência técnica, não precisamos
+impor nenhuma hipótese distribucional sobre o termo erro. 
+\item No entanto, para a estimação consistente dos coeficientes, temos alguns
+problemas: 
+
+\begin{itemize}
+\item Em primeiro lugar, a estimação por efeitos aleatórios precisa, para
+a estimação consistente da eficiência técnica, que a dimensão tempo
+e cross-section da amostra tenda ao infinito. 
+\item Além disso, esta estimação poe efeitos aleatórios pressupõe que a
+ineficiência seja exógena à escolha das quantidades de insumos. 
+\item Finalmente, a imposição de constância na eficiência técnica ao mesmo
+tempo que exija que a amostra tenda ao infinito é contraditório, demandando
+o desenvolvimento de modelos em que a eficiência seja alterada ao
+longo do tempo.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cornwell, Schmidt e Sickles}
+
+\begin{itemize}
+\item A primeira linha de ação adotada foi a de Cornwell, Schmidt e Sickles,
+que remonta o modelo acima da seguinte forma:
+\[
+\ln Y_{it}=(\beta_{0t}-u_{it})+\sum_{r}\beta_{r}\ln X_{rit}+v_{it}
+\]
+\item Os autores modelam os interceptos como uma função quadrática do tempo,
+em que o tempo está associado com características específicas dos
+produtores, no caso $\Gamma$:
+\[
+u_{it}=\Gamma_{1i}+\Gamma_{2i}t+\Gamma_{3i}t^{2}
+\]
+\item Os autores inclusive propôem inclusive uma forma de estimativa por
+Variáveis Instrumentais deste negócio.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Kumbhakar}
+
+\begin{itemize}
+\item A outra grande linha de ação passa pelo método da Máxima Verossimilhança. 
+\item Segundo Kumbhakar (1990), supondo que a ineficiência se altere ao
+longo do tempo de acordo com a seguinte especificação:
+\[
+u_{it}=\delta_{t}u_{i}
+\]
+\item E se assumirmos uma distribuição normal truncada para o termo $u_{i}$,
+podemos modelar $u_{it}$ da seguinte forma:
+\[
+u_{it}=[1+\exp(\gamma t+\rho t^{2})]^{-1}\times u_{i}
+\]
+\item Em que $\gamma$ e $\rho$ são parâmetros a serem estimados. 
+\item Uma linha alternativa de ataque é a de Battese e Coelli (1992), em
+que apenas um parâmetro deve ser estimado:
+\[
+u_{it}=[\exp(-\eta(t-T)]\times u_{i}
+\]
+\end{itemize}
+\end{frame}
+
+\section{Economias de Escala}
+\begin{frame}{Economias de Escala}
+
+\begin{itemize}
+\item Após estimar os coeficientes das funções de produção, como estimar
+as economias de escala?
+\item No caso de empresas multiproduto, Panzar (1989, p. 8) dá uma medida
+de \emph{economias de escala tecnológicas}, definidas da seguinte
+forma:
+\[
+S_{t}=\frac{\sum_{i=1}^{I}\sum_{j=1}^{J}x_{i}\frac{\partial f_{j}}{\partial x_{i}}}{\sum_{j}y_{j}}
+\]
+\item Em que $\frac{\partial f_{j}}{\partial x_{i}}$ é a produtividade
+marginal do insumo $i$ na produção do bem $j$, $x_{i}$ a quantidade
+do fator $i$ de produção e $y_{j}$ a quantidade do produto $j$. 
+\item Os retornos de escala tecnológicos seriam crescentes caso $S_{t}$
+fosse maior do que 1, decrescentes caso fosse menor do que 1, e constantes
+caso fossem iguais a 1.
+\end{itemize}
+\end{frame}
+
+\section{Funcoes de Custo}
+\begin{frame}{Estimação de Função Custo}
+
+\begin{itemize}
+\item Com relação à função custos, uma função muito utilizada é a Translog.
+Ela possui a seguinte forma funcional:{\tiny{}
+\[
+\ln C=a_{0}+\sum_{i}\beta_{i}\ln q_{i}+\sum_{j}\gamma_{j}\ln r_{j}+\sum_{j}\sum_{k}\gamma_{jk}\ln r_{j}\ln r_{k}+\sum_{h}\sum_{i}\beta_{hi}\ln q_{h}\ln q_{i}+\sum_{i}\sum_{j}\phi_{ij}\ln q_{i}\ln r_{j}
+\]
+}{\tiny \par}
+\item Em geral, se multiplica as variáveis por 0,5 quando temos os termos
+quadráticos, para facilitar na hora de montar os sistemas de demanda
+de fatores. 
+\item Vamos mostrar adicionalmente como se constrói um sistema de demandas
+por fatores de produção usando o lema de Sheppard:
+\[
+\frac{1}{C}\frac{\partial C}{\partial r_{i}}=\gamma_{i}\frac{1}{r_{i}}+\sum_{k}\gamma_{ik}\frac{\ln r_{k}}{r_{i}}+\sum_{l}\phi_{li}\frac{\ln q_{l}}{r_{i}}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Lema de Shepard}
+
+\begin{itemize}
+\item Pelo lema de Sheppard, $\frac{\partial C}{\partial r_{i}}=z_{i}$,
+ou seja:
+\begin{eqnarray*}
+\frac{z_{i}}{C} & = & \frac{1}{r_{i}}\left[\gamma_{i}+\sum_{k}\gamma_{ik}\ln r_{k}+\sum_{l}\phi_{li}\ln q_{l}\right]\\
+\frac{r_{i}z_{i}}{C} & = & \left[\gamma_{i}+\sum_{k}\gamma_{ik}\ln r_{k}+\sum_{l}\phi_{li}\ln q_{l}\right]
+\end{eqnarray*}
+\item O lado esquerdo da igualdade mostra a participação da remuneração
+do fator de produção $i$ no total dos custos. 
+\item Para $N$ fatores de produção, podemos colocar um sistema de $N-1$
+equações, impondo as restrições relevantes, para aumentar a eficiência
+das estimativas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimação de Função Custos}
+
+\begin{itemize}
+\item Podemos, por teoria de dualidade que vimos anteriormente, afirmar
+que a qualquer especificação de uma função de produção corresponde
+uma especificação da função custo, supondo comportamento minimizador
+de custos por parte das empresas envolvidas. 
+\item Nos anos 70, em geral se afirmava que, na suposição de mercados competitivos
+para os fatores de produção, a questão da exogeneidade das variáveis
+independentes parecia resolvida (um ponto de vista como este foi adotado
+por Varian (1980, cap. 12, pp. 207-9). 
+\item Evidentemente, as questões de identificação induzidas pelo atrito
+da amostra não estão resolvidas
+\item Desta forma, vamos nos concentrar mais nos procedimentos de análise
+propriamente ditos do que nas condições de identificação.
+\end{itemize}
+\end{frame}
+
+\subsection{Spady e Friedlaender}
+\begin{frame}{Spady e Friedlaender}
+
+\begin{itemize}
+\item A principal questão que este e o próximo artigo irão enfrentar diz
+respeito ao fato que, em muitos casos, os serviços oferecidos por
+uma mesma empresa são diferenciados -- ou seja, eles dependem
+não apenas do número de unidades produzidas, mas também das características
+destes insumos. 
+\item Por exemplo, um determinado número de minutos de serviço de telecomunucações
+pode se referir a minutos em horário comercial, e o restante fora
+do horário comercial. 
+\item Ou ainda, em termos de Kbps trafegados em uma rede, alguns podem ser
+de dados e outros de voz. 
+\item Consequentemente, duas empresas de telecomunicações podem possuir
+duas estruturas muito diferentes de produtos e de custos se uma se
+concentra em um conjunto de serviços e outra em outro. 
+\end{itemize}
+
+\note[item]{Em geral, estas diferenças são levadas em conta expandindo o vetor
+de produtos para englobar a dimensão de qualidade (ou seja, Minutos
+comerciais seriam um produto e Minutos Residenciais seriam outro). }
+
+\note[item]{O problema é quando você tem uma dimensão de características que
+os produtos podem tomar que, na prática, é contínua. Neste caso, exigiríamos
+demais dos dados. }
+
+\end{frame}
+
+\begin{frame}{Funções Hedônicas de Custo}
+\small
+\begin{itemize}
+\item Para resolver este problema, os autores propõem tratar o produto efetivo
+como sendo uma função de uma medida genérica da quantidade e das suas
+qualidades. 
+\item Assim, estimaríamos as chamadas ``funções hedônicas de custo''. 
+\item Os autores utilizam uma função de custos separável em qualidade, da
+seguinte forma:
+\[
+C=C[\psi(y,q),w]
+\]
+\item Em que $\psi(y,q)$ representa um vetor de funções que mensuram os
+produtos efetivos e $w$ denota um vetor de preços de fatores de produção. 
+\item Desta forma, $\psi=[\psi^{1},\psi^{2},\cdots,\psi^{n}]$ , para uma
+empresa que oferece $n$ produtos físicos diferentes, é um vetor em
+que cada elemento $\psi^{i}=\psi^{i}(y_{i},q_{1}^{i},\cdots,q_{r}^{i})$.
+\item $y_{i}$ é a quantidade física do produto $i$ 
+\item $q_{r}^{i}$ é a r-ésima qualidade do produto $i$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Spady e Friedlaender}
+\tiny
+\begin{itemize}
+\item Em especial, eles assumem que:
+\[
+\psi^{i}=y_{i}\times\phi(q_{1}^{i},\cdots,q_{r}^{i})
+\]
+\item Dados estes diferentes serviços, eles estimam uma função custo translog
+da seguinte forma:
+\begin{eqnarray*}
+\ln C(\psi,w) & = & \alpha_{0}+\sum_{i}\alpha_{i}(\ln\psi_{i}-\ln\bar{\psi_{i}})+\sum_{S}\beta_{s}(\ln w_{s}-\ln\bar{w_{s}})+\\
+ & + & \frac{1}{2}[\sum_{i}\sum_{j}A_{ij}(\ln\psi_{i}-\ln\bar{\psi_{i}})(\ln\psi_{j}-\ln\bar{\psi_{j}})+\\
+ & + & \sum_{s}\sum_{t}B_{st}(\ln w_{s}-\ln\bar{w_{s}})(\ln w_{t}-\ln\bar{w_{t}})]+\\
+ & + & \sum_{i}\sum_{s}C_{is}(\ln\psi_{i}-\ln\bar{\psi_{i}})(\ln w_{s}-\ln\bar{w_{s}})+\varepsilon
+\end{eqnarray*}
+\end{itemize}
+
+\note[item]{Em que as barras representam as médias das variáveis. }
+
+\end{frame}
+
+\begin{frame}{Spady e Friedlaender}
+
+\begin{itemize}
+\item Além disso os autores colocam no sistema as equações que representam
+as participações dos fatores no custo total:
+\[
+\frac{w_{s}x_{s}}{C}=\beta_{s}+\sum_{t}B_{st}(\ln w_{t}-\ln\bar{w_{t}})+\sum_{i}C_{is}(\ln\psi_{i}-\ln\bar{\psi_{i}})
+\]
+Até agora, o que há de novo é simplesmente a expressão das variáveis
+independentes em termos de desvios em relação às suas médias. 
+\item Neste ponto, os autores precisamo expor a sua escolha referente à
+forma funcional de $\psi_{i}$. 
+\item Eles utilizam uma aproximação translog para esta função, da seguinte
+forma:
+{\tiny{}
+\begin{eqnarray*}
+\ln\psi_{i} & = & \ln y_{i}+\sum_{h}a_{h}^{i}(\ln q_{h}^{i}-\ln\bar{q_{h}^{i}})+\\
+ & + & \frac{1}{2}\sum_{h}\sum_{l}b_{hl}^{i}(\ln q_{h}^{i}-\ln\bar{q}_{h}^{i})(\ln q_{l}^{i}-\ln\bar{q}_{l}^{i})
+\end{eqnarray*}}
+\end{itemize}
+
+\note[item]{Esta função é substituída no sistema original e ele é estimado por
+Mínimos Quadrados Generalizados (no paper de Spady e Friedlaender,
+usaram FIML). }
+
+\end{frame}
+
+\begin{frame}{Spady e Friedlaender}
+
+\begin{itemize}
+\item Além disso, eles impõem as condições de simetria que estão a seguir:
+\begin{eqnarray*}
+\sum\beta_{s} & = & 1\\
+\sum_{s}B_{st} & = & 0,t=1,\cdots,m;\\
+\sum_{s}C_{is} & = & 0,i=1,\cdots,n\\
+B_{ts} & = & B_{st}\\
+A_{ij} & = & A_{ji}
+\end{eqnarray*}
+\item Os custos marginais de cada serviço podem ser estimados com a seguinte
+fórmula:{\scriptsize{}
+\[
+CMg_{i}=\frac{C}{y_{i}}\frac{\partial\ln C}{\partial\ln y_{i}}=\frac{C}{y_{i}}\left\{ \alpha_{i}+\sum_{i=1}^{M}A_{im}(\ln y_{i}-\ln\bar{y_{i}})+\sum_{j=1}^{M}C_{ij}(\ln w_{i}-\ln\bar{w}_{i})\right\} 
+\]
+}{\scriptsize \par}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Spady e Friedlaender}
+
+\begin{itemize}
+\item Adicionalmente, podemos calcular o grau de economias de escala desfrutadas
+pela empresa usando a seguinte fórmula:
+\[
+S=\frac{C(y,w)}{\sum_{i}y_{i}\frac{\partial C}{\partial y_{i}}}
+\]
+\item Se $S$ for maior do que 1, os retornos de escala são crescentes.
+Se $S$ é menor do que 1, os retornos de escala são decrescentes e
+se $S$ for igual a 1, os retornos de escala são constantes. 
+\end{itemize}
+\end{frame}
+
+\subsection{Evans e Heckman}
+\begin{frame}{Evans e Heckman}
+
+\begin{itemize}
+\item Estes autores utilizam um método para testar a sub-aditividade das
+funções custos no contexto de uma função de produção multiproduto. 
+\item Eles começam assumindo que a função custo da AT\&T é dada por
+\[
+C=f(L,T,r,m,w,t)
+\]
+\item Em que: 
+
+\begin{itemize}
+\item $L$ denotava a quantidade de chamadas locais produzidas, 
+\item $T$ a quantidade de chamadas a longa distância produzidas, 
+\item $w$ o salário médio,
+\item $r$ o custo do capital, 
+\item $m$ o preço das matérias-primas 
+\item $t$ um índice de mudança tecnológica. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evans e Heckman}
+\tiny
+\begin{itemize}
+\item A idéia desta separação entre produtos é baseada que, à época, estes
+eram os principais produtos oferecidos pela empresa. 
+\item Inicialmente eles começam estimando uma função translog de custos
+da seguinte forma:
+\begin{eqnarray*}
+C & = & \alpha_{0}+\sum_{i=1}^{N}\alpha_{i}\ln p_{i}+\sum_{k=1}^{M}\beta_{k}\ln q_{k}+\mu\ln t\\
+ & + & \left[\sum_{i=1}^{N}\sum_{j=1}^{N}\gamma_{ij}\ln p_{i}\ln p_{j}+\sum_{k=1}^{M}\sum_{l=1}^{M}\delta_{kl}\ln q_{k}\ln q_{l}\right]+\\
+ & + & \sum_{i=1}^{N}\sum_{k=1}^{M}\rho_{ik}\ln p_{i}\ln q_{k}+\sum_{i=1}^{M}\lambda_{i}\ln p_{i}\ln t+\sum_{k=1}^{N}\theta_{k}\ln q_{k}\ln t+\tau(\ln t)^{2}
+\end{eqnarray*}
+\item Além disso, eles colocam um sistema associado de participações dos
+insumos nos custos totais. Além disso, eles investigam dois pontos
+adicionais. 
+\begin{itemize}
+\item A função de custos é separável em termos dos produtos 
+\item A função de custos é aditiva. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evans e Heckman}
+\small
+\begin{itemize}
+\item A primeira hipótese, separabilidade em termos dos produtos, se for
+verdade, implica que a decisão de montante a ser produzido pode ser
+separada da decisão da composção da quantidade. 
+\item Se ela for válida, podemos agregar as quantidades de $L$ e $T$ em
+um único índice, da seguinte forma:
+\[
+C=f(L,T,r,m,w,t)=f(A(L,T),r,m,w,t)=f(Q^{*},r,m,w,t)
+\]
+\item Sendo que $Q^{*}=A(L,T)$. 
+\item Para que isto valha, devemos ter $\rho_{ik}\beta_{l}=\rho_{il}\beta_{k},\forall i,k\neq l$. 
+\item A segunda hipótese testável, a de aditividade, é que os custos de
+produzir todos os produtos em um mesmo lugar é igual à soma dos custos
+de produzir em unidades separadas, ou seja:
+\[
+C=f(L,T,r,m,w,t)=C_{L}(L,r,m,w,t)+C_{T}(T,r,m,w,t)
+\]
+\item Esta aditividade pode ser testada pela seguinte hipótese, na função
+translog: $\delta_{kl}=-\beta_{k}\beta_{l}$. 
+\end{itemize}
+
+\note[item]{Se esta restrição for válida, a empresa não possui nem economias
+nem deseconomias de escopo. }
+
+\end{frame}
+
+\begin{frame}{Evans e Heckman -- Economias de Escopo:}
+
+\begin{itemize}
+\item Finalmente, eles buscam testar a existência de economias de escopo. 
+\item O teste canônico de economias de escopo foi proposto por Panzar (1989)
+e é da seguinte forma. 
+\item Seja $\hat{T}$ um subconjunto do espaço de produtos $(\hat{T},T)$,
+no ponto em que a quantidade produzida é $q$. 
+\item O grau de economias de escopo, neste caso, é dado por:
+\[
+SC=\frac{C(q_{T})+C(q_{\hat{T}})-C(q)}{C(q)}
+\]
+\item Em que $y_{T}$ é a quantidade produzida do subconjunto de produtos
+$T$, $q_{\hat{T}}$ a quantidade produzida do subconjunto de produtos
+$\hat{T}$ . 
+\item A função custo apresentaria economias de escopo se $SC$ for maior
+do que zero. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economias de Escopo II}
+
+\begin{itemize}
+\item No entanto, esta metodologia ``canônica'' apresenta problemas quando
+aplicada para a função translog.
+\item Com os coeficientes em questão, a gente somente poderia calcular os
+valores de $C(q_{T})$ e $C(q_{\hat{T}})$ se supuséssemos os valores
+de algumas quantidades iguais a zero. 
+\item No entanto, como a simples inspeção da fórmula acima pode nos mostrar,
+temos que este tipo de função não é definida nos pontos em que os
+argumentos são iguais a zero. 
+\item Evans e Heckman seguem um caminho diferente:
+
+\begin{itemize}
+\item Eles testam uma hipótese mais simples, se é mais econômica a produção
+dos dois bens em conjunto dentro de uma empresa -- no caso,
+a AT\&T -- ou em duas empresas separadas. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economias de Escopo III}
+
+\begin{itemize}
+\item O estudo que eles fazem é o seguinte. Considere $Q_{t}^{*}=(Q_{1t}^{*},Q_{2t}^{*})$
+como sendo o vetor de bens produzidos em um determinado ano $t$. 
+\item Além disso, considere também o vetor $Q_{M}=(Q_{1M},Q_{2M})=(\min Q_{1t}^{*},\min Q_{2t}^{*})$,
+que são os menores valores dos dois produtos disponíveis na amostra. 
+\item Vamos considerar duas empresas hipotéticas, A e B, que possuem as
+seguintes quantidades produzidas:
+\begin{eqnarray*}
+Q_{At} & = & (\phi Q_{1t}+Q_{1M},\omega Q_{2t}+Q_{2M})\\
+Q_{Bt} & = & ((1-\phi)Q_{1t}+Q_{1M},(1-\omega)Q_{2t}+Q_{2M})
+\end{eqnarray*}
+\item Neste caso, temos que ,$\omega$ e $\phi$ pertencem am intervalo
+$[0,1]$, pois a quantidade observada seria igual à produção das duas
+empresas hipotéticas. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economias de Escopo IV}
+\small
+\begin{itemize}
+\item Restringindo o domínio na função aos valores observados, temos que
+as duas empresas, juntas, produzem:
+\begin{eqnarray*}
+Q_{1t}+2Q_{1M} & = & Q_{1t}^{*}\\
+Q_{2t}+2Q_{2M} & = & Q_{2t}^{*}
+\end{eqnarray*}
+\item Finalmente, considere as seguintes definições:
+\begin{eqnarray*}
+C_{At}(\phi,\omega) & = & C(Q_{At})\\
+C_{Bt}(\phi,\omega) & = & C(Q_{Bt})\\
+C_{t}^{*} & = & C(Q_{t}^{*})
+\end{eqnarray*}
+\item A sub-aditividade vai ser obtida calculando a seguinte estatística:
+\[
+Sub(\phi,\omega)=\frac{C_{t}^{*}-C_{At}(\phi,\omega)-C_{Bt}(\phi,\omega)}{C_{t}^{*}}
+\]
+\item Podemos notar que esta estatística ainda é uma função de $\phi$ e
+$\omega$. 
+\end{itemize}
+
+\note[item]{Neste caso, o que os autores fazem é estimar o valor desta estatística
+para todos os parâmetros possíveis $\phi$ e $\omega$, e se o máximo
+deste valor for negativo (afinal de contas, este negócio é igual a
+(-1) multiplicando a estatística $SC$ anterior) e significativo,
+podemos dizer que existem economias de escopo e sub-aditividade da
+função de custos. }
+\end{frame}
+
+
+%\begin{comment}
+%\begin{frame}[allowframebreaks]
+%\bibliographystyle{aea}
+%\bibliography{C:/Bibliog/library}
+
+%\end{frame}
+
+%\end{comment}
+
+
+
+
+\end{document}
+
+

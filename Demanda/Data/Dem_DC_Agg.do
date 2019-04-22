@@ -9,8 +9,8 @@ set seed 1992
 discard
 set matsize 400
 *cd "C:\Users\Caio\Dropbox\BLP-Stata_Paper\BLp"
-cd "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
-adopath + "C:\Users\ClaudioLucinda\Dropbox\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
+adopath + "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
 
 fdause NevoData_OI.xpt, clear
 rename v1 share
@@ -23,6 +23,11 @@ rename v75 cdid
 rename v76 id
 su share price sugar mushy 
 order cdid id share price constant sugar mushy
+
+*id - an id variable in the format bbbbccyyq, where bbbb is a unique 4 digit 
+*identifier for each brand (the first digit is company and last 3 are brand, i.e., 
+*1006 is K Raisin Bran and 3006 is Post Raisin Bran), cc is a city code, yy is year 
+* (=88 for all observations is this data set) and q is quarter. All the other variables are sorted by date city brand.
 
 bysort cdid: egen inshare=total(share)
 gen outshare=1-inshare
