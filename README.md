@@ -31,7 +31,7 @@ Beyond its relevance for the Industrial Organization field, the topics above are
 	1.	Modelos não-aninhados
 	1.	Função de Produção e Conduta
 	1.	Outras abordagens
-1.	Modelos de Interações Estratégicas Dinâmicas
+1.	Modelos de Interações Estratégicas Discretas
 	1.	Introdução
 	1.	Como lidar com equilíbrios múltiplos
 	1.	Estimação
