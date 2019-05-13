@@ -20,6 +20,20 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usepackage{adjustbox}
+
 %\usepackage{bookmark}
 %\usepackage[normalem]{ulem}
 
@@ -30,7 +44,7 @@
 \author{Claudio R. Lucinda}
 
 
-\institute{FEA-RP/USP}
+\institute{FEA/USP}
 
 \date{}
 \logo{\includegraphics[scale=.1]{logousp.png}}
@@ -225,6 +239,124 @@ do termo $\varepsilon$, não conseguiremos identificar adequadamente
 os parâmetros $\beta$. 
 \end{itemize}
 \end{frame}
+
+\begin{frame}[plain]\frametitle{Graficamente}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.7pt,y=0.7pt,yscale=-.75,xscale=.75]
+%uncomment if require: \path (0,467.90625); %set diagram left start at 0, and has height of 467.90625
+
+%Shape: Axis 2D [id:dp8725187590404158] 
+\draw  (9.5,274.91) -- (649.5,274.91)(251.5,5.91) -- (251.5,461.91) (642.5,269.91) -- (649.5,274.91) -- (642.5,279.91) (246.5,12.91) -- (251.5,5.91) -- (256.5,12.91)  ;
+%Straight Lines [id:da6535064266743253] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (9.5,90.91) -- (653.5,90.91) ;
+
+
+%Straight Lines [id:da8929624552145203] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (10.5,191.91) -- (654.5,191.91) ;
+
+
+%Straight Lines [id:da3195858023878946] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (561.5,465.91) -- (558.5,12.91) ;
+
+
+%Straight Lines [id:da14923361717501327] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.5,466.91) -- (399.5,13.91) ;
+
+
+
+% Text Node
+\draw (275,13) node   {$\varepsilon _{2}$};
+% Text Node
+\draw (637,288) node   {$\varepsilon _{1}$};
+% Text Node
+\draw (534,293) node   {$X_{1} \beta ^{1}_{0}$};
+% Text Node
+\draw (228,74) node   {$X_{2} \beta ^{2}_{0}$};
+% Text Node
+\draw (213,171) node   {$X_{2} \beta ^{2}_{0} -\Delta ^{2}_{1}$};
+% Text Node
+\draw (357,289) node   {$X_{1} \beta ^{1}_{0} -\Delta ^{1}_{1}$};
+% Text Node
+\draw (233,288) node   {$0,0$};
+% Text Node
+\draw (361,45) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (140,44) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (485,44) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (137,125) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (319,114) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (134,233) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (135,326) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (299,231) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (333,330) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (132,357) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (195,232) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (333,365) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (359,231) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (476,224) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (480,335) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (604,336) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (618,219) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (139,147) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (321,139) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (612,134) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (609,31) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (484,66) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (362,68) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (140,65) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (602,367) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (614,247) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (610,161) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (603,62) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (476,247) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (482,362) node   {$\pi ^{*}_{1} < 0$};
+% Text Node
+\draw (450,110) node   {$\pi ^{*}_{1}  >0$};
+% Text Node
+\draw (516,111) node   {$\pi ^{*}_{2} < 0$};
+% Text Node
+\draw (481,131) node  [align=left] {OU};
+% Text Node
+\draw (519,164) node   {$\pi ^{*}_{2}  >0$};
+% Text Node
+\draw (447,165) node   {$\pi ^{*}_{1} < 0$};
+
+
+\end{tikzpicture}
+
+
+\end{frame}
+
 
 \begin{frame}\frametitle{Estratégias Discretas}
 \footnotesize
