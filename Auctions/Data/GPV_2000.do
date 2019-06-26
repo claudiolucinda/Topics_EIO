@@ -7,9 +7,9 @@
 
 clear
 
-cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\UCLA-Asker\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Auctions\"
 
-insheet using ".\PS3Data.csv", clear
+insheet using ".\Data\PS3Data.csv", clear
 
 reshape long bidder, i(auction) j(bid_code)
 
