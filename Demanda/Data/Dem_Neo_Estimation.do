@@ -8,6 +8,7 @@ set memory 128m
 set matsize 800
 set more off, permanently
 version 14
+
 cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Demanda\Data\"
 
 
@@ -47,7 +48,13 @@ forvalues i=1/`Jm1' {
 	local nom: word `i' of `sharenames'
 	global t`nom' (`nom' `pricenames' l_y_P)
 }
+
+display "$tsfoodh"
+
 reg3 $tsfoodh $tsfoodr $tsrent $tsoper $tsfurn $tscloth $tstranop $tsrecr, sure
+
+reg3 $tsfoodh $tsfoodr $tsrent $tsoper $tsfurn $tscloth $tstranop $tsrecr, sure ireg3
+
 
 * Restrições Homogeneidade
 local aa=1

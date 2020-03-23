@@ -193,6 +193,5 @@ if use_Az==1	local instlist "`instlist' $npzlist"
 if use_B==1		local instlist "`instlist' $npx"
 di "`instlist'"
 
-*set trace on
 gmm `eqlist', inst(`instlist') winitial(unadjusted, independent) quickderivatives
 
