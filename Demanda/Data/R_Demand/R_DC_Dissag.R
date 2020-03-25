@@ -80,3 +80,25 @@ summary(RC_f2)
 # de você ter uma demanda que sobe.
 mg_Price_2<-rpar(RC_f2, "Price")
 summary(mg_Price_2)
+
+###################################
+# Calculando efeitos marginais
+###################################
+# Aqui avaliando em cima da média amostral
+# Diferente do que fiz no Stata
+
+eval_stuff<-with(Dat2[!is.na(Dat2$choice),], data.frame(Price = tapply(Price, index(RC_f2)$alt, mean),
+                                  Feature = tapply(Feature, index(RC_f2)$alt, mean),
+                                  Display = tapply(Display, index(RC_f2)$alt, mean)))
+
+# Logit normal
+effects(f, covariate = "Price", data = eval_stuff)
+
+source("m_predict.R")
+m.predict(RC_f2, newdata = eval_stuff, returnData=TRUE)
+m.predict(f, newdata = eval_stuff, returnData=TRUE)
+
+source("m_effects.R")
+# RC Logit v1
+m.effects(RC_f, covariate = "Price", type = "rr", data=eval_stuff)
+m.effects(f, covariate = "Price", type="rr", data=eval_stuff)
