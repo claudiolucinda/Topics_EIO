@@ -8,6 +8,8 @@
 #install.packages("mlogit")
 library("mlogit")
 
+rm(list=ls())
+
 # Importando os dados
 data<-read.delim("..\\mgdata5.txt", header=FALSE, sep="\t")
 
@@ -63,6 +65,7 @@ summary(RC_f)
 # Aqui vemos que existe a possibilidade - entre a média e o 3º quartil
 # de você ter uma demanda que sobe.
 mg_Price<-rpar(RC_f, "Price")
+summary(mg_Price)
 
 # Random Coefficient Models - Lognormal
 # O opposite aqui é necessário porque o modelo espera que Price tenha um coeficiente 

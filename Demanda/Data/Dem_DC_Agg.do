@@ -58,6 +58,8 @@ mat rename elasts elasts_OLS_3
 mat li elasts_OLS_3
 
 * IV
+*replica o R
+ivreg2 meanu sugar mushy (price=v31-v74)
 
 ivreg2 meanu sugar mushy (price=v31-v74), gmm2s robust first
 run "Codigo_03_1.do"

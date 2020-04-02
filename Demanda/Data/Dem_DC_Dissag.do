@@ -99,6 +99,9 @@ reshape long marca_ price_ display_ feature_, i(nro) j(brand)
 * Com a constante - Não convergência
 *asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) difficult base(1)
 
+*asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) 
+
+
 * Sem a constante
 asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) nocons
 El_asclogit, price(price_) choicevar(brand)
