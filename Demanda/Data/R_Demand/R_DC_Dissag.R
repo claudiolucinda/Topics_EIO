@@ -74,6 +74,7 @@ summary(mg_Price)
 Dat2<-mlogit.data(data=data2, shape="wide", choice="choice",
                  varying=8:19, sep="_", id.var="id", opposite = c("Price"))
 
+
 RC_f2<-mlogit(choice ~ Price + Feature + Display, data=Dat2,
              panel = FALSE, rpar = c(Price = 'ln'), R = 100, halton=NA,
              method = "bhhh")
@@ -103,5 +104,5 @@ m.predict(f, newdata = eval_stuff, returnData=TRUE)
 
 source("m_effects.R")
 # RC Logit v1
-m.effects(RC_f, covariate = "Price", type = "rr", data=eval_stuff)
+m.effects(RC_f2, covariate = "Price", type = "rr", data=eval_stuff)
 m.effects(f, covariate = "Price", type="rr", data=eval_stuff)

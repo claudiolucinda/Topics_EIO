@@ -55,6 +55,9 @@ xi: xtreg lnva lnk lnw lnb i.year if balanced, fe robust cluster(newid)
 sort newid year
 * Estimando por Painéis Dinâmicos - GMM-Diff
 * 2 lags
+xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva, gmm(lnva lnk lnw lnb, laglim(2 .)) noleveleq robust
+
+
 xi: xtabond2 lnva l(0/1).lnk l(0/1).lnw l(0/1).lnb l.lnva i.year, gmm(lnva lnk lnw lnb, laglim(2 .)) iv(i.year) noleveleq robust
 md_ar1, nx(3) beta(e(b)) cov(e(V))
 
