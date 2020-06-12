@@ -274,7 +274,7 @@ nfxp.nll <- function(theta,pold.K = Kmart, pold.W = WalMart) {
 # here we use  1E-12 	
 # Note that the fixed point computation is done for all markets at once!
 	
-	while(err>1E-12 & nfxp.reps<1000) {
+	while(err>1E-12 & nfxp.reps<10000) {
 		nfxp.reps = nfxp.reps +1;
 		pnew.W = pnorm(pi.W - delta*pold.K);
 		pnew.K = pnorm(pi.K - delta*pnew.W);
