@@ -154,7 +154,7 @@ global nprice: word count `pricenames'
 global ncols=$nprice+1
 matrix elastsLAAIDS=J($nprice,$ncols,.)
 
-local medpoint=0
+local medpoint=1
 local i=1
 foreach nom of local sharenames {
 	if `medpoint'==0{
@@ -241,3 +241,20 @@ hasconstants(a1 a2 a3 a4 a5 a6 a7 a8)
 
 do Elast_QUAIDS.do
 estout matrix(elasts, fmt(%9.3f))
+
+
+quaids sfoodh sfoodr srent soper sfurn scloth stranop srecr spers, anot(5) ///
+lnprices(pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers) lnexpenditure(log_y) noquadratic
+
+estat uncompensated, atmeans
+mat temp01=r(uncompelas)
+
+estout matrix(temp01, fmt(%9.3f))
+
+quaids sfoodh sfoodr srent soper sfurn scloth stranop srecr spers, anot(5) ///
+lnprices(pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers) lnexpenditure(log_y)
+
+estat uncompensated, atmeans
+mat temp02=r(uncompelas)
+
+estout matrix(temp02, fmt(%9.3f))

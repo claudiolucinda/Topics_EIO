@@ -1,4 +1,4 @@
-cd "C:\Users\ClaudioLucinda\Dropbox\Consultoria - OLD\NET-2016\"
+cd "G:\Meu Drive\Aulas\GV\Curso de OI - Pós\Mini Curso USP\Topics_EIO\Entrada\Data\"
 
 
 import excel "TireDlrs.xls", sheet("Tire Data") firstrow clear
