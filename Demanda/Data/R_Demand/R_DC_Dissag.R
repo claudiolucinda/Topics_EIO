@@ -6,12 +6,16 @@
 #####################################################
 
 #install.packages("mlogit")
+require(devtools) 
+install_version("mlogit", version = "0.4.2", repos = "http://cran.us.r-project.org")
+
 library("mlogit")
 
 rm(list=ls())
 
 # Importando os dados
 data<-read.delim("..\\mgdata5.txt", header=FALSE, sep="\t")
+
 
 # Estrutura do Banco
 # 
@@ -49,8 +53,12 @@ data2<-data[!(duplicated(data[c("Panelist", "Week")])),]
 data2$choice<-data2$Brand_1+2*data2$Brand_2+3*data2$Brand_3+4*data2$Brand_4
 data2$id<-seq.int(nrow(data2))
 
+#Dat <- dfidx(data=data2, shape="wide", varying = 8:19, sep = "_", idx = list(c("choiceid", "id")))
+
 Dat<-mlogit.data(data=data2, shape="wide", choice="choice",
                  varying=8:19, sep="_", id.var="id")
+
+
 
 f <-mlogit(choice ~ Price + Feature + Display, data=Dat)
 summary(f)

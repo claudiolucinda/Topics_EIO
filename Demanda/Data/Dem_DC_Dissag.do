@@ -107,6 +107,9 @@ asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) nocons
 El_asclogit, price(price_) choicevar(brand)
 mat li r(elast)
 
+asclogit marca_ price_ display_ feature_, case(nro) alternatives(brand) 
+
+
 ***********************************************************************************
 * CLOGIT
 ***********************************************************************************
@@ -147,8 +150,19 @@ restore
 
 nlogitgen type=brand(tipo1:1|2,tipo2:3|4)
 nlogittree brand type
-
+/*
 * Dois níveis. No primeiro display e no segundo feature and price
 
 nlogit marca_ price_ feature_ || type: display_, base(tipo2) || brand:, noconst case(nro)
 
+nlogit marca_ price_ feature_ display_ || type:, base(tipo2) || brand:, noconst case(nro)
+*/
+
+* Esse é o correspondente ao do clogit de cima
+nlogit marca_ price_ feature_ display_ i.brand || type:, base(tipo2) || brand:, noconst case(nro)
+
+* constrained
+constraint 1 [tipo1_tau]_cons=[tipo2_tau]_cons
+
+* Esse é o correspondente ao do clogit de cima
+nlogit marca_ price_ feature_ display_ i.brand || type:, base(tipo2) || brand:, noconst case(nro) constraints(1)

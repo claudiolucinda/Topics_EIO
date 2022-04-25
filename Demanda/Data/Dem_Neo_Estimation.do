@@ -258,3 +258,11 @@ estat uncompensated, atmeans
 mat temp02=r(uncompelas)
 
 estout matrix(temp02, fmt(%9.3f))
+
+quaids sfoodh sfoodr srent soper sfurn scloth stranop srecr spers, anot(5) ///
+lnprices(pfoodh pfoodr prent poper pfurn pcloth ptranop precr ppers) lnexpenditure(log_y) demographics(age hsex carown)
+
+estat uncompensated, atmeans
+mat temp03=r(uncompelas)
+
+estout matrix(temp03, fmt(%9.3f))
