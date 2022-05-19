@@ -243,7 +243,7 @@ RC_results3
 # Não dá significante mesmo. Só para mostrar.
 
 # Logit Basicão
-elasts_RC<-RC_results2$compute_elasticities()
+elasts_RC<-RC_results1$compute_elasticities()
 elast_mkt1_RC<-elasts_RC[single_mkt,]
 plot(elast_mkt1_RC)
 

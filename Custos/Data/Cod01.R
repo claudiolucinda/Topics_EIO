@@ -10,12 +10,14 @@
 #install.packages("estprod")
 #install.packages("foreign")
 #install.packages("plm")
+#install.packages("prodest")
 
 library("AER")
 library("tidyverse")
 library("estprod")
 library("foreign")
 library("plm")
+library("prodest")
 
 data<-read.dta("sample.dta")
 
@@ -127,3 +129,8 @@ summary(mod_lp)
 
 #ACF -- Package "prodest"
 #Next year
+
+mod_acf<-prodestACF(data_3$lnva, fX=cbind(data_3$lnb,data_3$lnw), sX=data_3$lnk,
+                    pX=data_3$lnm, idvar = data_3$plantid, timevar = data_3$year,
+                    theta0 = c(.5,.5,.5), R = 5)
+mod_acf
