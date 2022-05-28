@@ -10,9 +10,9 @@ library(AER)
 library(readxl)
 library(plm)
 
-setwd("G:/Meu Drive/Aulas/GV/Curso de OI - Pós/Mini Curso USP/Topics_EIO/Conduta/Data")
+setwd("G:/Meu Drive/Aulas/GV/Curso de OI - PÃ³s/Mini Curso USP/Topics_EIO/Conduta/Data")
 
-# Dados da prova final de OI Empírica I
+# Dados da prova final de OI Emp?rica I
 
 data<-read_xls("Cereal_Data.xls")
 
@@ -37,10 +37,10 @@ model02<-lm(meanu~`Avg Shelf Price`+Cals+Fat+Sugar+factor(Sgmnt)+factor(brand), 
 summary(model02)
 coeftest(model02,vcov.=sandwich)
 
-# IV. Eu não disse quais IV vcs tinham que usar na prova, isso era de propósito
-# para vocês lembrarem das minhas aulas.
-# Aqui vamos criar os instrumentos BLP -- Poderíamos criar os BST, ou os GH.
-# Fica um exercício para o lar.
+# IV. Eu n?o disse quais IV vcs tinham que usar na prova, isso era de prop?sito
+# para voc?s lembrarem das minhas aulas.
+# Aqui vamos criar os instrumentos BLP -- Poder?amos criar os BST, ou os GH.
+# Fica um exerc?cio para o lar.
 
 data2<-data2 %>%
   group_by(brand) %>%
@@ -89,8 +89,9 @@ model04<-ivreg(meanu~`Avg Shelf Price`+Cals+Fat+Sugar+factor(Sgmnt)+factor(brand
                  BLP2_Cals+BLP2_Fat+BLP2_Sugar, data=data2)
 summary(model04, diagnostics = TRUE)
 
-# Efeitos Marginais - Vai ser importante pro nosso exercício
+# Efeitos Marginais - Vai ser importante pro nosso exerc?cio
 
+qtdvec<-as.numeric(data2$`Mkt Share`)*1e4
 sharevec<-as.numeric(data2$`Mkt Share`)/100
 pricevec<-as.numeric(data2$`Avg Shelf Price`)
 beta_coeff<-model04$coefficients["`Avg Shelf Price`"]
@@ -100,7 +101,7 @@ elast_mat<-elast_mat + diag(beta_coeff*pricevec)
 
 
 mgeff_mat<--beta_coeff*(sharevec %*% t(sharevec))
-mgeff_mat<- mgeff_mat+diag(beta_coeff*sharevec)
+mgeff_mat<- (mgeff_mat+diag(beta_coeff*sharevec)) * 1e6
 
 
 dum_brand<-model.matrix(~brand-1, data=data2)
@@ -112,16 +113,19 @@ omega<-dum_brand %*% t(dum_brand)
 # Betrand Multiproduto
 ###############################################
 
-m0<-(-solve(t(elast_mat)*omega) %*% sharevec) *(1/sharevec)
-cmg0<-(1-m0)*pricevec
+
+m01<-(-solve(t(mgeff_mat)*omega)) %*% (qtdvec)
+cmg01<-(pricevec-m01)
 
 ###############################################
 # Cartel
 ###############################################
 
 omega_cartel<-matrix(1,nrow=50,ncol=50)
-m_c<-(-solve(t(elast_mat)*omega_cartel) %*% sharevec) *(1/sharevec)
-cmg_c<-(1-m_c)*pricevec
+
+m_c01<-(-solve(t(mgeff_mat)*omega_cartel)) %*% (qtdvec)
+cmg_c01<-(pricevec-m_c01)
+
 
 ################################################
 # Apresentando Graficamente
@@ -129,15 +133,10 @@ cmg_c<-(1-m_c)*pricevec
 # Custos marginais
 ################################################
 
-mat<-t(cbind(cmg0,cmg_c))
+mat<-t(cbind(cmg01,cmg_c01))
 rownames(mat)<-c("Bertrand","Cartel")
 barplot(mat, beside=TRUE, legend.text = c("Bertrand", "Cartel"), 
-        args.legend = list(x="topleft", bty="n", inset=c(-0.1,0)) )
-
-mat<-t(cbind(m0,m_c))
-rownames(mat)<-c("Bertrand","Cartel")
-barplot(mat, beside=TRUE, legend.text = c("Bertrand", "Cartel"), 
-        args.legend = list(x="topleft", bty="n", inset=c(-0.1,0)) )
+        args.legend = list(x="topleft", bty="n", inset=c(-.1,0)) )
 
 
 
