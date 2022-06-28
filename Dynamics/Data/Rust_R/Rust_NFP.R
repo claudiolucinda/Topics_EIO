@@ -197,4 +197,8 @@ gglinEst = data.frame(decisionRule=c(rep("Forward-Looking (Lin Est.)",nrow(lin_f
                       pMaint=c(lin_forwardEst[,1],lin_myopicEst[,1]),
                       State=c(0:(nrow(lin_forwardEst)-1),0:(nrow(lin_myopicEst)-1)))
 
-ggplot(gglinEst,aes(y=pMaint,x=State,color=decisionRule))+geom_line(lwd=1)+theme_bw(20)+xlim(5,50)
+ggplot(gglinEst,aes(y=pMaint,x=State,color=decisionRule))+geom_line(lwd=1)+xlim(5,50) +
+theme(legend.position = "bottom")
+
++theme_bw(20)
+

@@ -23,7 +23,7 @@
 # ================================================================
 
 
-setwd("G:\\Meu Drive\\Aulas\\GV\\Curso de OI - Pós\\Mini Curso USP\\Topics_EIO\\Entrada\\Data\\")
+setwd("G:\\Meu Drive\\Aulas\\GV\\Curso de OI - PÃ³s\\Mini Curso USP\\Topics_EIO\\Entrada\\Data\\")
 # Read Data in
 jiadat <-read.csv("jiadata2R.csv",header=T)
 
@@ -297,6 +297,38 @@ theta.start = c(-4.8960054, -15.3832747,   1.6653983,   0.9289151,   2.4720639,-
 nfxp.res = optim(theta.start,nfxp.nll,control=list(trace=10,maxit=5000),method="BFGS",hessian=T)
 nfxp.se = sqrt(diag(solve(nfxp.res$hess)))
 
+# SE VC QUISER ESTIMATIVAS DAS CCPS' DEPOIS DE ESTIMADO
+# Dependent Vars
+pold.W = jiadat$WalMart
+pold.K = jiadat$Kmart
+
+theta=nfxp.res$par
+theta.W = c(theta[1],theta[3:5],theta[6:7]);
+theta.K = c(theta[2],theta[3:5],theta[8]);
+delta   = exp(theta[9]); # We exponentiate to ensure competitive effects are negative
+
+# Deterministic component of profits
+pi.W = Wxmat%*%theta.W;
+pi.K = Kxmat%*%theta.K;
+
+# Do Nested Fixed Point Computation
+nfxp.reps=0; err = 10;
+
+# User may want to play around with the tolerance to examine effect
+# In principle as low a tolerance as possible should be used
+# here we use  1E-12 	
+# Note that the fixed point computation is done for all markets at once!
+
+while(err>1E-12 & nfxp.reps<10000) {
+  nfxp.reps = nfxp.reps +1;
+  pnew.W = pnorm(pi.W - delta*pold.K);
+  pnew.K = pnorm(pi.K - delta*pnew.W);
+  err = max(abs(pnew.K-pold.K)+abs(pnew.W-pold.W));
+  pold.W = pnew.W;
+  pold.K = pnew.K;
+}
+
+
 #=======================================
 # Incomplete Information Games - Model 2
 # Two Step Approach
@@ -549,3 +581,32 @@ delta.NPL  =exp(NPL.res$par[9])
 # We leave this as an exercise to the reader! :)
 
 
+
+# Setup for Bootstrap
+nmkts = nrow(jiadat)
+bootN  = 100;
+theta = NPL.res$par
+BootNPL.res = matrix(0,bootN,length(theta))
+
+for( b in 1:bootN ) 
+{
+  # Redefine Covariates for Walmart and Kmart
+  jiadatBoot = jiadat[sample(1:nmkts,nmkts,replace=TRUE),]
+  nmktsBoot = nrow(jiadatBoot); # Number of markets
+  intsBoot = rep(1,nmktsBoot);  # intercepts
+  
+  Wxmat = cbind(intsBoot,jiadatBoot$population,jiadatBoot$SPC,jiadatBoot$urban,jiadatBoot$dBenton,jiadatBoot$southern);
+  Kxmat = cbind(intsBoot,jiadatBoot$population,jiadatBoot$SPC,jiadatBoot$urban,jiadatBoot$MidWest);
+  
+  # Create Dependent Vectors
+  WalMart = jiadatBoot$WalMart
+  Kmart = jiadatBoot$Kmart
+  
+  # Estimate and Store
+  BootNPL.res[b,] = doNPLloop(theta,npl.pold.K,npl.pold.W, quiet = TRUE)$par
+  cat("Bootstrap #",b," completed. \n",sep="")
+}
+
+# Standard Errors
+NPL.se = sqrt(diag(var(BootNPL.res)))
+deltaNPL.se = sqrt(var(exp(BootNPL.res[,9])))
