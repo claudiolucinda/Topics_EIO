@@ -104,7 +104,7 @@ eval_stuff<-with(Dat2[!is.na(Dat2$choice),], data.frame(Price = tapply(Price, in
                                   Display = tapply(Display, index(RC_f2)$alt, mean)))
 
 # Logit normal
-effects(f, covariate = "Price", data = eval_stuff)
+#effects(f, covariate = "Price", data = eval_stuff)
 
 source("m_predict.R")
 m.predict(RC_f2, newdata = eval_stuff, returnData=TRUE)

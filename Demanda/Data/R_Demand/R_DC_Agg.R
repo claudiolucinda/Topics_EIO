@@ -29,9 +29,9 @@ library("plot.matrix")
 py_install("pyblp", pip = TRUE)
 pyblp<-import("pyblp")
 
-setwd("G:/Meu Drive/Aulas/GV/Curso de OI - Pós/Mini Curso USP/Topics_EIO/Demanda/Data")
+#setwd("G:/Meu Drive/Aulas/GV/Curso de OI - Pós/Mini Curso USP/Topics_EIO/Demanda/Data")
 
-dat<-sasxport.get("NevoData_OI.xpt")
+dat<-sasxport.get("../NevoData_OI.xpt")
 
 dat<-dat %>%
   rename(price=v2, share=v1, sugar=v29, mushy=v30, cdid=v75, id=v76) 

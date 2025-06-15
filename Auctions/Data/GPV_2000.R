@@ -1,5 +1,5 @@
 ######################################
-# Código para implementar GPV (2000)
+# C?digo para implementar GPV (2000)
 # Claudio R. Lucinda
 # 26/06/2020
 # USP
@@ -11,7 +11,7 @@ library(ggplot2)
 
 rm(list=ls())
 
-setwd("G:\\Meu Drive\\Aulas\\GV\\Curso de OI - Pós\\Mini Curso USP\\Topics_EIO\\Auctions\\Data")
+setwd("G:\\Meu Drive\\Aulas\\GV\\Curso de OI - PÃ³s\\Mini Curso USP\\Topics_EIO\\Auctions\\Data")
 
 data<-read_csv("PS3Data.csv")
 
